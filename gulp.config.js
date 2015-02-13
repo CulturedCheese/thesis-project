@@ -1,7 +1,5 @@
 module.exports = function() {
-    var client = './client/';
     var root = './';
-    var server = './server/';
     var temp = './.tmp/';
     var config = {
         /**
@@ -12,10 +10,10 @@ module.exports = function() {
             './server/*.js',
             './*.js'
         ],
-        client: client,
+        client: './client/',
         index: client + 'index.html',
 
-        server: server,
+        server: './server/',
         temp: temp,
         /**
          * Bower and NPM locations
