@@ -31,7 +31,7 @@ gulp.task('wiredep', function() {
   var wiredep = require('wiredep').stream;
   return gulp
       .src(config.index) // reads the index.html file
-      .pipe(wiredep(options)) // checks Bower components
+      .pipe(wiredep(options)) // checks Bower components and injects into config.index
       .pipe($.inject(gulp.src(config.js))) // takes all config.js files and injects into config.index
       .pipe(gulp.dest(config.client)); // writes transformed config.index to folder
 });
