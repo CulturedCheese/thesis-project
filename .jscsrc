@@ -1,72 +1,64 @@
 {
-    "excludeFiles": ["node_modules/**", "bower_components/**"],
-
+    "disallowSpacesInNamedFunctionExpression": {
+        "beforeOpeningRoundBrace": true
+    },
+    "disallowSpacesInFunctionExpression": {
+        "beforeOpeningRoundBrace": true
+    },
+    "disallowSpacesInAnonymousFunctionExpression": {
+        "beforeOpeningRoundBrace": true
+    },
+    "disallowSpacesInFunctionDeclaration": {
+        "beforeOpeningRoundBrace": true
+    },
+    "disallowEmptyBlocks": true,
+    "disallowSpacesInsideArrayBrackets": true,
+    "disallowSpacesInsideParentheses": true,
+    "disallowQuotedKeysInObjects": true,
+    "disallowSpaceAfterObjectKeys": true,
+    "disallowSpaceAfterPrefixUnaryOperators": true,
+    "disallowSpaceBeforePostfixUnaryOperators": true,
+    "disallowSpaceBeforeBinaryOperators": [
+        ","
+    ],
+    "disallowMixedSpacesAndTabs": true,
+    "disallowTrailingWhitespace": true,
+    "disallowTrailingComma": true,
+    "disallowYodaConditions": true,
+    "disallowKeywords": [ "with" ],
+    "disallowMultipleLineBreaks": true,
+    "disallowMultipleVarDecl": true,
+    "requireSpaceBeforeBlockStatements": true,
+    "requireParenthesesAroundIIFE": true,
+    "requireSpacesInConditionalExpression": true,
+    "requireBlocksOnNewline": 1,
+    "requireCommaBeforeLineBreak": true,
+    "requireSpaceBeforeBinaryOperators": true,
+    "requireSpaceAfterBinaryOperators": true,
+    "requireCamelCaseOrUpperCaseIdentifiers": true,
+    "requireLineFeedAtFileEnd": true,
+    "requireCapitalizedConstructors": true,
+    "requireDotNotation": true,
+    "requireSpacesInForStatement": true,
+    "requireSpaceBetweenArguments": true,
     "requireCurlyBraces": [
+        "do"
+    ],
+    "requireSpaceAfterKeywords": [
         "if",
         "else",
         "for",
         "while",
         "do",
+        "switch",
+        "case",
+        "return",
         "try",
-        "catch"
+        "catch",
+        "typeof"
     ],
-    "requireOperatorBeforeLineBreak": true,
-    "requireCamelCaseOrUpperCaseIdentifiers": true,
-    "maximumLineLength": {
-      "value": 100,
-      "allowComments": true,
-      "allowRegex": true
-    },
-    "validateIndentation": 4,
+    "safeContextKeyword": "_this",
+    "validateLineBreaks": "LF",
     "validateQuoteMarks": "'",
-
-    "disallowMultipleLineStrings": true,
-    "disallowMixedSpacesAndTabs": true,
-    "disallowTrailingWhitespace": true,
-    "disallowSpaceAfterPrefixUnaryOperators": true,
-    "disallowMultipleVarDecl": null,
-
-    "requireSpaceAfterKeywords": [
-      "if",
-      "else",
-      "for",
-      "while",
-      "do",
-      "switch",
-      "return",
-      "try",
-      "catch"
-    ],
-    "requireSpaceBeforeBinaryOperators": [
-        "=", "+=", "-=", "*=", "/=", "%=", "<<=", ">>=", ">>>=",
-        "&=", "|=", "^=", "+=",
-
-        "+", "-", "*", "/", "%", "<<", ">>", ">>>", "&",
-        "|", "^", "&&", "||", "===", "==", ">=",
-        "<=", "<", ">", "!=", "!=="
-    ],
-    "requireSpaceAfterBinaryOperators": true,
-    "requireSpacesInConditionalExpression": true,
-    "requireSpaceBeforeBlockStatements": true,
-    "requireLineFeedAtFileEnd": true,
-    "disallowSpacesInsideObjectBrackets": "all",
-    "disallowSpacesInsideArrayBrackets": "all",
-    "disallowSpacesInsideParentheses": true,
-
-    "validateJSDoc": {
-        "checkParamNames": true,
-        "requireParamTypes": true
-    },
-
-    "disallowMultipleLineBreaks": true,
-
-    "disallowCommaBeforeLineBreak": null,
-    "disallowDanglingUnderscores": null,
-    "disallowEmptyBlocks": null,
-    "disallowMultipleLineStrings": null,
-    "disallowTrailingComma": null,
-    "requireCommaBeforeLineBreak": null,
-    "requireDotNotation": null,
-    "requireMultipleVarDecl": null,
-    "requireParenthesesAroundIIFE": true
+    "validateIndentation": 2
 }
