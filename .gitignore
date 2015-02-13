@@ -4,3 +4,7 @@ dist/
 .sass-cache/
 npm-debug.log
 *.csv
+build/
+public/
+.DS_Store
+client/.DS_Store
