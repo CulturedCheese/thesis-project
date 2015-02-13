@@ -19,7 +19,7 @@ gulp.task('vet', function() {
   return gulp
       .src(config.alljs) // reads all js files into the stream
       .pipe($.if(args.verbose, $.print())) // prints all files being piped through the stream 
-      // .pipe($.jscs()) // lints code style to enforce style guide
+      .pipe($.jscs()) // lints code style to enforce style guide
       .pipe($.jshint()) 
       .pipe($.jshint.reporter('jshint-stylish', {verbose: true})) // adds formatting to the jshint log
       .pipe($.jshint.reporter('fail')); // outputs 'fail' to the console
@@ -35,3 +35,4 @@ gulp.task('wiredep', function() {
       .pipe($.inject(gulp.src(config.alljs))) // takes all config.js files and injects into config.index
       .pipe(gulp.dest(config.client)); // writes transformed config.index to folder
 });
+

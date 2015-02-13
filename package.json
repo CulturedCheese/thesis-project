@@ -13,6 +13,7 @@
     "gulp-if": "^1.2.5",
     "gulp-imagemin": "latest",
     "gulp-inject": "^1.1.1",
+    "gulp-install": "^0.2.0",
     "gulp-jade": "~0.8.0",
     "gulp-jest": "~0.2.2",
     "gulp-jscs": "^1.4.0",
