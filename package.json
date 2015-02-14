@@ -37,7 +37,7 @@
     "yargs": "^2.3.0"
   },
   "scripts": {
-    "postinstall": "./node_modules/bower/bin/bower install"
+    "postinstall": "./node_modules/bower/bin/bower cache clean && bower install"
   },
   "engines": {
     "node": ">=0.10.0"
