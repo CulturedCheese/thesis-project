@@ -11,3 +11,4 @@ client/.DS_Store
 client/app/bundle.js
 client/styles/bundle.css
 client/styles/styles.css
+db/*
