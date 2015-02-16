@@ -1,18 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+	<meta charset="utf-8">
 	<title>Cultured Cheese</title>
 	<!-- bower:css -->
 	<!-- endbower -->
-
+    <link rel="stylesheet" href="./styles/base.css">
+    <link rel="stylesheet" href="./styles/app.css">
 	<!-- inject:css -->
 	<!-- endinject -->
 </head>
 <body>
+	<section id="todoapp"></section>
+	<footer id="info">
+	  <p>Double-click to edit a todo</p>
+	  <p>Created at <a href="http://hackreactor.com">Hack Reactor</a></p>
+	</footer>
 	<!-- bower:js -->
+	<script src="bower_components/modernizr/modernizr.js"></script>
+	<script src="bower_components/jquery/dist/jquery.js"></script>
+	<script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
 	<!-- endbower -->
 
 	<!-- inject:js -->
+
+	<script src="app/bundle.min.js"></script>
 	<!-- endinject -->
 </body>
 </html>
