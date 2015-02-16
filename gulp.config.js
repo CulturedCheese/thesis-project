@@ -1,25 +1,37 @@
 'use strict';
 
 module.exports = function() {
+  var client = './client/';
+  var server = './server/';
+  var tests = './__tests__/';
+  var pub = './public/';
+  var build = './build/'; 
   var config = {
       /**
        * Files paths
        */
       alljs: [
-          './client/*.js',
-          './*.js'
+          client + '**/*.js',
+          // tests + '**/*.js', // uncomment this line to include test files 
+          '!' + client + 'bower_components/**/*.js' // exclude bower component js files
+          // server + '**/*.js'
       ],
-      client: './client/',
-      index: './client/index.html',
-
-      server: './server/',
+      build: build,
+      client: client,
+      clientJS: client + 'app/app.js',
+      clientTests: client + 'clientSpec.js', 
+      index: client + 'index.html',
+      less: client + 'styles/styles.less',
+      pub: pub,
+      server: server,
+      tests: tests,
 
       /**
        * Bower and NPM locations
        */
       bower: {
           json: require('./bower.json'),
-          directory: './client/bower_components/',
+          directory: client + 'bower_components/',
           ignorePath: '../..'
       },
       packages: [
@@ -30,8 +42,9 @@ module.exports = function() {
       /**
        * Node settings
        */
+      buildPort: 9999,
       defaultPort: 7203,
-      nodeServer: './server/server.js'
+      nodeServer: server + 'server.js'
 
   };
 
