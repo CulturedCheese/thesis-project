@@ -1,18 +1,25 @@
 'use strict';
 
 var gulp = require('gulp');
+var del = require('del');
+var path = require('path');
 var args = require('yargs').argv;
 var config = require('./gulp.config.js')();
-var minifyCSS = require('gulp-minify-css');
- /*jshint -W079 */
 var $ = require('gulp-load-plugins')({lazy: true});
+var minifyCSS = require('gulp-minify-css');
+var concatCSS = require('gulp-concat-css');
+var browserify = require('browserify')(config.client + 'app/app.js'); 
+var reactify = require('reactify'); 
+var watchify = require('watchify');
+var source = require('vinyl-source-stream');
+ /*jshint -W079 */
 // var port = process.env.PORT || config.defaultPort;
 
 // provides a list of all tasks in gulpfile
 gulp.task('help', $.taskListing);
 
 // runs the 'help' task by default
-gulp.task('default', ['help']);
+gulp.task('default', ['build']);
 
 // checks code syntax and style with JSHint and JSCS
 gulp.task('vet', function() {
@@ -20,7 +27,7 @@ gulp.task('vet', function() {
 
   return gulp
       // reads all js files into the stream
-      .src(config.alljs)
+      .src(config.js)
       // prints all files being piped through the stream
       .pipe($.if(args.verbose, $.print()))
       // lints code style to enforce style guide
@@ -32,13 +39,13 @@ gulp.task('vet', function() {
       .pipe($.jshint.reporter('fail'));
 });
 
-// run gulp clean prior to each build to delete the previous build
+// run gulp clean prior to each dist to delete the previous dist
 gulp.task('clean', function() {
-    gulp.src(config.build + '*')
+    gulp.src(config.dist + '*')
       .pipe($.clean({force: true}));
 });
 
-// injects dependencies into HTML
+// injects client js dependencies into HTML
 gulp.task('wiredep', function() {
   var options = config.getWiredepDefaultOptions();
   var wiredep = require('wiredep').stream;
@@ -47,35 +54,63 @@ gulp.task('wiredep', function() {
       .src(config.index)
       // checks Bower components and injects into config.index
       .pipe(wiredep(options))
-      // takes all config.js files and injects into config.index
-      .pipe($.inject(gulp.src(config.alljs)))
+      // takes bundled js file and injects into config.index
+      .pipe($.inject(gulp.src(config.client + 'app/bundle.js')))
       // writes transformed config.index to folder
       .pipe(gulp.dest(config.client));
 });
 
-// bundles code to be served by the backend
-gulp.task('browserify-client', ['vet'], function() {
-  console.log('Bundling client code...');
-
-  return gulp
-      .src(config.clientJS)
-      .pipe($.browserify({
-        insertGlobals: true,
-        debug: true
-      }))
-      .pipe($.rename('bundled.js'))
-      .pipe(gulp.dest(config.build))
-      .pipe(gulp.dest(config.pub + 'javascripts'));
-
+// transforms jsx into js and bundles code
+gulp.task('bundle', function(){
+  browserify.transform(reactify); // use the reactify transform
+  return browserify.bundle()
+    .pipe(source('bundle.js'))
+    .pipe(gulp.dest(config.client + 'app/'))
+    .pipe(gulp.dest(config.dist));
 });
 
+// injects css dependencies into HTML
+gulp.task('inject', ['bundle','wiredep', 'styles'], function() {
+    console.log('Wire up the app css into the html, and call wiredep ');
+
+    return gulp
+        .src(config.index)
+        .pipe($.inject(gulp.src(config.css))) // NOTE: update src path, if using a css compiler
+        .pipe(gulp.dest(config.client))
+        .pipe(gulp.dest(config.dist));
+});
+
+// // browserifies our code and compiles React JSX files
+// gulp.task('scripts', ['clean'], function() {
+//   console.log('Bundling client code...');
+//   var bundler = watchify(browserify({
+//       entries: [config.js],
+//       insertGlobals: true,
+//       cache: {},
+//       packageCache: {},
+//       fullPaths: true
+//   }));
+
+//   bundler.on('update', rebundle);
+
+//   function rebundle() {
+//     return bundler.bundle()
+//       // log errors if they happen
+//         .on('error', $.util.log.bind($.util, 'Browserify Error'))
+//         .pipe(source('app.js'))
+//         .pipe(gulp.dest('./dist/scripts'));
+//   }
+
+//   return rebundle();
+
+// });
+
 // minifies bundled client code
-gulp.task('minify-js', ['browserify-client'], function() {
-  return gulp.src(config.build + 'bundled.js')
+gulp.task('minify-js', ['bundle'], function() {
+  return gulp.src(config.dist + 'bundle.js')
       .pipe($.uglify())
-      .pipe($.rename('bundled.min.js'))
-      .pipe(gulp.dest(config.build))
-      .pipe(gulp.dest(config.pub + 'javascripts'));
+      .pipe($.rename('bundle.min.js'))
+      .pipe(gulp.dest(config.dist))
 });
 
 // compiles LESS to CSS and saves CSS to public folder
@@ -87,39 +122,51 @@ gulp.task('styles', function() {
       .pipe($.plumber())
       .pipe($.less())
       .pipe($.autoprefixer({browsers: ['last 2 version', '> 5%']}))
-      .pipe(gulp.dest(config.build))
-      .pipe(gulp.dest(config.pub + 'stylesheets'));
+      // .pipe(gulp.dest(config.dist)); // NOTE: uncomment this line if using less
+});
+
+// concatenates all css files 
+gulp.task('concat-css', ['styles'], function() {
+  return gulp
+      // NOTE:refactor file path
+      .src('client/styles/**/*.css')
+      .pipe(concatCSS('styles.css'))
+      .pipe(gulp.dest('.client/styles'))
+      .pipe(gulp.dest(config.dist));
 });
 
 // minifies the css file compiled from less
-gulp.task('minify-css', ['styles'], function() {
+gulp.task('minify-css', ['styles', 'concat-css'], function() {
   return gulp
-      .src(config.build + 'styles.css')
+      .src(config.dist + 'styles.css')
       .pipe(minifyCSS())
       .pipe($.rename('styles.min.css'))
-      .pipe(gulp.dest(config.build))
-      .pipe(gulp.dest(config.pub + 'stylesheets'));
+      .pipe(gulp.dest(config.dist));
 });
 
+// copies bower components from development folder to the distributable folder
 gulp.task('copy-bower-components', function () {
   gulp.src(config.client + 'bower_components/**')
-    .pipe(gulp.dest(config.build + 'bower_components'));
+    .pipe(gulp.dest(config.dist + 'bower_components'));
 });
 
+// copies html files from development folder to the distributable folder
 gulp.task('copy-html-files', function () {
   gulp.src(config.client + '**/*.html')
-    .pipe(gulp.dest(config.build));
+    .pipe(gulp.dest(config.dist));
 });
 
-gulp.task('build', ['wiredep', 
-  'vet',
-  'browserify-client',
-  'styles', 
-  'minify-css', 
-  'minify-js', 
-  'copy-html-files',
-  // 'copy-bower-components',
-  'connectBuild']);
+gulp.task('build', function(){
+  $.runSequence('clean',
+    ['inject', 
+    // 'vet',
+    'inject',
+    'minify-css', 
+    'minify-js', 
+    'copy-html-files',
+    'copy-bower-components',
+    'connectDist']);
+});
 
 // gulp plugin for the Jest test library
 gulp.task('test', ['vet', 'browserify-client'], function () {
@@ -151,11 +198,11 @@ gulp.task('connect', function() {
   });
 });
 
-// serve and test final build on a staging server before deployment
-gulp.task('connectBuild', function() {
+// serve on dist server before deployment
+gulp.task('connectDist', function() {
   $.connect.server({
-    root: config.build,
-    port: config.buildPort
+    root: config.dist,
+    port: config.distPort
   });
 });
 

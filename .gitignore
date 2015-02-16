@@ -8,3 +8,4 @@ build/
 public/
 .DS_Store
 client/.DS_Store
+client/app/bundle.js

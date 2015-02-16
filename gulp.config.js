@@ -5,22 +5,31 @@ module.exports = function() {
   var server = './server/';
   var tests = './__tests__/';
   var pub = './public/';
-  var build = './build/'; 
+  var dist = './dist/'; 
   var config = {
       /**
        * Files paths
        */
       alljs: [
-          client + '**/*.js',
-          // tests + '**/*.js', // uncomment this line to include test files 
+          tests + '**/*.js',
+          client + '*.js',
           '!' + client + 'bower_components/**/*.js' // exclude bower component js files
+          // tests + '**/*.js', // uncomment this line to include test files 
           // server + '**/*.js'
       ],
-      build: build,
+      dist: dist,
       client: client,
-      clientJS: client + 'app/app.js',
-      clientTests: client + 'clientSpec.js', 
+      clientTests: tests + 'clientSpec.js',
+      css: [
+          client + 'styles/app.css',
+          client + 'styles/base.css'
+      ], 
       index: client + 'index.html',
+      js: [
+          './client/app/app.js',
+          '!' + client + 'app/bundle.min.js',
+          '!' + client + 'bower_components/**/*.js' // exclude bower component js files
+      ],
       less: client + 'styles/styles.less',
       pub: pub,
       server: server,
@@ -42,7 +51,7 @@ module.exports = function() {
       /**
        * Node settings
        */
-      buildPort: 9999,
+      distPort: 9999,
       defaultPort: 7203,
       nodeServer: server + 'server.js'
 
