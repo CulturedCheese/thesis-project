@@ -11,6 +11,7 @@ var React = require('react');
 var DevSearchActions = require('../actions/DevSearchActions');
 var SearchLanguageInput = require('./SearchLanguageInput.react');
 var SearchCountryInput = require('./SearchCountryInput.react');
+var LanguageDropdownMenu = require('./LanguageDropdownMenu.react');
 
 var Header = React.createClass({
 
@@ -28,8 +29,7 @@ var Header = React.createClass({
         <SearchCountryInput
           id="search-country"
           placeholder="Country?"
-          onSave={this._onSave}
-        />
+          onSave={this._onSave} />         
       </header>
     );
   },

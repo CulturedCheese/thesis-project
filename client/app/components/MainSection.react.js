@@ -10,6 +10,8 @@
 var React = require('react');
 var ReactPropTypes = React.PropTypes;
 var DevSearchActions = require('../actions/DevSearchActions');
+var LanguageDropdownMenu = require('./LanguageDropdownMenu.react');
+
 // var TodoItem = require('./TodoItem.react');
 
 var MainSection = React.createClass({
@@ -28,7 +30,7 @@ var MainSection = React.createClass({
 
     return (
       <section id="main">
- 
+        
       </section>
     );
   },
