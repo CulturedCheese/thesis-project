@@ -65,8 +65,8 @@ var GoogleMapFrags = React.createClass({
       <Map
         initialZoom={this.state.zoom}
         initialCenter={this.state.center}
-        width={600}
-        height={400}
+        width={800}
+        height={600}
         onClick={this.handleFaceCreate}>
         {this.state.faces.map(this.renderFace)}
       </Map>
