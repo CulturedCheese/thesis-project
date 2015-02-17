@@ -5,4 +5,27 @@ before_script:
   - npm install -g bower
   - npm install
   - bower install
-  
+# before_deploy: "echo 'ready?'"
+# deploy:
+#   provider: heroku
+# # Encrypt heroku token with the following:
+# # travis encrypt $(heroku auth:token) --add deploy.api_key
+#   api_key: "YOUR API KEY"
+# # After your tests ran and before the deploy, 
+# # Travis CI will clean up any additional files and changes you made
+# # unless otherwise stated.
+#   skip_cleanup: true
+# # It is also possible to deploy different branches to different applications:
+#   app:
+#     master: thesis-project-staging
+#     production: thesis-project-production
+# # you might want to run a command on Heroku after a successful deploy. 
+#   run:
+#     - ""
+# # use restart command to restart app between or after commands
+#     - restart
+#     - ""
+# # run commands after deploying, if deploy's successful
+# after_deploy:
+# #  - ./after_deploy_1.sh
+# #  - ./after_deploy_2.sh
