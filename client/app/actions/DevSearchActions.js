@@ -10,16 +10,16 @@
  */
 
 var AppDispatcher = require('../dispatcher/AppDispatcher');
-var TodoConstants = require('../constants/TodoConstants');
+var DevSearchConstants = require('../constants/DevSearchConstants');
 
-var TodoActions = {
+var DevSearchActions = {
 
   /**
    * @param  {string} text
    */
   create: function(text) {
     AppDispatcher.dispatch({
-      actionType: TodoConstants.TODO_CREATE,
+      actionType: DevSearchConstants.DEVSEARCH_CREATE,
       text: text
     });
   },
@@ -30,7 +30,7 @@ var TodoActions = {
    */
   updateText: function(id, text) {
     AppDispatcher.dispatch({
-      actionType: TodoConstants.TODO_UPDATE_TEXT,
+      actionType: DevSearchConstants.DEVSEARCH_UPDATE_TEXT,
       id: id,
       text: text
     });
@@ -44,23 +44,21 @@ var TodoActions = {
     var id = todo.id;
     if (todo.complete) {
       AppDispatcher.dispatch({
-        actionType: TodoConstants.TODO_UNDO_COMPLETE,
+        actionType: DevSearchConstants.DEVSEARCH_UNDO_COMPLETE,
         id: id
       });
     } else {
       AppDispatcher.dispatch({
-        actionType: TodoConstants.TODO_COMPLETE,
+        actionType: DevSearchConstants.DEVSEARCH_COMPLETE,
         id: id
       });
     }
   },
 
-  /**
-   * Mark all ToDos as complete
-   */
+  
   toggleCompleteAll: function() {
     AppDispatcher.dispatch({
-      actionType: TodoConstants.TODO_TOGGLE_COMPLETE_ALL
+      actionType: DevSearchConstants.DEVSEARCH_TOGGLE_COMPLETE_ALL
     });
   },
 
@@ -69,20 +67,17 @@ var TodoActions = {
    */
   destroy: function(id) {
     AppDispatcher.dispatch({
-      actionType: TodoConstants.TODO_DESTROY,
+      actionType: DevSearchConstants.DEVSEARCH_DESTROY,
       id: id
     });
   },
 
-  /**
-   * Delete all the completed ToDos
-   */
   destroyCompleted: function() {
     AppDispatcher.dispatch({
-      actionType: TodoConstants.TODO_DESTROY_COMPLETED
+      actionType: DevSearchConstants.DEVSEARCH_DESTROY_COMPLETED
     });
   }
 
 };
 
-module.exports = TodoActions;
+module.exports = DevSearchActions;

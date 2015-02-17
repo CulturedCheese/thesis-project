@@ -6,12 +6,13 @@
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * TodoStore
+ * DevSearchStore
+
  */
 
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var EventEmitter = require('events').EventEmitter;
-var TodoConstants = require('../constants/TodoConstants');
+var DevSearchConstants = require('../constants/DevSearchConstants');
 var assign = require('object-assign');
 
 var CHANGE_EVENT = 'change';
@@ -76,7 +77,8 @@ function destroyCompleted() {
   }
 }
 
-var TodoStore = assign({}, EventEmitter.prototype, {
+var DevSearchStore 
+= assign({}, EventEmitter.prototype, {
 
   /**
    * Tests whether all the remaining TODO items are marked as completed.
@@ -123,49 +125,49 @@ AppDispatcher.register(function(action) {
   var text;
 
   switch(action.actionType) {
-    case TodoConstants.TODO_CREATE:
+    case DevSearchConstants.DEVSEARCH_CREATE:
       text = action.text.trim();
       if (text !== '') {
         create(text);
       }
-      TodoStore.emitChange();
+      DevSearchStore.emitChange();
       break;
 
-    case TodoConstants.TODO_TOGGLE_COMPLETE_ALL:
-      if (TodoStore.areAllComplete()) {
+    case DevSearchConstants.DEVSEARCH_TOGGLE_COMPLETE_ALL:
+      if (DevSearchStore.areAllComplete()) {
         updateAll({complete: false});
       } else {
         updateAll({complete: true});
       }
-      TodoStore.emitChange();
+      DevSearchStore.emitChange();
       break;
 
-    case TodoConstants.TODO_UNDO_COMPLETE:
+    case DevSearchConstants.DEVSEARCH_UNDO_COMPLETE:
       update(action.id, {complete: false});
-      TodoStore.emitChange();
+      DevSearchStore.emitChange();
       break;
 
-    case TodoConstants.TODO_COMPLETE:
+    case DevSearchConstants.DEVSEARCH_COMPLETE:
       update(action.id, {complete: true});
-      TodoStore.emitChange();
+      DevSearchStore.emitChange();
       break;
 
-    case TodoConstants.TODO_UPDATE_TEXT:
+    case DevSearchConstants.DEVSEARCH_UPDATE_TEXT:
       text = action.text.trim();
       if (text !== '') {
         update(action.id, {text: text});
       }
-      TodoStore.emitChange();
+      DevSearchStore.emitChange();
       break;
 
-    case TodoConstants.TODO_DESTROY:
+    case DevSearchConstants.DEVSEARCH_DESTROY:
       destroy(action.id);
-      TodoStore.emitChange();
+      DevSearchStore.emitChange();
       break;
 
-    case TodoConstants.TODO_DESTROY_COMPLETED:
+    case DevSearchConstants.DEVSEARCH_DESTROY_COMPLETED:
       destroyCompleted();
-      TodoStore.emitChange();
+      DevSearchStore.emitChange();
       break;
 
     default:
@@ -173,4 +175,5 @@ AppDispatcher.register(function(action) {
   }
 });
 
-module.exports = TodoStore;
+module.exports = DevSearchStore;
+

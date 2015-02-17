@@ -12,7 +12,7 @@ var ReactPropTypes = React.PropTypes;
 
 var ENTER_KEY_CODE = 13;
 
-var TodoTextInput = React.createClass({
+var SearchLanguageInput = React.createClass({
 
   propTypes: {
     className: ReactPropTypes.string,
@@ -41,8 +41,7 @@ var TodoTextInput = React.createClass({
         onChange={this._onChange}
         onKeyDown={this._onKeyDown}
         value={this.state.value}
-        autoFocus={true}
-      />
+        autoFocus={true} />
     );
   },
 
@@ -77,4 +76,4 @@ var TodoTextInput = React.createClass({
 
 });
 
-module.exports = TodoTextInput;
+module.exports = SearchLanguageInput;

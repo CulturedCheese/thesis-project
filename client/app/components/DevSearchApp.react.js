@@ -9,41 +9,42 @@
 
 /**
  * This component operates as a "Controller-View".  It listens for changes in
- * the TodoStore and passes the new data to its children.
+ * the DevSearchStore and passes the new data to its children.
  */
 
 var Footer = require('./Footer.react');
 var Header = require('./Header.react');
 var MainSection = require('./MainSection.react');
+var Map = require('./Map.react');
 var React = require('react');
-var TodoStore = require('../stores/TodoStore');
+var DevSearchStore = require('../stores/DevSearchStore');
 
 /**
- * Retrieve the current TODO data from the TodoStore
+ * Retrieve the current TODO data from the DevSearchStore
  */
-function getTodoState() {
+function getDevSearchState() {
   return {
-    allTodos: TodoStore.getAll(),
-    areAllComplete: TodoStore.areAllComplete()
+    allTodos: DevSearchStore.getAll(),
+    areAllComplete: DevSearchStore.areAllComplete()
   };
 }
 
-var TodoApp = React.createClass({
+var DevSearchApp = React.createClass({
 
   getInitialState: function() {
-    return getTodoState();
+    return getDevSearchState();
   },
 
   componentDidMount: function() {
-    TodoStore.addChangeListener(this._onChange);
+    DevSearchStore.addChangeListener(this._onChange);
   },
 
   componentWillUnmount: function() {
-    TodoStore.removeChangeListener(this._onChange);
+    DevSearchStore.removeChangeListener(this._onChange);
   },
 
   /**
-   * @return {object}
+   * @return {objDevSearch
    */
   render: function() {
   	return (
@@ -59,12 +60,12 @@ var TodoApp = React.createClass({
   },
 
   /**
-   * Event handler for 'change' events coming from the TodoStore
+   * Event handler for 'change' events coming from the DevSearchStore
    */
   _onChange: function() {
-    this.setState(getTodoState());
+    this.setState(getDevSearchState());
   }
 
 });
 
-module.exports = TodoApp;
+module.exports = DevSearchApp;

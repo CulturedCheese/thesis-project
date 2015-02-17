@@ -9,7 +9,7 @@
 
 var React = require('react');
 var ReactPropTypes = React.PropTypes;
-var TodoActions = require('../actions/TodoActions');
+var DevSearchActions = require('../actions/DevSearchActions');
 
 var Footer = React.createClass({
 
@@ -67,7 +67,7 @@ var Footer = React.createClass({
    * Event handler to delete all completed TODOs
    */
   _onClearCompletedClick: function() {
-    TodoActions.destroyCompleted();
+    DevSearchActions.destroyCompleted();
   }
 
 });

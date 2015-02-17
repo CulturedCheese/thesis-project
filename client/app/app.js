@@ -9,9 +9,9 @@
 
 var React = require('react');
 
-var TodoApp = require('./components/TodoApp.react');
+var DevSearchApp = require('./components/DevSearchApp.react');
 
 React.render(
-  <TodoApp />,
-  document.getElementById('todoapp')
+  <DevSearchApp />,
+  document.getElementById('devsearchapp')
 );
