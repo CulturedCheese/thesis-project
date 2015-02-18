@@ -1,0 +1,10 @@
+
+#map {
+	padding-left: 175px;
+}
+
+#googlemap {
+	min-height: 10em;
+  display: table-cell;
+  vertical-align: middle;
+}
