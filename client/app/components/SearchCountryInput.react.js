@@ -24,7 +24,7 @@ var SearchCountryInput = React.createClass({
 
   getInitialState: function() {
     return {
-      value: this.props.value || ''
+      // value: this.props.value || ''
     };
   },
 
@@ -40,8 +40,7 @@ var SearchCountryInput = React.createClass({
         onBlur={this._save}
         onChange={this._onChange}
         onKeyDown={this._onKeyDown}
-        value={this.state.value}
-        autoFocus={true} />
+        value={this.state.value} />
     );
   },
 
