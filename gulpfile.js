@@ -160,7 +160,6 @@ gulp.task('build', function(){
   $.runSequence('clean',
     ['inject', 
     // 'vet',
-    'inject',
     'minify-css', 
     'minify-js', 
     'copy-html-files',
