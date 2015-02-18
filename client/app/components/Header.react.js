@@ -21,7 +21,6 @@ var Header = React.createClass({
   render: function() {
     return (
       <header id="header">
-        <h1>DevTracker</h1>
         <SearchLanguageInput
           id="search-language"
           placeholder="Programming language?"
@@ -41,9 +40,9 @@ var Header = React.createClass({
    * @param {string} text
    */
   _onSave: function(text) {
-    if (text.trim()){
-      DevSearchActions.create(text);
-    }
+    // if (text.trim()){
+    //   DevSearchActions.create(text);
+    // }
 
   }
 

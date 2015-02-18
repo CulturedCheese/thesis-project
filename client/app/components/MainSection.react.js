@@ -17,8 +17,8 @@ var LanguageDropdownMenu = require('./LanguageDropdownMenu.react');
 var MainSection = React.createClass({
 
   propTypes: {
-    allTodos: ReactPropTypes.object.isRequired,
-    areAllComplete: ReactPropTypes.bool.isRequired
+    // allTodos: ReactPropTypes.object.isRequired,
+    // areAllComplete: ReactPropTypes.bool.isRequired
   },
 
   /**
@@ -38,9 +38,9 @@ var MainSection = React.createClass({
   /**
    * Event handler to mark all TODOs as complete
    */
-  _onToggleCompleteAll: function() {
-    DevSearchActions.toggleCompleteAll();
-  }
+  // _onToggleCompleteAll: function() {
+  //   DevSearchActions.toggleCompleteAll();
+  // }
 
 });
 
