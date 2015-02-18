@@ -131,7 +131,7 @@ gulp.task('concat-css', ['styles'], function() {
       // NOTE:refactor file path
       .src('client/styles/**/*.css')
       .pipe(concatCSS('styles.css'))
-      .pipe(gulp.dest('.client/styles'))
+      .pipe(gulp.dest('client/styles'))
       .pipe(gulp.dest(config.dist));
 });
 
