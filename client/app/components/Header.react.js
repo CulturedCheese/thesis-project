@@ -23,11 +23,11 @@ var Header = React.createClass({
       <header id="header">
         <SearchLanguageInput
           id="search-language"
-          placeholder="Programming language?"
+          placeholder="Search programming language"
           onSave={this._onSave} />
         <SearchCountryInput
           id="search-country"
-          placeholder="Country?"
+          placeholder="Search country"
           onSave={this._onSave} />
       </header>
     );
