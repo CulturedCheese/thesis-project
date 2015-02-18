@@ -8,8 +8,10 @@
  */
 
 var React = require('react');
-var TodoActions = require('../actions/TodoActions');
-var TodoTextInput = require('./TodoTextInput.react');
+var DevSearchActions = require('../actions/DevSearchActions');
+var SearchLanguageInput = require('./SearchLanguageInput.react');
+var SearchCountryInput = require('./SearchCountryInput.react');
+var LanguageDropdownMenu = require('./LanguageDropdownMenu.react');
 
 var Header = React.createClass({
 
@@ -19,12 +21,14 @@ var Header = React.createClass({
   render: function() {
     return (
       <header id="header">
-        <h1>todos</h1>
-        <TodoTextInput
-          id="new-todo"
-          placeholder="What needs to be done?"
-          onSave={this._onSave}
-        />
+        <SearchLanguageInput
+          id="search-language"
+          placeholder="Programming language?"
+          onSave={this._onSave} />
+        <SearchCountryInput
+          id="search-country"
+          placeholder="Country?"
+          onSave={this._onSave} />
       </header>
     );
   },
@@ -36,10 +40,9 @@ var Header = React.createClass({
    * @param {string} text
    */
   _onSave: function(text) {
-    if (text.trim()){
-      TodoActions.create(text);
-    }
-
+    // if (text.trim()){
+    //   DevSearchActions.create(text);
+    // }
   }
 
 });
