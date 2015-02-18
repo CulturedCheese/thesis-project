@@ -51,8 +51,8 @@ var DevSearchApp = React.createClass({
       <div>
         <Header />
         <MainSection
-          allTodos={this.state.allTodos}
-          areAllComplete={this.state.areAllComplete}
+          // allTodos={this.state.allTodos}
+          // areAllComplete={this.state.areAllComplete}
         />
         <Footer allTodos={this.state.allTodos} />
       </div>

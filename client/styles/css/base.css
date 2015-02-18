@@ -1,6 +1,6 @@
 
 #map {
-	padding-left: 175px;
+	padding-left: 15px;
 }
 
 #googlemap {
@@ -8,3 +8,26 @@
   display: table-cell;
   vertical-align: middle;
 }
+
+#search-language {
+	border: solid;
+	border-color: lightgrey;
+	margin-left: 275px;
+	margin-bottom: 15px;
+	font-size: 25px;
+	padding-left: 5px;
+	width:390px;
+	font-family: times;
+}
+
+#search-country {
+	margin-left: 20px;
+	margin-bottom: 15px;
+	border: solid;
+	border-color: lightgrey;	
+	font-size: 25px;
+	padding-left: 5px;
+	width:390px;
+	font-family: times;
+}
+
