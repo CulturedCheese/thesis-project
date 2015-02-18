@@ -133,14 +133,14 @@ AppDispatcher.register(function(action) {
       DevSearchStore.emitChange();
       break;
 
-    case DevSearchConstants.DEVSEARCH_TOGGLE_COMPLETE_ALL:
-      if (DevSearchStore.areAllComplete()) {
-        updateAll({complete: false});
-      } else {
-        updateAll({complete: true});
-      }
-      DevSearchStore.emitChange();
-      break;
+    // case DevSearchConstants.DEVSEARCH_TOGGLE_COMPLETE_ALL:
+    //   if (DevSearchStore.areAllComplete()) {
+    //     updateAll({complete: false});
+    //   } else {
+    //     updateAll({complete: true});
+    //   }
+    //   DevSearchStore.emitChange();
+    //   break;
 
     case DevSearchConstants.DEVSEARCH_UNDO_COMPLETE:
       update(action.id, {complete: false});

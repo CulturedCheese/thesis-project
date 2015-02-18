@@ -21,6 +21,8 @@ var Footer = React.createClass({
    * @return {object}
    */
   render: function() {
+
+    // If you delete the below up to render, the react header breaks
     var allTodos = this.props.allTodos;
     var total = Object.keys(allTodos).length;
 
@@ -54,11 +56,11 @@ var Footer = React.createClass({
       <footer id="footer">
         <span id="todo-count">
           <strong>
-            {itemsLeft}
+            // {itemsLeft}
           </strong>
-          {itemsLeftPhrase}
+          // {itemsLeftPhrase}
         </span>
-        {clearCompletedButton}
+        // {clearCompletedButton}
       </footer>
     );
   },
@@ -66,9 +68,9 @@ var Footer = React.createClass({
   /**
    * Event handler to delete all completed TODOs
    */
-  _onClearCompletedClick: function() {
-    DevSearchActions.destroyCompleted();
-  }
+  // _onClearCompletedClick: function() {
+  //   DevSearchActions.destroyCompleted();
+  // }
 
 });
 

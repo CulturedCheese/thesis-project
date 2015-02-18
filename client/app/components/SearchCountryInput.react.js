@@ -10,16 +10,16 @@
 var React = require('react');
 var ReactPropTypes = React.PropTypes;
 
-var ENTER_KEY_CODE = 13;
+// var ENTER_KEY_CODE = 13;
 
 var SearchCountryInput = React.createClass({
 
   propTypes: {
-    className: ReactPropTypes.string,
-    id: ReactPropTypes.string,
-    placeholder: ReactPropTypes.string,
-    onSave: ReactPropTypes.func.isRequired,
-    value: ReactPropTypes.string
+    // className: ReactPropTypes.string,
+    // id: ReactPropTypes.string,
+    // placeholder: ReactPropTypes.string,
+    // onSave: ReactPropTypes.func.isRequired,
+    // value: ReactPropTypes.string
   },
 
   getInitialState: function() {
@@ -64,11 +64,11 @@ var SearchCountryInput = React.createClass({
   /**
    * @param  {object} event
    */
-  _onKeyDown: function(event) {
-    if (event.keyCode === ENTER_KEY_CODE) {
-      this._save();
-    }
-  }
+  // _onKeyDown: function(event) {
+  //   if (event.keyCode === ENTER_KEY_CODE) {
+  //     this._save();
+  //   }
+  // }
 
 });
 

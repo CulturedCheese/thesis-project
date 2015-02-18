@@ -189,7 +189,7 @@ a:focus {
 }
 
 .mt {
-	margin-top: 60px;
+	margin-top: 0px;
 }
 
 .hline {
@@ -364,10 +364,10 @@ a:focus {
 
 #blue {
 	background: #00b3fe;
-	margin-top: 60px;
-	margin-bottom: 60px;
-	padding-top: 25px;
-	padding-bottom: 25px;
+	margin-top: 40px;
+	margin-bottom: 0px;
+	padding-top: 15px;
+	padding-bottom: 0px;
 }
 
 #blue h3 {
