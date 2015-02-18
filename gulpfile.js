@@ -12,6 +12,7 @@ var browserify = require('browserify')(config.client + 'app/app.js');
 var reactify = require('reactify'); 
 var watchify = require('watchify');
 var source = require('vinyl-source-stream');
+
  /*jshint -W079 */
 // var port = process.env.PORT || config.defaultPort;
 
@@ -27,9 +28,11 @@ gulp.task('vet', function() {
 
   return gulp
       // reads all js files into the stream
-      .src(config.js)
+      .src(config.alljs)
       // prints all files being piped through the stream
       .pipe($.if(args.verbose, $.print()))
+      // compiles all jsx files into js files
+      .pipe($.react())
       // lints code style to enforce style guide
       .pipe($.jscs())
       .pipe($.jshint())
@@ -110,6 +113,7 @@ gulp.task('minify-js', ['bundle'], function() {
   return gulp.src(config.dist + 'bundle.js')
       .pipe($.uglify())
       .pipe($.rename('bundle.min.js'))
+      .pipe(gulp.dest(config.client + 'app'))
       .pipe(gulp.dest(config.dist))
 });
 
@@ -129,7 +133,7 @@ gulp.task('styles', function() {
 gulp.task('concat-css', ['styles'], function() {
   return gulp
       // NOTE:refactor file path
-      .src('client/styles/**/*.css')
+      .src([config.client + 'styles/**/*.css',config.client + 'styles/*.css'])
       .pipe(concatCSS('styles.css'))
       .pipe(gulp.dest('client/styles'))
       .pipe(gulp.dest(config.dist));

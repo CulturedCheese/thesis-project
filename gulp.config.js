@@ -11,18 +11,18 @@ module.exports = function() {
        * Files paths
        */
       alljs: [
-          tests + '**/*.js',
-          client + '*.js',
-          '!' + client + 'bower_components/**/*.js' // exclude bower component js files
-          // tests + '**/*.js', // uncomment this line to include test files 
+          // tests + '**/*.js',
+          client + 'app/*.js',
+          '!' + client + 'bower_components/**/*.js', // exclude bower component js files
+          '!' + client + 'app/bundle.js', // exclude bundle.js
+          '!' + client + 'app/bundle.min.js' // exclude bundle.min.js
           // server + '**/*.js'
       ],
       dist: dist,
       client: client,
       clientTests: tests + 'clientSpec.js',
       css: [
-          client + 'styles/app.css',
-          client + 'styles/base.css'
+          client + 'styles/css/*'
       ], 
       index: client + 'index.html',
       js: [

@@ -5,6 +5,7 @@ before_script:
   - npm install -g bower
   - npm install
   - bower install
+  - gulp vet
 # before_deploy: "echo 'ready?'"
 # deploy:
 #   provider: heroku
