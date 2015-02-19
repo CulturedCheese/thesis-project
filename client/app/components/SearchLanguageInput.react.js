@@ -24,7 +24,7 @@ var SearchLanguageInput = React.createClass({
 
   getInitialState: function() {
     return {
-      // value: this.props.value || ''
+      value: this.props.value || ''
     };
   },
 
