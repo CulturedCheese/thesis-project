@@ -161,9 +161,9 @@ gulp.task('copy-html-files', function () {
 });
 
 gulp.task('build', function(){
-  $.runSequence('clean',
+  $.runSequence(
     ['inject', 
-    // 'vet',
+    'vet',
     'minify-css', 
     'minify-js', 
     'copy-html-files',
