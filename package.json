@@ -10,6 +10,7 @@
     "morgan": "^1.5.1",
     "mysql": "^2.5.4",
     "object-assign": "^2.0.0",
+    "odesk-api": "^0.2.3",
     "react": "^0.12.2",
     "react-bootstrap": "^0.15.1",
     "react-googlemaps": "^0.4.0",
