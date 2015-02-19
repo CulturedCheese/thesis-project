@@ -30,3 +30,7 @@
 form {
 	float: left;
 }
+
+#bigquery {
+	height: 20px;
+}

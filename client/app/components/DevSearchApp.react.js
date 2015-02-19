@@ -24,8 +24,8 @@ var DevSearchStore = require('../stores/DevSearchStore');
  */
 function getDevSearchState() {
   return {
-    allTodos: DevSearchStore.getAll(),
-    areAllComplete: DevSearchStore.areAllComplete()
+    // allTodos: DevSearchStore.getAll(),
+    // areAllComplete: DevSearchStore.areAllComplete()
   };
 }
 
@@ -52,9 +52,9 @@ var DevSearchApp = React.createClass({
         <Header />
         <MainSection
           // allTodos={this.state.allTodos}
-          // areAllComplete={this.state.areAllComplete}
+          // areAllComplete={this.state.areAllComplete} 
         />
-        <Footer allTodos={this.state.allTodos} />
+        <Footer />
       </div>
   	);
   },

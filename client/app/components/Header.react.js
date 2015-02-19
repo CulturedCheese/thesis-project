@@ -9,8 +9,8 @@
 
 var React = require('react');
 var DevSearchActions = require('../actions/DevSearchActions');
-var SearchLanguageInput = require('./SearchLanguageInput.react');
-var LanguageDropdownMenu = require('./LanguageDropdownMenu.react');
+// var SearchLanguageInput = require('./SearchLanguageInput.react');
+// var LanguageDropdownMenu = require('./LanguageDropdownMenu.react');
 var SearchLanguageBar = require('./SearchLanguageBar.react');
 var SearchCountryBar = require('./SearchCountryBar.react');
 // var RealTimeSearch = require('./RealTimeSearch.react');
