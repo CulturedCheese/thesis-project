@@ -4,6 +4,7 @@
   "dependencies": {
     "body-parser": "^1.11.0",
     "bower": "^1.3.12",
+    "country-data": "0.0.18",
     "express": "^4.11.2",
     "flux": "^2.0.1",
     "keymirror": "^0.1.1",

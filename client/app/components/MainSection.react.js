@@ -25,8 +25,7 @@ var MainSection = React.createClass({
    * @return {object}
    */
   render: function() {
-    // This section should be hidden by default
-    // and shown when there are todos.
+    console.log('this.props.countryData', this.props.countryData);
 
     return (
       <section id="main">
