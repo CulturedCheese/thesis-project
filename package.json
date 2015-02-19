@@ -8,6 +8,7 @@
     "flux": "^2.0.1",
     "keymirror": "^0.1.1",
     "morgan": "^1.5.1",
+    "mysql": "^2.5.4",
     "object-assign": "^2.0.0",
     "react": "^0.12.2",
     "react-bootstrap": "^0.15.1",
@@ -20,7 +21,8 @@
     "scriptPreprocessor": "./preprocessor.js",
     "unmockedModulePathPatterns": [
       "./node_modules/react"
-    ]
+    ],
+    "mysql": "^2.5.4"
   },
   "devDependencies": {
     "browserify": "^8.1.3",
