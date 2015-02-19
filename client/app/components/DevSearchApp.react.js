@@ -50,11 +50,8 @@ var DevSearchApp = React.createClass({
   	return (
       <div>
         <Header />
-        <MainSection
-          // allTodos={this.state.allTodos}
-          // areAllComplete={this.state.areAllComplete}
-        />
-        <Footer allTodos={this.state.allTodos} />
+        <MainSection />
+        <Footer />
       </div>
   	);
   },
