@@ -1,6 +1,6 @@
 
 #map {
-	padding-left: 15px;
+	padding-left: 90px;
 }
 
 #googlemap {
@@ -11,19 +11,22 @@
 
 #search-language {
 	border-color: lightgrey;
-	margin-left: 0%;
+	margin-left: 37.5%;
 	margin-bottom: 15px;
 	font-size: 25px;
 	font-family: times;
-	position: relative;
+	position: inline-block;
 }
 
 #search-country {
-	margin-left: 50%;
-	margin-bottom: 15px;
+	margin-left: 5%;
+	margin-bottom: 10px;
 	border-color: lightgrey;	
 	font-size: 25px;
 	font-family: times;
-	position: relative;
+	position: inline-block;
 }
 
+form {
+	float: left;
+}
