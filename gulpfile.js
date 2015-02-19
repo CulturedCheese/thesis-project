@@ -44,7 +44,7 @@ gulp.task('vet', function() {
 
 // run gulp clean prior to each dist to delete the previous dist
 gulp.task('clean', function() {
-    gulp.src(config.dist + '*')
+    gulp.src([config.dist + '*', config.client + 'app/bundle*', config.client + 'styles/styles.css'])
       .pipe($.clean({force: true}));
 });
 
