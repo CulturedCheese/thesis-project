@@ -1,17 +1,12 @@
 var React = require('react');
+var ReactPropTypes = React.PropTypes;
 
 var SearchLanguageBar = React.createClass({
-  //here is where we started to build out our handleSubmit logic. 
-  // handleSubmit: function() {
-  //   return (
-
-  //   )
-  // },
 
   render: function() {
     return (
-      <form onSubmit={this.handleSubmit} id={this.props.id}>
-          <input type="text" placeholder=" Search language..." />
+      <form onSubmit={this.handleSubmit} id="search-language" >
+          <input type="text" placeholder=" Search by language..." />
       </form>
     );
   },

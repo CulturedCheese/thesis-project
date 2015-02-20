@@ -1,6 +1,9 @@
 var Footer = require('./Footer.react');
 var Header = require('./Header.react');
+var Infobox = require('./Infobox.react');
 var MainSection = require('./MainSection.react');
+var SearchLanguageBar = require('./SearchLanguageBar.react');
+var SearchCountryBar = require('./SearchCountryBar.react');
 var Map = require('./Map.react');
 var React = require('react');
 var DevSearchStore = require('../stores/DevSearchStore');
@@ -41,7 +44,8 @@ var DevSearchApp = React.createClass({
   render: function() {
   	return (
       <div>
-        <Header />
+        <SearchLanguageBar />
+        <SearchCountryBar />
         <MainSection countryData={this.state.countryData} />
         <Footer />
       </div>

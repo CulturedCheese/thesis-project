@@ -1,23 +1,43 @@
 
+
+
 #d3Map {
-	padding-left: 200px;
-	position: relative; 
-	width: 1250px; 
-	height: 600px;
+	height: 450px;
+	width: 900px;
+	margin-left: 0px;
+	float: left;
+}
+
+#datamaps-subunits {
+	position: inline-block; 
+	width: 700px; 
+	height: 1800px;
+	padding-left: -50px;
+	margin-left: 0px;
+	margin-top: 0px;
+	padding-top: 0px;
+	padding: 0px;
+	border: solid;
+	border-color: green;
+	float: left;
 }
 
 #search-language {
+	margin-top: 20px;
 	border-color: lightgrey;
-	margin-left: 37.5%;
-	margin-bottom: 15px;
+	margin-left: 15%;
+	margin-bottom: 0px;
 	font-size: 25px;
+	font-color: black;
 	font-family: times;
 	position: inline-block;
 }
 
 #search-country {
-	margin-left: 5%;
-	margin-bottom: 10px;
+	margin-top: 20px;
+	margin-left: 8%;
+	margin-bottom: 0px;
+	font-color: black;
 	border-color: lightgrey;	
 	font-size: 25px;
 	font-family: times;
@@ -31,3 +51,27 @@ form {
 #extraspacing {
 	height: 500px;
 }
+
+#infobox {
+	height: 380px;
+	width: 300px;
+	margin-top: 2.5em;
+	margin-left: 3em;
+	border: solid;
+	border-color: grey;
+	border-width: 15%;
+	float: left;
+	border-radius: 10px;
+	position: inline-block;
+}
+
+div.col-lg-10.centered {
+	width: 125%;
+	padding: 0px;
+}
+
+.screenshots figure img.gulp {
+	width: 50%;
+	height: 50%;
+}
+

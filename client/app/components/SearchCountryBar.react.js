@@ -5,8 +5,8 @@ var SearchCountryBar = React.createClass({
 
     render: function() {
         return (
-            <form onSubmit={this.handleSubmit} id={this.props.id}>
-                <input type="text" placeholder=" Search country..." />
+            <form onSubmit={this.handleSubmit} id="search-country">
+                <input type="text" placeholder=" Search by country..." />
             </form>
         );
     },
@@ -14,3 +14,6 @@ var SearchCountryBar = React.createClass({
 });
 
 module.exports = SearchCountryBar;
+
+
+ 
