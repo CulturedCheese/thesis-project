@@ -12,6 +12,8 @@ var browserify = require('browserify')(config.client + 'app/app.js');
 var reactify = require('reactify'); 
 var watchify = require('watchify');
 var source = require('vinyl-source-stream');
+var bs = require('browser-sync');
+var reload = bs.reload;
 
  /*jshint -W079 */
 // var port = process.env.PORT || config.defaultPort;
@@ -19,8 +21,12 @@ var source = require('vinyl-source-stream');
 // provides a list of all tasks in gulpfile
 gulp.task('help', $.taskListing);
 
-// runs the 'help' task by default
-gulp.task('default', ['build']);
+// runs the 'browser-sync' task by default
+gulp.task('default', ['browser-sync'], function(){
+  // watches for changes to js files and runs necessary tasks
+    gulp.watch([config.alljs, config.index, config.css], ['build', bs.reload]);
+  
+});
 
 // checks code syntax and style with JSHint and JSCS
 gulp.task('vet', function() {
@@ -28,7 +34,7 @@ gulp.task('vet', function() {
 
   return gulp
       // reads all js files into the stream
-      .src(config.alljs)
+      .src(config.alljs) // TODO: include server js 
       // prints all files being piped through the stream
       .pipe($.if(args.verbose, $.print()))
       // compiles all jsx files into js files
@@ -79,34 +85,10 @@ gulp.task('inject', ['bundle','wiredep', 'styles'], function() {
     return gulp
         .src(config.index)
         .pipe($.inject(gulp.src(config.css))) // NOTE: update src path, if using a css compiler
-        .pipe(gulp.dest(config.client))
+        .pipe($.replace('styles/styles.css', './styles.min.css'))
+        .pipe($.replace('./app/bundle.js', './bundle.min.js'))
         .pipe(gulp.dest(config.dist));
 });
-
-// // browserifies our code and compiles React JSX files
-// gulp.task('scripts', ['clean'], function() {
-//   console.log('Bundling client code...');
-//   var bundler = watchify(browserify({
-//       entries: [config.js],
-//       insertGlobals: true,
-//       cache: {},
-//       packageCache: {},
-//       fullPaths: true
-//   }));
-
-//   bundler.on('update', rebundle);
-
-//   function rebundle() {
-//     return bundler.bundle()
-//       // log errors if they happen
-//         .on('error', $.util.log.bind($.util, 'Browserify Error'))
-//         .pipe(source('app.js'))
-//         .pipe(gulp.dest('./dist/scripts'));
-//   }
-
-//   return rebundle();
-
-// });
 
 // minifies bundled client code
 gulp.task('minify-js', ['bundle'], function() {
@@ -163,14 +145,32 @@ gulp.task('copy-html-files', function () {
 gulp.task('build', function(){
   $.runSequence(
     ['inject', 
-    'vet',
+    // 'vet',
     'minify-css', 
     'minify-js', 
     'copy-html-files',
     'copy-bower-components'
-    // 'connectDist'
     ]);
 });
+
+// runs nodemon
+gulp.task('serve', function() {
+  $.nodemon({
+    script: 'server/server.js', 
+    ignore: 'node_modules/**/*.js'
+  });
+});
+
+// refreshes the browser in response to the changes
+gulp.task('browser-sync', function() {
+  bs({
+    server: "dist",
+    notify: true
+    // injectChanges: true,
+    // files: [config.client + '**/*.js', config.css, config.index]
+  });
+});
+
 
 // gulp plugin for the Jest test library
 gulp.task('test', ['vet', 'browserify-client'], function () {
@@ -194,24 +194,27 @@ gulp.task('test', ['vet', 'browserify-client'], function () {
     }));
 });
 
-// serve app on a development server running on default port
-gulp.task('connect', function() {
-  $.connect.server({
-    root: config.client,
-    port: config.defaultPort
-  });
-});
+// // browserifies our code and compiles React JSX files
+// gulp.task('scripts', ['clean'], function() {
+//   console.log('Bundling client code...');
+//   var bundler = watchify(browserify({
+//       entries: [config.js],
+//       insertGlobals: true,
+//       cache: {},
+//       packageCache: {},
+//       fullPaths: true
+//   }));
 
-// serve on dist server before deployment
-gulp.task('connectDist', function() {
-  $.connect.server({
-    root: config.dist,
-    port: config.distPort
-  });
-});
+//   bundler.on('update', rebundle);
 
-// watches for changes to js files and runs necessary tasks
-gulp.task('watch', function() {
-  gulp.watch(config.alljs, ['vet','browserify-client','test']);
-  gulp.watch(config.clientTests, ['test']);
-});
+//   function rebundle() {
+//     return bundler.bundle()
+//       // log errors if they happen
+//         .on('error', $.util.log.bind($.util, 'Browserify Error'))
+//         .pipe(source('app.js'))
+//         .pipe(gulp.dest('./dist/scripts'));
+//   }
+
+//   return rebundle();
+
+// });
