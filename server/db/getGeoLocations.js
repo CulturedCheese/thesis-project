@@ -536,7 +536,33 @@ module.exports = {
       }
 
     }); //this ends the db.query();
-    //translate 2 letter country codes to 3 letter country codes
 
+  },
+  getCountriesForLanguage: function(req,res) {
+    //TODO: figure out what format our language variable is coming in as
+    var languageVar = req.body.language || 'javascript';
+    var countriesQuery = 'SELECT SUM(totalActiveRepos) AS totalActivities, countryCode FROM countriesAggAll WHERE repository_language="' + languageVar + '" GROUP BY countryCode';
+    db.query(countriesQuery, function(err, response) {
+      if(err) {
+        console.error(err);
+      } else {
+
+        //all this logic is to get the three letter country code, and to format our response object to use the fillKey format
+        var countries = {};
+        for(var i = 0; i < response.length; i++) {
+          var country = response[i].countryCode;
+          if(country !== 'null') {
+            var lookupResults = lookup.countries({alpha2: country});
+            if(lookupResults[0]) {
+              var threeLetterName = lookupResults[0].alpha3;
+              countries[threeLetterName] = {fillKey: response[i].totalActivities};
+            }
+          }
+        }
+        console.log('data back from topLangsByCountry');
+        console.log(countries);
+        res.send(countries);
+      }
+    });
   }
 }

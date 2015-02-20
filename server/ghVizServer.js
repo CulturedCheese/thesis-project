@@ -38,6 +38,10 @@ app.get('/getTopLanguageByCountry', function(req,res) {
   getGeoLocations.getTopLanguageByCountry(req,res);
 });
 
+app.get('/getCountriesForLanguage', function(req,res) {
+  getGeoLocations.getCountriesForLanguage(req,res);
+});
+
 // export app for testing and flexibility
 module.exports = app;
 

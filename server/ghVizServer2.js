@@ -1,3 +1,6 @@
+//THIS SERVER EXISTS ONLY TO LET US MAKE TWICE AS MANY API CALLS PER HOUR
+//TODO: cleanup
+
 var express = require('express');
 var mysql = require('mysql');
 var db = require('./db/index.js');
