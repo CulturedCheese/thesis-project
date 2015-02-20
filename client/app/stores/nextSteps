@@ -1,0 +1,8 @@
+next steps:
+
+1. where is the map going to go- inside react, or it's own component?
+2. build out logic for dispatcher and store and event emitters for search box
+2A. once we have sent an event to the app store, how does that flow through the app store, and then how do we make sure the components know about the event. 
+3. general clean up
+4. build out placeholders for future functionality/server integration
+
