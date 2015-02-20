@@ -26,6 +26,28 @@ function updateAll(updates) {
 }
 
 var DevSearchStore = assign({}, EventEmitter.prototype, {
+  getCountryData: function() {
+    //ajax request to the server
+    //server returns a json of all the countries, much like our mock data above.
+  },
+
+  getLanguageData: function(language) {
+    //ajax request with the language
+    //server return a formatted json with only information for that langauge
+    //or maybe we build that logic into the client, right here in this function
+  },
+
+  getContractorData: function(country) {
+    //invokes getOdeskData and geteLanceData()
+  }, 
+
+  getODeskData: function(country) {
+    //make api calls to get the oDesk data
+  },
+
+  geteLanceData: function(country) {
+    //make api calls to get the oDesk data
+  },
 
   getMockData: function() {
     return mockData;
