@@ -7,6 +7,8 @@ FROM (
 ) ranked
 WHERE country_rank <= 10;
 
+
+-- saves the same query to a csv file
 SELECT * FROM (
   SELECT repository_language, countryCode, totalActiveRepos
   FROM (

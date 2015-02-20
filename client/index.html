@@ -6,36 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="assets/ico/favicon.ico">
 
     <title>Cultured Cheese</title>
 
-    <!-- Bootstrap core CSS -->
-    <!-- <link href="styles/assets/css/bootstrap.css" rel="stylesheet"> -->
-
-    <!-- Custom styles for this template -->
-<!--     <link href="styles/css/style.css" rel="stylesheet">
-    <link href="styles/css/font-awesome.min.css" rel="stylesheet"> -->
-
     <!-- Custom styles for this project -->
-	<link rel="stylesheet" href="styles/styles.css">
-	<link rel="stylesheet" href="./styles.min.css">
+  <link rel="stylesheet" href="styles/styles.css"> <!--thsi is for the client/app folder for development -->
 
-    <!-- Just for debugging purposes. Don't actually copy this line! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    
-		<!-- bower:css -->
-		<!-- endbower -->
-
-<!-- 	    <link rel="stylesheet" href="styles/css/base.css">
-		<link rel="stylesheet" href="styles/css/bootstrap.css">
-		 -->
+  <!-- <link rel="stylesheet" href="./styles.min.css">  --> <!--TODO: uncomment this when we are serving this from the server -->
 
   </head>
 
@@ -58,24 +35,15 @@
             <li><a href="index.html">HOME</a></li>
             <li><a href="about.html">ABOUT</a></li>
             <li><a href="contact.html">CONTACT</a></li>
-            <li class="dropdown active">
-<!--               <a href="#" class="dropdown-toggle" data-toggle="dropdown">PAGES <b class="caret"></b></a>
- -->              <ul class="dropdown-menu">
-                <li><a href="blog.html">BLOG</a></li>
-                <li><a href="single-post.html">SINGLE POST</a></li>
-                <li><a href="portfolio.html">PORTFOLIO</a></li>
-                <li><a href="single-project.html">SINGLE PROJECT</a></li>
-              </ul>
-            </li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </div>
 
 
-	<!-- *****************************************************************************************************************
-	 BLUE WRAP
-	 ***************************************************************************************************************** -->
+  <!-- *****************************************************************************************************************
+   BLUE WRAP
+   ***************************************************************************************************************** -->
 	<div id="blue">
 	    <div class="container">
 			<div class="row">
@@ -87,15 +55,11 @@
 	<!-- *****************************************************************************************************************
 	 TITLE & CONTENT
 	 ***************************************************************************************************************** -->
-
+<!-- This is in here for spacing purposes. it is not displayed otherwise -->
 	 <div class="container mt">
 	 	<div class="row">
 		 	<div class="col-lg-10 col-lg-offset-1 centered">
-<!-- 					<section id="devsearchapp"></section>
-					<span id="googlemap">
-						<div id="map"></div>
-					</span>
- -->	</div>
+  	</div>
 		</div>
 	 </div>
 		 	
@@ -113,23 +77,13 @@
                     	<div class="row">
 		 	<div class="col-lg-10 centered">
 					<section id="devsearchapp"></section>
-					<span id="googlemap">
-						<div id="map"></div>
-						<div id="button"></div>
-					</span>
+          <div id="d3Map" style="position: relative; width: 800px; height: 500px;">
+					</div>
 				</div>
 			</div>
 		 </div>
-										<!-- <img src="styles/assets/img/testMap.png" alt=""> -->
-<!-- 					<img src="styles/assets/img/portfolio/portfolio_05.jpg" alt="">
- -->						<div class="he-view">
-							<div class="bg a0" >
-              </div><!-- he bg -->
-						</div><!-- he view -->		
-					</div><!-- he wrap -->
-				</div><!-- end col-12 -->
-                                        
-                    
+
+        
             </div><!-- portfolio -->
         </div><!-- portfolio container -->
 	 </div><!--/Portfoliowrap -->
@@ -170,17 +124,22 @@
 		 	</div><! --/row -->
 	 	</div><! --/container -->
 	 </div><! --/footerwrap -->
-	 
-	<!-- bower:js -->
-	<script src="bower_components/modernizr/modernizr.js"></script>
-	<script src="bower_components/jquery/dist/jquery.js"></script>
-	<script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
-	<script src="bower_components/react/react.js"></script>
-	<script src="bower_components/react-bootstrap/react-bootstrap.js"></script>
-	<!-- endbower -->
-	<script src="http://maps.googleapis.com/maps/api/js"></script>
-	<script src="./app/bundle.min.js"></script>
-	<script src="./bundle.min.js"></script>
-</script>
+
+
+   
+  <!-- bower:js -->
+  <script src="bower_components/modernizr/modernizr.js"></script>
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
+  <script src="bower_components/react/react.js"></script>
+  <script src="bower_components/react-bootstrap/react-bootstrap.js"></script>
+  <script src="bower_components/d3/d3.js"></script>
+  <script src="bower_components/topojson/topojson.js"></script>
+  <script src="bower_components/datamaps/dist/datamaps.all.js"></script>
+  <!-- endbower -->
+
+ <script src="./app/bundle.js"></script> <!--this is for the client/app development folder -->
+ <!-- TODO: uncomment this when we are serving from our server. -->
+ <!-- // <script src="./bundle.min.js"></script> this is for the dist folder we will be deploying -->
   </body>
 </html>

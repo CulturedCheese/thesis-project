@@ -167,8 +167,9 @@ gulp.task('build', function(){
     'minify-css', 
     'minify-js', 
     'copy-html-files',
-    'copy-bower-components',
-    'connectDist']);
+    'copy-bower-components'
+    // 'connectDist'
+    ]);
 });
 
 // gulp plugin for the Jest test library

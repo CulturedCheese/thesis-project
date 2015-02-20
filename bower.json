@@ -5,6 +5,13 @@
     "jquery": "~2.1.1",
     "bootstrap-sass-official": ">=3.3.0",
     "modernizr": "~2.8.3",
-    "react-bootstrap": "~0.15.1"
+    "react-bootstrap": "~0.15.1",
+    "datamaps": "~0.3.4",
+    "topojson": "~1.6.18",
+    "d3": "~3.5.5"
+  },
+  "resolutions": {
+    "topojson": "~1.4.3",
+    "d3": "~3.3.8"
   }
 }

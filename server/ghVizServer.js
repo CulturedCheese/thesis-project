@@ -34,6 +34,10 @@ app.get('/groupByAttempt', function(req,res) {
   getGeoLocations.groupByAttempt(req,res);
 });
 
+app.get('/getTopLanguageByCountry', function(req,res) {
+  getGeoLocations.getTopLanguageByCountry(req,res);
+});
+
 // export app for testing and flexibility
 module.exports = app;
 

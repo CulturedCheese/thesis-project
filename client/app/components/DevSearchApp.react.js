@@ -23,9 +23,9 @@ var DevSearchStore = require('../stores/DevSearchStore');
  * Retrieve the current TODO data from the DevSearchStore
  */
 function getDevSearchState() {
+  var countryData = DevSearchStore.getMockData();
   return {
-    // allTodos: DevSearchStore.getAll(),
-    // areAllComplete: DevSearchStore.areAllComplete()
+    countryData: countryData
   };
 }
 
@@ -50,10 +50,7 @@ var DevSearchApp = React.createClass({
   	return (
       <div>
         <Header />
-        <MainSection
-          // allTodos={this.state.allTodos}
-          // areAllComplete={this.state.areAllComplete} 
-        />
+        <MainSection countryData={this.state.countryData} />
         <Footer />
       </div>
   	);

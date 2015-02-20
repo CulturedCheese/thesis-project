@@ -2,6 +2,9 @@ var db = require('../db');
 var http = require('http');
 var githubToMysqlMap = require('./githubToMysqlMap');
 var mysqlToGithubMap = require('./mysqlToGithubMap');
+var countriesModule = require('country-data').countries;
+var lookup = require('country-data').lookup;
+
 
 module.exports = {
   get: function (req, res) {
@@ -488,13 +491,52 @@ module.exports = {
       console.log(response);
       res.send(response);
     });
+  },
+
+  getTopLanguageByCountry: function(req, res) {
+    console.log('heard a request to getTopLanguageByCountry');
+    //selects the top 10 languages by country;
+    var sqlQuery =  'SELECT repository_language, countryCode, totalActiveRepos       FROM ( SELECT repository_language, countryCode, totalActiveRepos,   @country_rank := IF(@current_country = countryCode, @country_rank + 1, 1) AS country_rank, @current_country := countryCode     FROM countriesAggAll     ORDER BY countryCode, totalActiveRepos DESC   ) ranked      WHERE country_rank <= 10';
+    // var sqlQuery2 = 'select * from countriesAggAll limit 100';
+    db.query(sqlQuery, function(err, response) {
+      if(err) {
+        console.error(err);
+      } else {
+        console.log('data back from topLangsByCountry');
+        //response is an array of objects. 
+        //sample object: {"repository_language":"JavaScript","countryCode":"AM","totalActiveRepos":68}
+        var countries1 = {};
+        for(var i = 0; i < response.length; i++) {
+          var item = response[i];
+          var tuple = [item.repository_language, item.totalActiveRepos];
+          if(!countries1[item.countryCode]) {
+            countries1[item.countryCode] = {
+              fillKey: item.repository_language,
+              allLangs: [tuple]
+            };
+          } else {
+            countries1[item.countryCode].allLangs.push(tuple);
+          }
+        }
+        var countries2 = {};
+        for(var country in countries1) {
+          if(country !== 'null') {
+            var lookupResults = lookup.countries({alpha2: country});
+            if(lookupResults[0]) {
+              var threeLetterName = lookupResults[0].alpha3;
+              
+            }
+            console.log('3 letter name from country-data', threeLetterName);
+            countries2[threeLetterName] = countries1[country];
+            
+          }
+        }
+        res.send(countries2);
+        
+      }
+
+    }); //this ends the db.query();
+    //translate 2 letter country codes to 3 letter country codes
+
   }
-  // post: function (message, res) {
-  //   getUserID({message: message, res: res})
-  //   .then(getRoomID)
-  //   .then(postMessageToDB)
-  //   .catch(function(err, res) {
-  //     res.status(404).send();
-  //   });
-  // } // a function which can be used to insert a message into the database
 }
