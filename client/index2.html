@@ -1,3 +1,5 @@
+<!-- Using this to test formatting
+ -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -6,24 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="assets/ico/favicon.ico">
 
+    <title>Cultured Cheese</title>
 
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="styles/styles.css">
-		<link rel="stylesheet" href="./styles.min.css">
+    <!-- Custom styles for this project -->
+  <link rel="stylesheet" href="styles/styles.css"> <!--thsi is for the client/app folder for development -->
 
+  <!-- <link rel="stylesheet" href="./styles.min.css">  --> <!--TODO: uncomment this when we are serving this from the server -->
 
-
-    <!-- Just for debugging purposes. Don't actually copy this line! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    
   </head>
 
   <body>
@@ -51,9 +43,9 @@
     </div>
 
 
-	<!-- *****************************************************************************************************************
-	 BLUE WRAP
-	 ***************************************************************************************************************** -->
+  <!-- *****************************************************************************************************************
+   BLUE WRAP
+   ***************************************************************************************************************** -->
 	<div id="blue">
 	    <div class="container">
 			<div class="row">
@@ -65,32 +57,13 @@
 	<!-- *****************************************************************************************************************
 	 TITLE & CONTENT
 	 ***************************************************************************************************************** -->
-
+<!-- This is in here for spacing purposes. it is not displayed otherwise -->
 	 <div class="container mt">
 	 	<div class="row">
 		 	<div class="col-lg-10 col-lg-offset-1 centered">
-			 	
-		 	</div>
-		 	
-		 	<div class="col-lg-5 col-lg-offset-1">
-			 	<div class="spacing"></div>
-		 		<!-- <h4>YOUR PROJECT NAME</h4>
-		 		<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-		 		<h4>Our Proposal</h4>
-		 		<p>It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p> -->
-		 	</div>
-		 	
-		 	<div class="col-lg-4 col-lg-offset-1">
-			 	<div class="spacing"></div>
-		 	<!-- 	<h4>Project Details</h4>
-		 		<div class="hline"></div>
-		 		<p><b>Date:</b> April 18, 2014</p>
-		 		<p><b>Author:</b> Marcel Newman</p>
-		 		<p><b>Categories:</b> Illustration, Web Design, Wordpress</p>
-		 		<p><b>Tagged:</b> Flat, UI, Development</p>
-		 		<p><b>Client:</b> Wonder Corp.</p>
-		 		<p><b>Website:</b> <a href="http://blacktie.co">http://blacktie.co</a></p> -->
-		 	</div>
+  	</div>
+		</div>
+	 </div>
 		 	
 	 	</div><! --/row -->
 	 </div><! --/container -->
@@ -101,17 +74,18 @@
 	 <div id="portfoliowrap">
         <div class="portfolio-centered">
             <div class="recentitems portfolio">
-						<div class="portfolio-item graphic-design">
+                <div class="portfolio-item graphic-design">
                     <div>
                     	<div class="row">
 		 	<div class="col-lg-10 centered">
 					<section id="devsearchapp"></section>
-          <div id="d3Map" style="position: relative; width: 1000px; height: 800px;">
+          <div id="d3Map" style="position: relative; width: 900px; height: 700px;">
 					</div>
 				</div>
 			</div>
 		 </div>
-                                                           
+
+        
             </div><!-- portfolio -->
         </div><!-- portfolio container -->
 	 </div><!--/Portfoliowrap -->
@@ -121,13 +95,13 @@
 	<!-- *****************************************************************************************************************
 	 FOOTER
 	 ***************************************************************************************************************** -->
-	 <div id="footerwrap">
+	 <div id="footerwrap" id="info">
 	 	<div class="container">
 		 	<div class="row">
 		 		<div class="col-lg-4">
 		 			<h4>About</h4>
 		 			<div class="hline-w"></div>
-		 			<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+		 			<p>CoderTracks is simply dummy text of the programming and nomadding industry. Lorem Ipsum has been the industry's standard dummy text ever since 1983.</p>
 		 		</div>
 		 		<div class="col-lg-4">
 		 			<h4>Social Links</h4>
@@ -152,11 +126,11 @@
 		 	</div><! --/row -->
 	 	</div><! --/container -->
 	 </div><! --/footerwrap -->
-	 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="bower_components/modernizr/modernizr.js"></script>
+
+
+   
+  <!-- bower:js -->
+  <script src="bower_components/modernizr/modernizr.js"></script>
   <script src="bower_components/jquery/dist/jquery.js"></script>
   <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
   <script src="bower_components/react/react.js"></script>
@@ -164,7 +138,10 @@
   <script src="bower_components/d3/d3.js"></script>
   <script src="bower_components/topojson/topojson.js"></script>
   <script src="bower_components/datamaps/dist/datamaps.all.js"></script>
-   <!-- endbower -->
-  	 <script src="./app/bundle.js"></script> 
+  <!-- endbower -->
+
+ <script src="./app/bundle.js"></script> <!--this is for the client/app development folder -->
+ <!-- TODO: uncomment this when we are serving from our server. -->
+ <!-- // <script src="./bundle.min.js"></script> this is for the dist folder we will be deploying -->
   </body>
 </html>
