@@ -14,3 +14,4 @@ client/styles/bundle.min.css
 client/styles/styles.css
 db/*
 client/app/bundle.min.js
+config.js
