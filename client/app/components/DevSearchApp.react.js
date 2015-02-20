@@ -1,27 +1,15 @@
-/**
- * Copyright (c) 2014, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- */
-
-/**
- * This component operates as a "Controller-View".  It listens for changes in
- * the DevSearchStore and passes the new data to its children.
- */
-
 var Footer = require('./Footer.react');
 var Header = require('./Header.react');
 var MainSection = require('./MainSection.react');
 var Map = require('./Map.react');
 var React = require('react');
 var DevSearchStore = require('../stores/DevSearchStore');
-
 /**
- * Retrieve the current TODO data from the DevSearchStore
+ * This component operates as a "Controller-View".  It listens for changes in
+ * the DevSearchStore and passes the new data to its children.
  */
+
+//get the countryData from the store
 function getDevSearchState() {
   var countryData = DevSearchStore.getMockData();
   return {
@@ -35,17 +23,15 @@ var DevSearchApp = React.createClass({
     return getDevSearchState();
   },
 
-  componentDidMount: function() {
-    DevSearchStore.addChangeListener(this._onChange);
-  },
+  //the component mounting/unmounting functions are purely placeholders. 
+  // componentDidMount: function() {
+  //   DevSearchStore.addChangeListener(this._onChange);
+  // },
 
-  componentWillUnmount: function() {
-    DevSearchStore.removeChangeListener(this._onChange);
-  },
+  // componentWillUnmount: function() {
+  //   DevSearchStore.removeChangeListener(this._onChange);
+  // },
 
-  /**
-   * @return {objDevSearch
-   */
   render: function() {
   	return (
       <div>
@@ -56,9 +42,8 @@ var DevSearchApp = React.createClass({
   	);
   },
 
-  /**
-   * Event handler for 'change' events coming from the DevSearchStore
-   */
+  //Event handler for 'change' events coming from the DevSearchStore
+  //We are not sure that this works yet- it's just legacy code right now.
   _onChange: function() {
     this.setState(getDevSearchState());
   }

@@ -1,5 +1,3 @@
-
-
 // Can't get this one to work yet, but trying to incorporate real-time search into our search boxes
 
 var React = require('react');
@@ -53,7 +51,6 @@ var RealTimeSearch = React.createClass({
     }
 });
 
-                                                                                                                                                             
 var libraries = [
 
     { name: 'Backbone.js', url: 'http://documentcloud.github.io/backbone/'},

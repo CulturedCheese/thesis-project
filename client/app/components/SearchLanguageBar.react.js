@@ -1,6 +1,7 @@
 var React = require('react');
 
 var SearchLanguageBar = React.createClass({
+  //here is where we started to build out our handleSubmit logic. 
   // handleSubmit: function() {
   //   return (
 
