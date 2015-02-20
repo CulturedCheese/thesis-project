@@ -1,4 +1,6 @@
-{
+//TODO: capture this once so we don't need to reformat it every time.
+
+var colors = {
     "ABAP": {
         "color": null,
         "url": "https://github.com/trending?l=ABAP"
@@ -935,3 +937,11 @@
         "color": null,
         "url": "https://github.com/trending?l=Zimpl"
     }
+};
+
+var formattedColors = {};
+for(var language in colors) {
+    formattedColors[language] = colors[language].color;
+}
+
+module.exports = formattedColors;
