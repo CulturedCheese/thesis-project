@@ -9,5 +9,9 @@
     "datamaps": "~0.3.4",
     "topojson": "~1.6.18",
     "d3": "~3.5.5"
+  },
+  "resolutions": {
+    "topojson": "~1.4.3",
+    "d3": "~3.3.8"
   }
 }
