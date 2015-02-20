@@ -60,6 +60,8 @@ var DevSearchStore = assign({}, EventEmitter.prototype, {
   /**
    * @param {function} callback
    */
+   //outgoing callbacks/changes
+
   addChangeListener: function(callback) {
     this.on(CHANGE_EVENT, callback);
   },
@@ -75,6 +77,8 @@ var DevSearchStore = assign({}, EventEmitter.prototype, {
 // Register callback to handle all updates
 AppDispatcher.register(function(action) {
   var text;
+
+  //incoming callbacks/changes
 
   switch(action.actionType) {
 
