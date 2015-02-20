@@ -3,12 +3,6 @@
 	padding-left: 90px;
 }
 
-#googlemap {
-	min-height: 10em;
-  display: table-cell;
-  vertical-align: middle;
-}
-
 #search-language {
 	border-color: lightgrey;
 	margin-left: 37.5%;
