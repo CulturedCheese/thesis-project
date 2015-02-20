@@ -3,22 +3,25 @@
 var morgan      = require('morgan'); // used for logging incoming request
 var bodyParser  = require('body-parser');
 var helpers     = require('./helpers.js'); // our custom middleware
+var apiRouter   = require('../api/api-router.js'); //client-server api
+var dataProcessingRouter = require('../dataProcessing/dataProcessing-router.js');
+
 
 module.exports = function(app, express) {
-  // Express 4 allows us to use multiple routers with their own configurations
-  // Examples:
-  // var userRouter = express.Router();
-  // var groupRouter = express.Router();
   app.use(morgan('dev'));
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(bodyParser.json());
   app.use(express.static(__dirname + '/../client'));
+  app.use(helpers.errorLogger);
+  app.use(helpers.errorHandler);
+
+  // Express 4 allows us to use multiple routers with their own configurations
   // TODO: load routers based on request urls
   // Example: app.use('/api/users', userRouter);
   // use user router for all user request
-  app.use(helpers.errorLogger);
-  app.use(helpers.errorHandler);
-  // TODO: inject our routers into their respective route files
-  // Example:
-  // require('./users/userRoutes.js')(userRouter);
+
+  //router for all of our client-server api endpoints
+  app.use('/api', apiRouter); 
+    //this router is only used once when we import the data
+  app.use('/dataProcessing', dataProcessingRouter); //router for all of our internal data processing
 };
