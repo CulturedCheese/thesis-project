@@ -1,6 +1,6 @@
 
-#map {
-	padding-left: 90px;
+#d3Map {
+	padding-left: 200px;
 }
 
 #search-language {
@@ -25,6 +25,6 @@ form {
 	float: left;
 }
 
-#bigquery {
-	height: 20px;
+#extraspacing {
+	height: 500px;
 }
