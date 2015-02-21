@@ -1,6 +1,9 @@
 
 #d3Map {
 	padding-left: 200px;
+	position: relative; 
+	width: 1250px; 
+	height: 600px;
 }
 
 #search-language {
