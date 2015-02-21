@@ -35,8 +35,6 @@ var DevSearchApp = React.createClass({
   _onChange: function() {
     this.setState(getDevSearchState());
     //We have to force it to render after updating the state to make sure to pass the new data down to the sub components. 
-    console.log('state after _onChange');
-    console.log(this.state);
     this.render();
   },
 

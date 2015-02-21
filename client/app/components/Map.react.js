@@ -15,31 +15,44 @@ var Map = React.createClass({
   //Please see wiki page for more detailed information:
   //https://github.com/CulturedCheese/thesis-project/wiki/DataMaps
 
-  render: function() {
-    console.log('call to render' + this.callsToRender++);
-    //right now this isn't updating because we're not returning it from render
-    //TODO: either wipe out the whole map and re-render it each time,
-    //TODO: or find a way to return it in react.
-    return(
-      new Datamap({
-        element: document.getElementById('d3Map'),
-        fills: languageColors, //mapping file from language to the color code. it's a long file so we're saving it elsewhere. 
-        data: this.props.countryData,  //this is the data that is attached to each country
-        geographyConfig: {
-          popupTemplate: function(geo, data) {
-            //TODO: format this. right now it's just putting the whole 'data.allLangs' object into the hover
-            //clearly we want to have this formatted more intelligently
-            //we should be able to make this a separate React component
-            return ['<div class="hoverinfo"><strong>',
-                    'Number of things in ' + geo.properties.name,
-                    ': ' + data.allLangs,
-                    '</strong></div>'].join('')
-          }
+  drawMap: function(countryData) {
+    //TODO: investigate if there's a cleaner way to do this. 
+    //hacky: right now we're removing the map from the page each time. 
+    //in d3 i know how to do this, but i'm less sure about this abstraction on top of D3
+    //we may want to refactor this to use pure D3
+    document.getElementById('d3Map').innerHTML='';
+    new Datamap({
+      element: document.getElementById('d3Map'),
+      fills: languageColors, //mapping file from language to the color code. it's a long file so we're saving it elsewhere. 
+      data: countryData,  //this is the data that is attached to each country
+      geographyConfig: {
+        popupTemplate: function(geography, data) {
+          //TODO: we should be able to make this a separate React component
+          return ['<div class="hoverinfo"><strong>',
+                  'Top language for ' + geography.properties.name,
+                  ': ' + data.fillKey,
+                  '</strong></div>'].join('');
         }
-      })
+      }
+    });
+  },
+
+  componentDidMount: function() {
+    this.drawMap(this.props.countryData);
+  },
+
+  componentDidUpdate: function() {
+    this.drawMap(this.props.countryData);
+  },
+
+  render: function() {
+    //TODO: style the svg to be the right size. 
+    //TODO: give the svg an ID.
+    return(
+      <div id="d3Map" ></div>
     ) 
 
-  },
+  }
 
 
 });
