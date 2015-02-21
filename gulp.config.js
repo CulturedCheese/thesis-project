@@ -12,7 +12,7 @@ module.exports = function() {
        */
       alljs: [
           // tests + '**/*.js',
-          client + 'app/*.js',
+          client + 'app/**/*.js',
           '!' + client + 'bower_components/**/*.js', // exclude bower component js files
           '!' + client + 'app/bundle.js', // exclude bundle.js
           '!' + client + 'app/bundle.min.js' // exclude bundle.min.js
@@ -33,6 +33,7 @@ module.exports = function() {
       less: client + 'styles/styles.less',
       pub: pub,
       server: server,
+      serverjs: server + '**/*.js',
       tests: tests,
 
       /**
