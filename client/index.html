@@ -10,9 +10,9 @@
     <title>Cultured Cheese</title>
 
     <!-- Custom styles for this project -->
-  <link rel="stylesheet" href="styles/styles.css"> <!--thsi is for the client/app folder for development -->
+  <!-- <link rel="stylesheet" href="styles/styles.css"> this is for the client/app folder for development  -->
 
-  <!-- <link rel="stylesheet" href="./styles.min.css">  --> <!--TODO: uncomment this when we are serving this from the server -->
+  <link rel="stylesheet" href="./styles.min.css">  <!--this is the file when we are serving from the server -->
 
   </head>
 
@@ -128,7 +128,7 @@
 	 </div><! --/footerwrap -->
 
 
-   
+   <!-- TODO: figure out how to get gulp to insert the minified versions of these files -->
   <!-- bower:js -->
   <script src="bower_components/modernizr/modernizr.js"></script>
   <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -140,8 +140,8 @@
   <script src="bower_components/datamaps/dist/datamaps.all.js"></script>
   <!-- endbower -->
 
- <script src="./app/bundle.js"></script> <!--this is for the client/app development folder -->
+ <!-- // <script src="./app/bundle.js"></script> this is for the client/app development folder  -->
  <!-- TODO: uncomment this when we are serving from our server. -->
- <!-- // <script src="./bundle.min.js"></script> this is for the dist folder we will be deploying -->
+ <script src="./bundle.min.js"></script> <!--this is for the dist folder when serving from the server -->
   </body>
 </html>
