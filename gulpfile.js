@@ -87,6 +87,11 @@ gulp.task('inject', ['bundle','wiredep', 'styles'], function() {
         .pipe($.inject(gulp.src(config.css))) // NOTE: update src path, if using a css compiler
         .pipe($.replace('styles/styles.css', './styles.min.css'))
         .pipe($.replace('./app/bundle.js', './bundle.min.js'))
+        .pipe($.replace('dist/jquery.js', 'dist/jquery.min.js'))
+        .pipe($.replace('javascripts/bootstrap.js', 'javascripts/bootstrap.min.js'))
+        .pipe($.replace('react-bootstrap/react-bootstrap.js', 'react-bootstrap/react-bootstrap.min.js'))
+        .pipe($.replace('d3/d3.js', 'd3/d3.min.js'))
+        .pipe($.replace('dist/datamaps.all.js', 'dist/datamaps.all.min.js'))
         .pipe(gulp.dest(config.dist));
 });
 
