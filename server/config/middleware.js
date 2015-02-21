@@ -5,13 +5,13 @@ var bodyParser  = require('body-parser');
 var helpers     = require('./helpers.js'); // our custom middleware
 var apiRouter   = require('../api/api-router.js'); //client-server api
 var dataProcessingRouter = require('../dataProcessing/dataProcessing-router.js');
+var path        = require('path')
 
 
 module.exports = function(app, express) {
   app.use(morgan('dev'));
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(bodyParser.json());
-  app.use(express.static(__dirname + '/../client'));
   app.use(helpers.errorLogger);
   app.use(helpers.errorHandler);
 
@@ -20,6 +20,7 @@ module.exports = function(app, express) {
   // Example: app.use('/api/users', userRouter);
   // use user router for all user request
 
+  app.use(express.static(path.join(__dirname + '../../../dist')));
   //router for all of our client-server api endpoints
   app.use('/api', apiRouter); 
     //this router is only used once when we import the data

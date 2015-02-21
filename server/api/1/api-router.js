@@ -1,14 +1,20 @@
 var express = require('express');
 var apiRouter = express.Router();
-var apiLogic = require('./apiLogic.js');
+var databaseLogic = require('./databaseLogic.js');
+// var elanceLogic = require('/eLanceLogic.js');
 
 apiRouter.get('/allCountriesAllLanguages', function(req,res) {
-  apiLogic.allCountriesAllLanguages(req,res);
+  databaseLogic.allCountriesAllLanguages(req,res);
 });
 
 apiRouter.get('/countriesForLanguage', function(req,res) {
   console.log('heard a request to countriesForLanguage');
-  apiLogic.countriesForLanguage(req,res);
+  databaseLogic.countriesForLanguage(req,res);
 });
+
+// apiRouter.get('/eLanceData', function(req,res) {
+//   console.log('heard a request to countriesForLanguage');
+//   eLanceLogic.getAllData(req,res);
+// });
 
 module.exports = apiRouter;
