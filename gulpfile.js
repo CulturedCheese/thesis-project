@@ -142,6 +142,11 @@ gulp.task('copy-html-files', function () {
     .pipe(gulp.dest(config.dist));
 });
 
+gulp.task('copy-font-files', function () {
+  gulp.src(config.client + 'styles/fonts/*')
+    .pipe(gulp.dest(config.dist + 'fonts'));
+});
+
 gulp.task('build', function(){
   $.runSequence(
     ['inject', 
@@ -149,7 +154,8 @@ gulp.task('build', function(){
     'minify-css', 
     'minify-js', 
     'copy-html-files',
-    'copy-bower-components'
+    'copy-bower-components',
+    'copy-font-files'
     ]);
 });
 
