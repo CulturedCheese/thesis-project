@@ -5,7 +5,7 @@ dbConnection = mysql.createConnection({
   database: "ghdb"
 });
 
-dbConnection.connect();
+// dbConnection.connect();
 
 module.exports = dbConnection;
 
