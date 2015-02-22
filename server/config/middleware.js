@@ -8,9 +8,11 @@ var dataProcessingRouter = require('../dataProcessing/dataProcessing-router.js')
 var path        = require('path');
 var passport    = require('passport');
 var session = require('express-session');
+var cookieParser = require('cookie-parser');
 
 module.exports = function(app, express) {
   app.use(morgan('dev'));
+  app.use(cookieParser());
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(bodyParser.json());
   app.use(session({ secret: 'keyboard cat'}));
