@@ -6,9 +6,9 @@ var lookup = require('country-data').lookup;
 
 module.exports = {
   allCountriesAllLanguages: function(req, res) {
-    console.log('heard a request to getTopLanguageByCountry');
+    console.log('heard a request to allCountriesAllLanguages');
     //selects the top 10 languages by country;
-    var sqlQuery =  'SELECT repository_language, countryCode, totalActiveRepos       FROM ( SELECT repository_language, countryCode, totalActiveRepos,   @country_rank := IF(@current_country = countryCode, @country_rank + 1, 1) AS country_rank, @current_country := countryCode     FROM countriesAggAll     ORDER BY countryCode, totalActiveRepos DESC   ) ranked      WHERE country_rank <= 10';
+    var sqlQuery =  'SELECT repository_language, countryCode, activeProgrammers       FROM ( SELECT repository_language, countryCode, activeProgrammers,   @country_rank := IF(@current_country = countryCode, @country_rank + 1, 1) AS country_rank, @current_country := countryCode     FROM 14countries     ORDER BY countryCode, activeProgrammers DESC   ) ranked      WHERE country_rank <= 10';
     // var sqlQuery2 = 'select * from countriesAggAll limit 100';
     db.query(sqlQuery, function(err, response) {
       if(err) {
@@ -52,12 +52,15 @@ module.exports = {
 
   countriesForLanguage: function(req,res) {
     //TODO: figure out what format our language variable is coming in as
-    var languageVar = req.body.language || 'javascript';
-    var countriesQuery = 'SELECT SUM(totalActiveRepos) AS totalActivities, countryCode FROM countriesAggAll WHERE repository_language="' + languageVar + '" GROUP BY countryCode';
-    db.query(countriesQuery, function(err, response) {
+    var languageVar = req.body.language || 'Javascript';
+    var countriesQuery = 'SELECT activeProgrammers, countryCode FROM 14countries WHERE repository_language="' + languageVar + '" GROUP BY countryCode';
+    var countriesQuery2 = "select countryCode, activeProgrammers FROM 14countries WHERE repository_language='javascript' GROUP BY countryCode";
+    db.query(countriesQuery2, function(err, response) {
       if(err) {
         console.error(err);
       } else {
+        console.log('response!');
+        console.log(response);
 
         //all this logic is to get the three letter country code, and to format our response object to use the fillKey format
         var countries = {};
@@ -67,11 +70,10 @@ module.exports = {
             var lookupResults = lookup.countries({alpha2: country});
             if(lookupResults[0]) {
               var threeLetterName = lookupResults[0].alpha3;
-              countries[threeLetterName] = {fillKey: response[i].totalActivities};
+              countries[threeLetterName] = {fillKey: response[i].activeProgrammers};
             }
           }
         }
-        console.log('data back from topLangsByCountry');
         res.send(countries);
       }
     });

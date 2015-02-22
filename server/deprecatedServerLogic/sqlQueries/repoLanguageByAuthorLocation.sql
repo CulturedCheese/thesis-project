@@ -1,4 +1,4 @@
-//this is the query we're running on google BigQuery to get the raw data downloaded into our mysql instance. 
+//this is the query we arere running on google BigQuery to get the raw data downloaded into our mysql instance. 
 
 select 
   repository_url,

@@ -57,35 +57,4 @@ var Map = React.createClass({
 
 });
 
-//original render function
-// render: function() {
-//   console.log('call to render' + this.callsToRender++);
-//   //right now this isn't updating because we're not returning it from render
-//   //TODO: either wipe out the whole map and re-render it each time,
-//   //TODO: or find a way to return it in react.
-//   var map = new Datamap({
-//     element: document.getElementById('d3Map'),
-//     fills: languageColors, //mapping file from language to the color code. it's a long file so we're saving it elsewhere. 
-//     data: this.props.countryData,  //this is the data that is attached to each country
-//     geographyConfig: {
-//       popupTemplate: function(geo, data) {
-//         //TODO: format this. right now it's just putting the whole 'data.allLangs' object into the hover
-//         //clearly we want to have this formatted more intelligently
-//         //we should be able to make this a separate React component
-//         return ['<div class="hoverinfo"><strong>',
-//                 'Number of things in ' + geo.properties.name,
-//                 ': ' + data.allLangs,
-//                 '</strong></div>'].join('');
-//       }
-//     }
-//     //ideally we can set responsive to true and it will adjust based on the screen size
-//     // responsive: true
-//   });
-
-//   return (
-//     <span></span>
-//   );
-// },
-
-
 module.exports = Map;

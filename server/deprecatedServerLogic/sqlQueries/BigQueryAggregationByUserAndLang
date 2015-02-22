@@ -1,0 +1,28 @@
+This is the new query i wrote which aggregates the Google BigQuery data to count of repositories by user for each language. 
+this table is long, rather than wide. 
+I also slightly expanded the types of events that count for this query. it did not substantially increase the number of rows, signalling that while it may have increased the number of active repos for a given user for a given language, it was unlikely to have added a new user/language combination to the data set. 
+
+select 
+  COUNT(DISTINCT(repository_url)) AS activeReposByLang,
+  repository_language,
+  actor_attributes_login,
+  actor_attributes_location
+from [githubarchive:month.201311]
+where
+    (
+      type = 'PushEvent'
+      OR type = 'ForkEvent'
+      OR type = 'PullRequestEvent'
+      OR (type = 'IssuesEvent' AND (payload_action="opened" OR payload_action=="reopened"))
+      OR type = 'WatchEvent'
+      OR type = 'MemberEvent'
+      OR type = 'PublicEvent'
+      OR type = 'ReleaseEvent'
+    )
+    AND repository_language !=''
+    AND repository_url != ''
+group each by 
+  actor_attributes_login,
+  repository_language,
+  actor_attributes_location;
+  
