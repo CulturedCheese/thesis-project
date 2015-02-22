@@ -35,11 +35,18 @@ apiRouter.get('/auth/odesk', passportOdesk.authenticate('odesk'));
 // Finish the authentication process by attempting to obtain an access
 // token.  If authorization was granted, the user will be logged in.
 // Otherwise, authentication has failed.
-apiRouter.get('/auth/elance/callback', 
-  passportElance.authenticate('elance', { successRedirect: '/about',
-                                      failureRedirect: '/contact' }));
+// apiRouter.get('/auth/elance/callback', 
+//   passportElance.authenticate('elance', { successRedirect: '/about',
+//                                       failureRedirect: '/contact' }));
 apiRouter.get('/auth/odesk/callback', 
-  passportOdesk.authenticate('odesk', { successRedirect: '/about',
-                                      failureRedirect: '/contact' }));
+  passportOdesk.authenticate('odesk', { failureRedirect: '/' }),
+  function(req, res){
+    console.log('authenticated');
+    res.redirect('/');
+  });
+
+apiRouter.get('/', function(req, res) {
+  res.render('index');
+});
 
 module.exports = apiRouter;
