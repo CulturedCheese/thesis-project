@@ -1,12 +1,13 @@
-var Footer = require('./Footer.react');
-var Header = require('./Header.react');
-var Infobox = require('./Infobox.react');
-var MainSection = require('./MainSection.react');
-var SearchLanguageBar = require('./SearchLanguageBar.react');
-var SearchCountryBar = require('./SearchCountryBar.react');
-var Map = require('./Map.react');
 var React = require('react');
 var DevSearchStore = require('../stores/DevSearchStore');
+var Header = require('./Header.react');
+var SearchLanguageBar = require('./SearchLanguageBar.react');
+var SearchCountryBar = require('./SearchCountryBar.react');
+var MainSection = require('./MainSection.react');
+var Map = require('./Map.react');
+var Infobox = require('./Infobox.react');
+var Profiles = require('./Profiles.react');
+var Footer = require('./Footer.react');
 //This component operates as a "Controller-View".  It listens for changes in
 //the DevSearchStore and passes the new data to its children.
 
@@ -14,8 +15,10 @@ var DevSearchStore = require('../stores/DevSearchStore');
 //this does not make a new api call to the server, only to the store.
 function getDevSearchState() {
   var countryData = DevSearchStore.getCountryDataFromStore();
+  // var profileData = DevSearchStore.getProfileDataFromStore();
   return {
     countryData: countryData
+    // profileData: profileData
   };
 }
 

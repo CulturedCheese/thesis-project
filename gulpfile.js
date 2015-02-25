@@ -153,6 +153,16 @@ gulp.task('copy-font-files', function () {
     .pipe(gulp.dest(config.dist + 'fonts'));
 });
 
+gulp.task('copy-image-files', function () {
+  gulp.src(config.client + 'images/**/*')
+    .pipe(gulp.dest(config.dist + 'images/'));
+});
+
+gulp.task('copy-styles-files', function () {
+  gulp.src(config.client + 'styles/**/*')
+    .pipe(gulp.dest(config.dist + 'styles/'));
+});
+
 gulp.task('build', function(){
   $.runSequence(
     ['inject', 
@@ -161,7 +171,8 @@ gulp.task('build', function(){
     'minify-js', 
     'copy-html-files',
     'copy-bower-components',
-    'copy-font-files'
+    'copy-styles-files',
+    'copy-image-files'
     ]);
 });
 

@@ -1,0 +1,12 @@
+initial:
+top 10 countries by number of active developers --> hire coders
+click on "hire coders" --> profile page()
+
+hover over country/search by country (top 10 languages & # of active developers) --> hire coders
+click on "hire coders" --> profile page for country X 
+(filter by keyword, language; order results by...) 
+
+
+search by language (top 10 countries & # of active developers) --> hire coders
+click on "hire coders" --> profile page for language X 
+(filter by country, keyword; order results by...)

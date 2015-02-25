@@ -16,3 +16,4 @@ client/styles/styles.css
 db/*
 server/deprecatedServerLogic/*
 client/app/bundle.min.jsconfig.js
+config.js
