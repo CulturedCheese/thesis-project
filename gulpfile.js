@@ -88,6 +88,7 @@ gulp.task('inject', ['bundle','wiredep', 'styles'], function() {
         .pipe($.replace('styles/styles.css', './styles.min.css'))
         .pipe($.replace('./app/bundle.js', './bundle.min.js'))
         .pipe($.replace('dist/jquery.js', 'dist/jquery.min.js'))
+        .pipe($.replace('react/react.js', 'react/react.min.js'))
         .pipe($.replace('javascripts/bootstrap.js', 'javascripts/bootstrap.min.js'))
         .pipe($.replace('react-bootstrap/react-bootstrap.js', 'react-bootstrap/react-bootstrap.min.js'))
         .pipe($.replace('d3/d3.js', 'd3/d3.min.js'))

@@ -23,9 +23,3 @@ SET
   latitude= @Lat,
   longitude= @Long,
   latLongPoint= PointFromWKB(POINT(@Lat,@Long));
--- character set latin1 
--- escaped by '\\' 
--- ignore 1 lines;
--- lines terminated by '\n' 
--- starting by '' 
-

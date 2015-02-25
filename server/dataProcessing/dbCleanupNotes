@@ -1,0 +1,4 @@
+dbCleanupNotes
+1. I'm pretty sure i can delete all the userAggregation tables except for 8
+2. i'm pretty sure i need to redo the countryAggregation
+3. can get rid of one of hte contryaggregation tables i think
