@@ -1,6 +1,7 @@
 var express = require('express');
 var apiRouter = express.Router();
 var oDeskApi = require('odesk-api'), rl = require('readline');
+var Q = require('q'); 
 
 // configures oDesk api to enable HTTP requets
 var config = require('./../../../config.js');
@@ -28,22 +29,37 @@ apiRouter.get('/countriesForLanguage', function(req,res) {
   databaseLogic.countriesForLanguage(req,res);
 });
 
-// api routes for oDesk data
-apiRouter.get('/odeskData', function(req,res) {
-   console.log('heard a request to odeskData');
-   freelancersLogic.getOdeskData(req,res);
-});
-
-
-apiRouter.get('/roles', function(req, res) {
-  var Search = require('odesk-api/lib/routers/freelancers/search.js').Search;
-  var freelancers = new Search(api);
+// api route for oDesk data
+// routes to the odesk API-based profile listing given country and language
+apiRouter.get('/odeskByCountry', function(req, res) {
   api.setAccessToken(config.accessToken, config.accessSecret, function() {
-    var params = {'q': 'JavaScript', 'title': 'Software Developer'};
-    freelancers.find(params, function(error, data) {
-      res.send(data);
-
-    })
+    var Search = require('odesk-api/lib/routers/freelancers/search.js').Search;
+    var freelancers = new Search(api);
+    var language = req.language || 'JavaScript'; //TODO: need to make dynamic, i.e., req.language, based on user input on front-end
+    var country = req.country || 'Vietnam'; //TODO: need to make dynamic, i.e., req.country,  based on user input on front-end
+    var page = req.page || 0;
+    // queries the top 20 results; at least 4.0 feedback score
+    var params = {'q': 'skills:'+ language + ' AND country:' + country, 'paging': page + ';20', 'feedback': '[4 TO 5]'}
+    var profiles = Q.nbind(freelancers.find,freelancers);
+    
+    profiles(params)
+      .then(function (results) {
+        var profiles = results.providers; // an array containing a list of 20 freelancer profiles
+        // parse profiles to grab only the name, title, skills, feedback, portrait, id from each profile  
+        var summaryProfiles = profiles.map(function(profile){
+          return {
+            name: profile.name,
+            title: profile.title,
+            skills: profile.skills,
+            feedback: profile.feedback,
+            portrait: profile.portrait_50,
+            country: profile.country,
+            hourlyRate: profile.rate,
+            url: 'https://www.odesk.com/o/profiles/users/_' + profile.id
+          };
+        });
+        res.send(summaryProfiles);
+      })
   });
 });
 

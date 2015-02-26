@@ -48,6 +48,7 @@ var Map = React.createClass({
   render: function() {
     //TODO: style the svg to be the right size. 
     //TODO: give the svg an ID.
+    console.log('hello')
     return(
       <div id="d3Map" ></div>
     ) 
