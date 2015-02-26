@@ -2,6 +2,7 @@ var express = require('express');
 var apiRouter = express.Router();
 var oDeskApi = require('odesk-api'), rl = require('readline');
 var Q = require('q'); 
+var url = require('url');
 
 // configures oDesk api to enable HTTP requets
 var config = require('./../../../config.js');
@@ -29,9 +30,20 @@ apiRouter.get('/countriesForLanguage', function(req,res) {
   databaseLogic.countriesForLanguage(req,res);
 });
 
+apiRouter.get('/developerCountByCountry', function(req,res) {
+  console.log('heard a request to developerCountByCountry');
+  databaseLogic.developerCountByCountry(req,res);
+});
+
+apiRouter.get('/developerCountByLanguage', function(req,res) {
+  console.log('heard a request to developerCountByLanguage');
+  databaseLogic.developerCountByLanguage(req,res);
+});
+
 // api route for oDesk data
 // routes to the odesk API-based profile listing given country and language
 apiRouter.get('/odeskByCountry', function(req, res) {
+
   api.setAccessToken(config.accessToken, config.accessSecret, function() {
     var Search = require('odesk-api/lib/routers/freelancers/search.js').Search;
     var freelancers = new Search(api);

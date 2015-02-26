@@ -17,3 +17,7 @@ db/*
 server/deprecatedServerLogic/*
 client/app/bundle.min.jsconfig.js
 config.js
+*.pem
+ec2-api-tools.zip
+ghdb2Dump.sql
+ghdb2Dump2.sql

@@ -176,6 +176,6 @@ module.exports = {
       });//db.query ends here
       }
     }, 2000);
-  }
+  },
 
 };
