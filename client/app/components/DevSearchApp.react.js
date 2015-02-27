@@ -1,11 +1,8 @@
 var React = require('react');
 var DevSearchStore = require('../stores/DevSearchStore');
 var Header = require('./Header.react');
-var SearchLanguageBar = require('./SearchLanguageBar.react');
-var SearchCountryBar = require('./SearchCountryBar.react');
 var MainSection = require('./MainSection.react');
 var Map = require('./Map.react');
-var Infobox = require('./Infobox.react');
 var Profiles = require('./Profiles.react');
 var Footer = require('./Footer.react');
 //This component operates as a "Controller-View".  It listens for changes in
@@ -47,10 +44,7 @@ var DevSearchApp = React.createClass({
   render: function() {
   	return (
       <div>
-        <SearchLanguageBar />
-        <SearchCountryBar />
         <MainSection countryData={this.state.countryData} />
-        <Footer />
       </div>
   	);
   },
