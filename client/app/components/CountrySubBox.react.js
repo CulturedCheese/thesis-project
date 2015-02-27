@@ -8,7 +8,7 @@ var CountrySubBox = React.createClass({
         <h3>Country Search Results</h3>
         <p>Country</p> 
         <p>Top 10 Languages (# Active Devs)</p> 
-        <p></p>
+        <p>Name: {this.props.countryData.name}</p>
         <p></p>
         <p></p>
         <p></p>

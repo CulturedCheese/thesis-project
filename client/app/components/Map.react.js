@@ -52,7 +52,7 @@ var Map = React.createClass({
     return(
       <section> 
         <div id="d3Map" ></div>
-        <Infobox />
+        <Infobox countryData={this.props.countryData}/>
       </section>
     ) 
   }
