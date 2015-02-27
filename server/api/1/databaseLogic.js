@@ -37,14 +37,17 @@ module.exports = {
           yoyGrowth[countryCode] = [programmer2013,programmer2014, hourlyWage];
         }
 
+        //this query grabs the top languages for each country
         db.query(sqlQuery, function(err, response) {
           if(err) {
             console.error(err);
           } else {
+            //countries1 is built off the two letter country codes (which is what the geonames API returned)
             var countries1 = {};
             for(var i = 0; i < response.length; i++) {
               var item = response[i];
               var tuple = [item.repository_language, item.activeProgrammers];
+              //if the country doesn't exist yet, add it!
               if(!countries1[item.countryCode]) {
                 countries1[item.countryCode] = {
                   fillKey: item.repository_language,
@@ -54,6 +57,7 @@ module.exports = {
                 countries1[item.countryCode].allLangs.push(tuple);
               }
             }
+            //countries2 will be built using the three letter countryCodes that the d3 map requires
             var countries2 = {};
             for(var country in countries1) {
               if(country !== 'null') {
@@ -94,7 +98,7 @@ module.exports = {
   countriesForLanguage: function(req,res) {
     //TODO: figure out what format our language variable is coming in as
     var languageVar = req._parsedUrl.query;
-    var countriesQuery = 'SELECT activeProgrammers, countryCode, hourlyWage FROM 14countries JOIN salaryByCountry ON 14countries.countryCode = salaryByCountry.countryCodeTwoLetter WHERE repository_language="' + languageVar + '" GROUP BY countryCode';
+    var countriesQuery = 'SELECT activeProgrammers, countryCode, hourlyWage FROM 14countries JOIN salaryByCountry ON 14countries.countryCode = salaryByCountry.countryCodeTwoLetter WHERE repository_language="' + languageVar + '" GROUP BY countryCode ORDER BY activeProgrammers DESC';
     // var countriesQuery2 = "select countryCode, activeProgrammers FROM 14countries WHERE repository_language='javascript' GROUP BY countryCode";
     db.query(countriesQuery, function(err, response) {
       if(err) {d
@@ -109,7 +113,12 @@ module.exports = {
             var lookupResults = lookup.countries({alpha2: country});
             if(lookupResults[0]) {
               var threeLetterName = lookupResults[0].alpha3;
-              countries[threeLetterName] = {fillKey: response[i].activeProgrammers};
+              countries[threeLetterName] = {
+                fillKey: response[i].activeProgrammers,
+                countryCode2: lookupResults[0].alpha2,
+                countryCode3: threeLetterName,
+                countryName: lookupResults[0].name
+              };
             }
           }
         }
@@ -124,13 +133,33 @@ module.exports = {
       if(err) {
         console.error(err);
       } else {
-        res.send(response);
+        var countries = {};
+        for(var i = 0; i < response.length; i++) {
+          var lookupResults = lookup.countries({alpha2: response[i].countryCode});
+          //not all countries play nicely, or we might have null in our dataset. 
+          if(lookupResults[0]) {
+            var countryCode3 = lookupResults[0].alpha3;
+            var countryCode2 = lookupResults[0].alpha2;
+            var countryName = lookupResults[0].name;
+
+            countries[countryCode3] = {
+              programmers2013: response[i].programmers2013,
+              programmers2014: response[i].programmers2014,
+              hourlyWage: response[i].hourlyWage,
+              countryCode2: countryCode2,
+              countryCode3: countryCode3,
+              countryName: lookupResults[0].name
+            }
+            
+          }
+        }
+        res.send(countries);
       }
     });
   },
 
   developerCountByLanguage: function(req,res) {
-    var sqlQuery = 'SELECT * FROM languages';
+    var sqlQuery = 'SELECT * FROM languages ORDER BY activeProgrammers DESC';
     db.query(sqlQuery, function(err, response) {
       if(err) {
         console.error(err);
