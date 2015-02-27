@@ -8,7 +8,7 @@ var Profiles = React.createClass({
   	var results = this.props.profileData;
 	    return (
 	      <section id="profiles">
-          <NextPage />
+          <NextPage profileData={results} />
           <br />
           <br />
           {results.map(function(result) {

@@ -16,7 +16,7 @@ var config = {
 var api = new oDeskApi(config);
 
 // app controllers // TODO: rename to controller
-var databaseLogic = require('./databaseLogic.js');
+// var databaseLogic = require('./databaseLogic.js');
 var freelancersLogic = require('./freelancersLogic.js');
 
 // api routes for Github data
@@ -43,17 +43,15 @@ apiRouter.get('/developerCountByLanguage', function(req,res) {
 // api route for oDesk data
 // routes to the odesk API-based profile listing given country and language
 apiRouter.get('/odeskByCountry', function(req, res) {
-
   api.setAccessToken(config.accessToken, config.accessSecret, function() {
     var Search = require('odesk-api/lib/routers/freelancers/search.js').Search;
     var freelancers = new Search(api);
-    var language = req.language || 'JavaScript'; //TODO: need to make dynamic, i.e., req.language, based on user input on front-end
-    var country = req.country || 'Vietnam'; //TODO: need to make dynamic, i.e., req.country,  based on user input on front-end
-    var page = req.page || 0;
+    var language = req.language || 'Ruby'; 
+    var country = req.country || 'Vietnam'; 
+    var page = req.url.split("=")[1] || 0;
     // queries the top 20 results; at least 4.0 feedback score
     var params = {'q': 'skills:'+ language + ' AND country:' + country, 'paging': page + ';20', 'feedback': '[4 TO 5]'}
     var profiles = Q.nbind(freelancers.find,freelancers);
-    
     profiles(params)
       .then(function (results) {
         var profiles = results.providers; // an array containing a list of 20 freelancer profiles
@@ -67,6 +65,7 @@ apiRouter.get('/odeskByCountry', function(req, res) {
             portrait: profile.portrait_50,
             country: profile.country,
             hourlyRate: profile.rate,
+            page: page,
             url: 'https://www.odesk.com/o/profiles/users/_' + profile.id
           };
         });
