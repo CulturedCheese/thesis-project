@@ -3,6 +3,7 @@ var apiRouter = express.Router();
 var oDeskApi = require('odesk-api'), rl = require('readline');
 var Q = require('q'); 
 var url = require('url');
+var databaseLogic = require('./databaseLogic.js');
 
 // configures oDesk api to enable HTTP requets
 var config = require('./../../../config.js');
