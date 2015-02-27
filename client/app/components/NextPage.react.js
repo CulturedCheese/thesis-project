@@ -1,22 +1,20 @@
 var React = require('react');
-// var ProfilesStore = require('../stores/ProfilesStore');
+var ProfilesActions = require('../actions/ProfilesActions');
 
 var NextPage = React.createClass({
 
-  handleSubmit: function(e) {
-    e.preventDefault();
-    var req = {}; 
-    console.log('clicked!');
-    req.page = 1;
-    // ProfilesApp.getInitialState(req);
-  },
-
   render: function() {
     return (
-    	<form ref="form" onSubmit={this.handleSubmit}>
-    	  <button type="submit" >Next Page</button>
-    	</form>
+      <form ref="form" onSubmit={this._handleSubmit}>
+        <button type="submit" >Next Page</button>
+      </form>
     );
+  },
+
+  _handleSubmit: function(e) {
+    e.preventDefault();
+    var currentPage = Number(this.props.profileData[0].page);
+    ProfilesActions.nextPage(currentPage + 1);
   }
 
 });

@@ -8,9 +8,8 @@ var NextPage = require('./NextPage.react');
 //this gets the country data **as it already exists in the store** 
 //this does not make a new api call to the server, only to the store.
 function getProfilesState() {
-  var profileData = ProfilesStore.getProfileDataFromStore();
   return {
-    profileData: profileData
+    profileData: ProfilesStore.getProfileDataFromStore()
   };
 }
 
@@ -20,12 +19,6 @@ function requestProfilesData(page) {
 }
 
 var ProfilesApp = React.createClass({
-  
-  nextPage: function(page) {
-    var updatedProfileData = this.state.profileData;
-    updatedProfileData = requestProfilesData(page);
-    this.setState({profileData: updatedProfileData});
-  },
 
   getInitialState: function() {
     requestProfilesData();
@@ -34,6 +27,10 @@ var ProfilesApp = React.createClass({
 
   componentDidMount: function() {
     ProfilesStore.addChangeListener(this._onChange);
+  },
+
+  componentWillUnmount: function() {
+    ProfilesStore.removeChangeListener(this._onChange);
   },
 
   _onChange: function() {
@@ -45,7 +42,7 @@ var ProfilesApp = React.createClass({
   render: function() {
   	return (
       <div>
-        <Profiles profileData = {this.state.profileData} page = {0} />
+        <Profiles profileData = {this.state.profileData} />
       </div>
   	);
   },

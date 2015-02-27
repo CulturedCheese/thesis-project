@@ -1,6 +1,22 @@
 var Dispatcher = require('flux').Dispatcher;
 
-//component - dispatcher - store
-// search box -> 
+var copyProperties = require('react/lib/copyProperties');
 
-module.exports = new Dispatcher();
+var AppDispatcher = copyProperties(new Dispatcher(), {
+
+  /**
+   * @param {object} action The details of the action, including the action's
+   * type and additional data coming from the view.
+   */
+  handleViewAction: function(action) {
+    var payload = {
+      source: 'VIEW_ACTION',
+      action: action
+    };
+    console.log("here's the payload", payload);
+    this.dispatch(payload);
+  }
+
+});
+
+module.exports = AppDispatcher;
