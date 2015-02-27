@@ -2,6 +2,7 @@ var React = require('react');
 //languageColors is the object that maps from a language string to a color hex.
 var languageColors = require('./languageColors'); 
 
+
 //sample data so we can see the format 
 // var mockData = {
 //   "BRN":{"fillKey":"JavaScript","allLangs":[["JavaScript",3],["Visual Basic",3],["PHP",1]]},
@@ -28,10 +29,8 @@ var Map = React.createClass({
       geographyConfig: {
         popupTemplate: function(geography, data) {
           //TODO: we should be able to make this a separate React component
-          return ['<div class="hoverinfo"><strong>',
-                  'Top language for ' + geography.properties.name,
-                  ': ' + data.fillKey,
-                  '</strong></div>'].join('');
+          console.log(geography.properties.name);
+          console.log(data.fillKey);
         }
       }
     });
@@ -49,13 +48,10 @@ var Map = React.createClass({
     //TODO: style the svg to be the right size. 
     //TODO: give the svg an ID.
     console.log('hello')
-    return(
+    return( 
       <div id="d3Map" ></div>
     ) 
-
   }
-
-
 });
 
 module.exports = Map;
