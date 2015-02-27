@@ -1,16 +1,16 @@
-var React = require('react');
-var DevSearchActions = require('../actions/DevSearchActions');
+// var React = require('react');
+// var DevSearchActions = require('../actions/DevSearchActions');
 
-var Footer = React.createClass({
+// var Footer = React.createClass({
 
-  render: function() {
+//   render: function() {
 
-  	return (
-      <footer id="footer">
-      </footer>
-    );
-  },
+//   	return (
+//       <footer id="footer">
+//       </footer>
+//     );
+//   },
 
-});
+// });
 
-module.exports = Footer;
+// module.exports = Footer;
