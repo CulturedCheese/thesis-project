@@ -100,7 +100,7 @@ module.exports = {
   countriesForLanguage: function(req,res) {
     //TODO: figure out what format our language variable is coming in as
     var languageVar = req._parsedUrl.query;
-    var countriesQuery = 'SELECT activeProgrammers, countryCode, hourlyWage FROM 14countries JOIN salaryByCountry ON 14countries.countryCode = salaryByCountry.countryCodeTwoLetter WHERE repository_language="' + languageVar + '" GROUP BY countryCode ORDER BY activeProgrammers DESC';
+    var countriesQuery = 'SELECT SUM(activeProgrammers) AS activeProgrammers, countryCode, hourlyWage FROM 14countries JOIN salaryByCountry ON 14countries.countryCode = salaryByCountry.countryCodeTwoLetter WHERE repository_language="' + languageVar + '" GROUP BY countryCode ORDER BY activeProgrammers DESC';
     // var countriesQuery2 = "select countryCode, activeProgrammers FROM 14countries WHERE repository_language='javascript' GROUP BY countryCode";
     db.query(countriesQuery, function(err, response) {
       if(err) {
