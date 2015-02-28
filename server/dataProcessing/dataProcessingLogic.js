@@ -178,4 +178,53 @@ module.exports = {
     }, 2000);
   },
 
+  topDevsByCountry: function(req,res) {
+    console.log('heard a request ot topDevsByCountry');
+    var sqlQuery = 'SELECT * FROM 14users';
+    db.query(sqlQuery, function(err, response) {
+      if(err) {
+        console.error(err);
+      } else {
+        var results = {};
+        for(var i = 0; i < response.length; i++) {
+          var item = response[i];
+          var country = item.countryCode;
+          var language = item.repository_language;
+          //if the country doesn't exist, initialize it
+          if(!results[country]) {
+            results[country] = {};
+          }
+          //if the language doesn't exist for that country, initialize it
+          if(!results[country][language]) {
+            results[country][language] = [];
+          }
+          //now the country and language exist
+          //check to see if we can skip out on this easily because we already have 10 items and the new item is less than the 10th largest item. if 
+          if(!(results[country][language].length === 10 && item.activeReposByLang < results[country][language][9].activeRepos)) {
+            //create the item to be added
+            var pushItem = {
+              username: item.actor_attributes_login,
+              activeRepos: item.activeReposByLang
+            };
+            //add the item
+            results[country][language].push(pushItem);
+            //sort the resulting array
+            results[country][language].sort(function(a,b) {
+              return b.activeRepos - a.activeRepos;
+            });
+            //if we have too many items, get rid of one.
+            if(results[country][language].length > 10) {
+              results[country][language].pop();
+            }
+          }
+        }
+        //the users are now all aggregated.
+        //TODO: next steps:
+        //1. insert into DB
+        //2. figure out how to get github avatar pic
+        res.send(results);
+      }
+    })
+  }
+
 };

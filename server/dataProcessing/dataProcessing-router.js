@@ -6,4 +6,8 @@ dataProcessingRouter.get('/escapeAndLoadUsersByLang', function(req, res) {
   dataProcessingLogic.escapeAndLoadUsersByLang(req,res);
 });
 
+dataProcessingRouter.get('/topDevsByCountry', function(req, res) {
+  dataProcessingLogic.topDevsByCountry(req,res);
+});
+
 module.exports = dataProcessingRouter;

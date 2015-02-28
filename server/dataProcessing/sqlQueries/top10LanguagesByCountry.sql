@@ -1,3 +1,4 @@
+-- interestingly, this works fine when running in a MySQL shell, but does not work from within Node. 
 SELECT repository_language, countryCode, activeProgrammers 
 FROM ( 
   SELECT 
