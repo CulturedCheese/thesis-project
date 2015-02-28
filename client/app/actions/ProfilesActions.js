@@ -9,6 +9,15 @@ var ProfilesActions = {
       actionType: 'PROFILES_NEXT_PAGE',
       page: page
     });
+  },
+
+  getCoders: function(language, country) {
+    console.log('heard a getCoders in ProfilesActions!')
+    AppDispatcher.handleViewAction({
+      actionType: 'GET_CODERS',
+      language: language,
+      country: country
+    });
   }
 
 };

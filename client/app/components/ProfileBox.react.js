@@ -11,7 +11,7 @@ var ProfileBox = React.createClass({
         <p>Feedback: {this.props.profileData.feedback}</p>
         <p>Rate: ${this.props.profileData.hourlyRate}/hr</p>
         <p>Country: {this.props.profileData.country}</p>
-        <p>Page: {this.props.profileData.page}</p>
+        <p>Page: {Number(this.props.profileData.page) + 1}</p>
         <ProfileLink url={this.props.profileData.url} />
         <p>--------------------------------------------------------------</p>
       </div>

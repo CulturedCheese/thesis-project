@@ -67,16 +67,53 @@ apiRouter.get('/CountryCountByLanguage', function(req,res) {
 // api route for oDesk data
 // routes to the odesk API-based profile listing given country and language
 // TODO: move to freelancersLogic.js
-apiRouter.get('/odeskByCountry', function(req, res) {
+apiRouter.get('/codersNextPage', function(req, res) {
   api.setAccessToken(config.accessToken, config.accessSecret, function() {
     var Search = require('odesk-api/lib/routers/freelancers/search.js').Search;
     var freelancers = new Search(api);
-    var language = req.language || 'Ruby'; 
-    var country = req.country || 'Vietnam'; 
+    var language = req.url.split("=")[3];  
+    var country = req.url.split("=")[5]; 
     var page = req.url.split("=")[1] || 0;
     // queries the top 20 results; at least 4.0 feedback score
-    var params = {'q': 'skills:'+ language + ' AND country:' + country, 'paging': page + ';20', 'feedback': '[4 TO 5]'}
+    var params = {'q': 'skills:'+ language + ' AND country:' + country, 'paging': page + ';20', 'feedback': '[1 TO 5]'}
     var profiles = Q.nbind(freelancers.find,freelancers);
+    profiles(params)
+      .then(function (results) {
+        var profiles = results.providers; // an array containing a list of 20 freelancer profiles
+        // parse profiles to grab only the name, title, skills, feedback, portrait, id from each profile  
+        var summaryProfiles = profiles.map(function(profile){
+          return {
+            name: profile.name,
+            title: profile.title,
+            skills: profile.skills,
+            feedback: profile.feedback,
+            portrait: profile.portrait_50,
+            country: profile.country,
+            hourlyRate: profile.rate,
+            page: page,
+            url: 'https://www.odesk.com/o/profiles/users/_' + profile.id
+          };
+        });
+        res.send(summaryProfiles);
+      })
+  });
+});
+
+apiRouter.get('/codersByLanguageByCountry', function(req, res) {
+  api.setAccessToken(config.accessToken, config.accessSecret, function() {
+    console.log("server hears a call for codersByLanguageByCountry")
+    var Search = require('odesk-api/lib/routers/freelancers/search.js').Search;
+    var freelancers = new Search(api);
+    var language = req.url.split("=")[3] || 'JavaScript'; 
+    var country = req.url.split("=")[5] || 'Vietnam'; 
+    var page = req.url.split("=")[1]
+    var summaryProfiles = {};
+    // queries the top 20 results; at least 4.0 feedback score
+    var params = {'q': 'skills:'+ language + ' AND country:' + country, 'paging': page + ';20', 'feedback': '[1 TO 5]'};
+
+    console.log(language, country, params)
+    var profiles = Q.nbind(freelancers.find,freelancers);
+    
     profiles(params)
       .then(function (results) {
         var profiles = results.providers; // an array containing a list of 20 freelancer profiles
