@@ -9,12 +9,12 @@ var Infobox = require('./Infobox.react');
 var MainSection = React.createClass({
 
   render: function() {
-    return (      
+    return (
       <section id="main">
-      	<SearchLanguageBar />
-        <SearchCountryBar />
-        <Map countryData={this.props.countryData} />
-        <Infobox countryData={this.props.countryData}/>
+	      <SearchLanguageBar />
+	      <SearchCountryBar />      
+	      <Map countryData={this.props.countryData} sortedCountriesByLanguageTop10={this.props.sortedCountriesByLanguageTop10}/>
+	      <Infobox countryData={this.props.countryData} sortedCountriesByLanguageTop10={this.props.sortedCountriesByLanguageTop10} />
       </section>
     );
   },

@@ -940,8 +940,10 @@ var colors = {
 };
 
 var formattedColors = {};
-for(var language in colors) {
-    formattedColors[language] = colors[language].color;
+
+for(var language in colors) {  
+  formattedColors[language] = colors[language].color;
+  formattedColors[language.toLowerCase()] = colors[language].color;
 }
 
 module.exports = formattedColors;
