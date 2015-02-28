@@ -3,19 +3,18 @@ var React = require('react');
 var LanguageSubBox = React.createClass({
 
   render: function() {
-    return (
-      <div className="languagesubbox">
-        <h3>Language Search Results</h3>
-        <p>Language</p> 
-        <p># of Active Developers</p> 
-        <p>Top 5 GitHub Handles</p>
-        <p></p>
-        <p></p>
-        <p></p>
-        <p>--------------------------------------------------------------</p>
+  	var results = this.props.sortedCountriesByLanguageTop10;
+    console.log(results);
+  	return (
+      <div id="infobox">
+        {results.map(function(country) {
+        	return (
+              <p>{country.countryName} has {country.activeProgrammers} {country.language} developers</p>
+        	);
+        })}
       </div>
     );
-  },
+  }
 
 });
 

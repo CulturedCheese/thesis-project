@@ -1,10 +1,8 @@
 var React = require('react');
 var DevSearchStore = require('../stores/DevSearchStore');
-var Header = require('./Header.react');
 var MainSection = require('./MainSection.react');
 var Map = require('./Map.react');
 var Profiles = require('./Profiles.react');
-var Footer = require('./Footer.react');
 //This component operates as a "Controller-View".  It listens for changes in
 //the DevSearchStore and passes the new data to its children.
 
@@ -12,10 +10,10 @@ var Footer = require('./Footer.react');
 //this does not make a new api call to the server, only to the store.
 function getDevSearchState() {
   var countryData = DevSearchStore.getCountryDataFromStore();
-  // var profileData = DevSearchStore.getProfileDataFromStore();
+  var sortedCountriesByLanguageTop10 = DevSearchStore.getTop10CountriesByLanguage() || [];
   return {
-    countryData: countryData
-    // profileData: profileData
+    countryData: countryData,
+    sortedCountriesByLanguageTop10: sortedCountriesByLanguageTop10 
   };
 }
 
@@ -44,10 +42,10 @@ var DevSearchApp = React.createClass({
   render: function() {
   	return (
       <div>
-        <MainSection countryData={this.state.countryData} />
+        <MainSection countryData={this.state.countryData} sortedCountriesByLanguageTop10={this.state.sortedCountriesByLanguageTop10}/>
       </div>
   	);
-  },
+  }
 
 });
 

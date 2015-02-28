@@ -9,8 +9,8 @@ var Infobox = React.createClass({
 
   	return (
       <section id="infobox">
-      	<LanguageSubBox />
-      	<CountrySubBox />      	
+      	<LanguageSubBox sortedCountriesByLanguageTop10={this.props.sortedCountriesByLanguageTop10} />
+      	<CountrySubBox countryData={this.props.countryData} developersByCountryData={this.props.developersByCountryData} />      	
       </section>
     );
   },
