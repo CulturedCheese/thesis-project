@@ -5,6 +5,14 @@ var http = require('http');
 var lookup = require('country-data').lookup;
 var path = require('path');
 var fs = require('fs');
+var Github = require('github-api');
+
+var github = new Github({
+  token: process.env.githubAPIDataGathering,
+  auth: "oauth"
+});
+
+var GHuser = github.getUser();
 
 //map of dangerous characters to a hex representation
 var entityMap = {
@@ -249,6 +257,88 @@ module.exports = {
         res.send(results);
       }
     })
+  },
+
+  getAvatarURLs: function(req,res) {
+    console.log(process.env.githubAPIDataGathering);
+    var sqlQuery = 'SELECT * FROM topUsersByLang';
+    var allUsers = {};
+    var userList = [];
+    db.query(sqlQuery, function(err, response) {
+      // res.send(response);
+      if(err) {
+        console.error(err);
+      } else {
+        for(var i = 0; i < response.length; i++) {
+          var users = JSON.parse(response[i].users);
+          for(var k = 0; k < users.length; k++) {
+            //worst case scenario this just overwrites the username with a blank object again
+            allUsers[users[k].username] = users[k].username;
+          }
+        }
+
+        // create an array of all the usernames
+        // use setInterval to iterate through the array at a steady pace
+        // update the allUsers obj with the results of the http request
+        for(var username in allUsers) {
+          userList.push(username);
+        }
+
+        var sqlCheck = "SELECT * FROM githubUserData";
+        db.query(sqlCheck, function(err, response) {
+          if(err) {
+            console.error(err);
+          } else {
+            for(var j = 0; j < response.length; j++) {
+              var usernameFromTable = response[j].username;
+              allUsers[usernameFromTable] = 'in table';
+            }
+            var usersToQuery = [];
+            for (var user in allUsers) {
+              if(allUsers[user] !== 'in table') {
+                usersToQuery.push(user);
+              }
+            }
+            res.send(usersToQuery);
+            //we are using setInterval to iterate through our userlist at a pace that falls below the api rate limit. 
+            var counter = 0;
+            //timing calculates how many requests we can make per second to stay below the 5000 per hour rate limit of the api
+            var timing = 3600/4900*1000; 
+            var interval = setInterval(function() {
+              if(counter === usersToQuery.length) {
+                clearInterval(interval);
+              } else {
+                module.exports.getOneUser(usersToQuery[counter], counter);
+                counter++;
+              }
+            }, timing);
+          }
+        })
+
+
+        // res.send(allUsers);
+      }
+    });
+  },
+  githubUserErrors: {},
+
+  getOneUser: function(username, count) {
+    GHuser.show(username, function(err, user) {
+      if(err) {
+        console.error(err);
+        module.exports.githubUserErrors[username] = true;
+      } else {
+        var insertionQuery = "INSERT INTO githubUserData (username, avatarURL, profileURL) VALUES('" + username + "','" + user.avatar_url + "','" + user.html_url + "')";
+        db.query(insertionQuery, function(err, response) {
+          if(err) {
+            module.exports.githubUserErrors[username] = true;
+            console.error(err);
+          } else {
+            console.log('number:', count, 'username', username);
+          }
+        });
+      }
+    });
   }
 
 };
