@@ -179,7 +179,7 @@ module.exports = {
   },
 
   topDevsByCountry: function(req,res) {
-    console.log('heard a request ot topDevsByCountry');
+    console.log('heard a request to topDevsByCountry');
     var sqlQuery = 'SELECT * FROM 14users';
     db.query(sqlQuery, function(err, response) {
       if(err) {
@@ -216,6 +216,30 @@ module.exports = {
             if(results[country][language].length > 10) {
               results[country][language].pop();
             }
+          }
+        }
+        var insertionCount = 0;
+        var queryCount = 0;
+        for (var country in results) {
+          // console.log(country);
+          for (var language in results[country]) {
+            // console.log(results[country][language]);
+            // console.log(JSON.stringify(results[country][language]));
+            //insert results into db!
+            var sqlInsert = "INSERT INTO topUsersByLang (countryCode, language, users) VALUES('"
+              + country + "','"
+              + language + "','"
+              + JSON.stringify(results[country][language]) + "')";
+
+            db.query(sqlInsert, function(err, response) {
+              if(err) {
+                console.error(err);
+              } else {
+                if(++insertionCount % 1000 === 0) {
+                  console.log('inserted ' + insertionCount + ' into db!');
+                }
+              }
+            });
           }
         }
         //the users are now all aggregated.
