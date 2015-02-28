@@ -21,3 +21,4 @@ config.js
 ec2-api-tools.zip
 ghdb2Dump.sql
 ghdb2Dump2.sql
+db2/*
