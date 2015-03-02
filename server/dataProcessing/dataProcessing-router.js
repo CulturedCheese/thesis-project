@@ -10,4 +10,8 @@ dataProcessingRouter.get('/topDevsByCountry', function(req, res) {
   dataProcessingLogic.topDevsByCountry(req,res);
 });
 
+dataProcessingRouter.get('/getAvatarURLs', function(req, res) {
+  dataProcessingLogic.getAvatarURLs(req,res);
+});
+
 module.exports = dataProcessingRouter;

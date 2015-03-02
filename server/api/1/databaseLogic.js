@@ -94,13 +94,25 @@ module.exports = {
       }
     })
 
-
   },
+
+  // getAvatars: function(req,res, countries) {
+  //   //nvm, we'll just do some batch processing up front to grab all this data beforehand. 
+  //   console.log('got to getAvatars');
+  //   for(var country in countries) {
+  //     // console.log(countries[country]);
+  //     for(var i = 0; i < countries[country]['topUsers'].length; i++) {
+  //       var user = countries[country].topUsers[i];
+  //       console.log(user);
+  //     }
+  //   }
+  //   res.send(countries);
+  // },
 
   countriesForLanguage: function(req,res) {
     //TODO: figure out what format our language variable is coming in as
     var languageVar = req._parsedUrl.query;
-    var countriesQuery = 'SELECT SUM(activeProgrammers) AS activeProgrammers, countryCode, hourlyWage FROM 14countries JOIN salaryByCountry ON 14countries.countryCode = salaryByCountry.countryCodeTwoLetter WHERE repository_language="' + languageVar + '" GROUP BY countryCode ORDER BY activeProgrammers DESC';
+    var countriesQuery = 'SELECT MAX(14countries.activeProgrammers) AS activeProgrammers, 14countries.countryCode, hourlyWage, users FROM 14countries JOIN salaryByCountry ON 14countries.countryCode = salaryByCountry.countryCodeTwoLetter JOIN topUsersByLang ON topUsersByLang.countryCode = 14countries.countryCode WHERE repository_language="' + languageVar + '" GROUP BY countryCode ORDER BY activeProgrammers DESC';
     // var countriesQuery2 = "select countryCode, activeProgrammers FROM 14countries WHERE repository_language='javascript' GROUP BY countryCode";
     db.query(countriesQuery, function(err, response) {
       if(err) {
@@ -114,9 +126,11 @@ module.exports = {
           if(country !== 'null') {
             var lookupResults = lookup.countries({alpha2: country});
             if(lookupResults[0]) {
+              //TODO: add in the profile link and avatarURL once we have them
               var threeLetterName = lookupResults[0].alpha3;
               countries[threeLetterName] = {
                 fillKey: response[i].activeProgrammers,
+                topUsers: JSON.parse(response[0].users),
                 countryCode2: lookupResults[0].alpha2,
                 countryCode3: threeLetterName,
                 countryName: lookupResults[0].name
@@ -124,6 +138,7 @@ module.exports = {
             }
           }
         }
+        // module.exports.getAvatars(req,res, countries);
         res.send(countries);
       }
     });
