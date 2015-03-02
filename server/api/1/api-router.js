@@ -71,11 +71,12 @@ apiRouter.get('/codersNextPage', function(req, res) {
   api.setAccessToken(config.accessToken, config.accessSecret, function() {
     var Search = require('odesk-api/lib/routers/freelancers/search.js').Search;
     var freelancers = new Search(api);
+    var page = req.url.split("=")[1] || 0;
     var language = req.url.split("=")[3];  
     var country = req.url.split("=")[5]; 
-    var page = req.url.split("=")[1] || 0;
+    var subcategory = req.url.split("=")[7] || 'Web Development'; 
     // queries the top 20 results; at least 4.0 feedback score
-    var params = {'q': 'skills:'+ language + ' AND country:' + country, 'paging': page + ';20', 'feedback': '[1 TO 5]'}
+    var params = {'q': 'skills:'+ language + ' AND country:' + country + ' AND subcategory2:' + subcategory, 'paging': page + ';20', 'feedback': '[1 TO 5]'}
     var profiles = Q.nbind(freelancers.find,freelancers);
     profiles(params)
       .then(function (results) {
@@ -85,6 +86,7 @@ apiRouter.get('/codersNextPage', function(req, res) {
           return {
             name: profile.name,
             title: profile.title,
+            subcategories: profile.categories,
             skills: profile.skills,
             feedback: profile.feedback,
             portrait: profile.portrait_50,
@@ -99,19 +101,24 @@ apiRouter.get('/codersNextPage', function(req, res) {
   });
 });
 
-apiRouter.get('/codersByLanguageByCountry', function(req, res) {
+apiRouter.get('/coders', function(req, res) {
   api.setAccessToken(config.accessToken, config.accessSecret, function() {
-    console.log("server hears a call for codersByLanguageByCountry")
+    console.log("server hears a call for /coders")
     var Search = require('odesk-api/lib/routers/freelancers/search.js').Search;
     var freelancers = new Search(api);
+    var page = req.url.split("=")[1] || 0;
     var language = req.url.split("=")[3] || 'JavaScript'; 
     var country = req.url.split("=")[5] || 'Vietnam'; 
-    var page = req.url.split("=")[1]
+    var subcategory = req.url.split("=")[7] || 'Web Development'; 
+    var hourlyRate = req.url.split("=")[9] || '100'; 
+    var minScore = req.url.split('=')[11] || 0;
+    var maxScore = req.url.split('=')[13] || 5;
+
     var summaryProfiles = {};
     // queries the top 20 results; at least 4.0 feedback score
-    var params = {'q': 'skills:'+ language + ' AND country:' + country, 'paging': page + ';20', 'feedback': '[1 TO 5]'};
+    var params = {'q': 'skills:'+ language + ' AND country:' + country + ' AND subcategory2:' + subcategory, 'rate': '[0 TO ' + hourlyRate+ ']', 'paging': page + ';20', 'feedback': '[' + minScore + ' TO ' + maxScore + ']'};
 
-    console.log(language, country, params)
+    console.log(language, country, subcategory, hourlyRate, minScore, maxScore, params);
     var profiles = Q.nbind(freelancers.find,freelancers);
     
     profiles(params)
@@ -122,6 +129,7 @@ apiRouter.get('/codersByLanguageByCountry', function(req, res) {
           return {
             name: profile.name,
             title: profile.title,
+            subcategories: profile.categories,
             skills: profile.skills,
             feedback: profile.feedback,
             portrait: profile.portrait_50,
