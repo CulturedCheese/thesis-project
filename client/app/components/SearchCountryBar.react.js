@@ -1,6 +1,6 @@
+var DevSearchActions = require('../actions/DevSearchActions');
 var React = require('react');
 var ReactPropTypes = React.PropTypes;
-var DevSearchActions = require('../actions/DevSearchActions');
 
 var SearchCountryBar = React.createClass({
 
@@ -18,8 +18,9 @@ var SearchCountryBar = React.createClass({
   render: function() {
     return (
       <form id="search-country" onSubmit={this.handleSubmit} >
-        <input type="text" placeholder=" Search by country..." ref="text"/>
+        <input type="text" placeholder=" Search by country..." id="ajax2" list="json-countrylist" ref="text"/>
         <input type="submit" value="submit" />
+        <datalist id="json-countrylist"></datalist>  
       </form>
     );
   },

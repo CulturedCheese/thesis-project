@@ -168,7 +168,7 @@ gulp.task('copy-autocomplete-file', function () {
     .pipe(gulp.dest(config.dist));
 });
 
-gulp.task('copy-json-file', function () {
+gulp.task('copy-languagejson-file', function () {
   gulp.src(config.client + 'app/html-elements.json')
     .pipe(gulp.dest(config.dist));
 });
@@ -184,7 +184,7 @@ gulp.task('build', function(){
     'copy-styles-files',
     'copy-image-files',
     'copy-autocomplete-file',
-    'copy-json-file'
+    'copy-languagejson-file'
     ]);
 });
 

@@ -1,4 +1,5 @@
 var React = require('react');
+var DevSearchActions = require('../actions/DevSearchActions');
 //languageColors is the object that maps from a language string to a color hex.
 var languageColors = require('./languageColors'); 
 
@@ -9,27 +10,21 @@ var Map = React.createClass({
   //https://github.com/CulturedCheese/thesis-project/wiki/DataMaps
 
   drawMap: function(countryData) {
-    //TODO: investigate if there's a cleaner way to do this. 
-    //hacky: right now we're removing the map from the page each time. 
-    //in d3 i know how to do this, but i'm less sure about this abstraction on top of D3
-    //we may want to refactor this to use pure D3
+
+    // this.props.countrySpecificData is an object. The data property on Datamap class is expecting an object argument. 
+    
     document.getElementById('d3Map').innerHTML='';
     new Datamap({
       element: document.getElementById('d3Map'),
       done: function(datamap) {
         datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
-          alert(geography.properties.name + ": "+ geography.id);
-        });
+          var country = geography.properties.name;
+          DevSearchActions.displayCountryData(country);
+          // alert(geography.properties.name + ": "+ geography.id);
+        });  //allows map to be clickable
       },
       fills: languageColors, //mapping file from language to the color code. it's a long file so we're saving it elsewhere. 
-      data: countryData,  //this is the data that is attached to each country
-      geographyConfig: {
-        popupTemplate: function(geography, data) {
-          //TODO: we should be able to make this a separate React component
-          console.log(geography.properties.name);
-          console.log(data.fillKey);
-        }
-      }
+      data: countryData  //this is the data that is attached to each country
     });
   },
   
