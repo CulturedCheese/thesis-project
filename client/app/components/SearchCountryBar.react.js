@@ -1,40 +1,29 @@
 var React = require('react');
 var ReactPropTypes = React.PropTypes;
+var DevSearchActions = require('../actions/DevSearchActions');
 
 var SearchCountryBar = React.createClass({
 
-	getInitialState: function() {
+  getInitialState: function() {
     return {country: '' };
-    console.log(this.props.country);
   },
 
-	handleSubmit: function(search_param){
-    // $.ajax({
-    //   url: this.props.url,
-    //   dataType: 'json',
-    //   type: 'POST',
-    //   data: search_param,
-    //   success: function(data){
-    //       this.setState({data:data});
-    //       console.log(data);
-    //   }.bind(this),
-    //   error: function (xhr, status, err) {
-    //       console.error(this.props.url, status, err.toString());
-    //   }.bind(this)
-    // });
+  handleSubmit: function(e) {
+    e.preventDefault();
+    var country = this.refs.text.getDOMNode().value;
+    DevSearchActions.displayCountryData(country);
+    this.refs.text.getDOMNode().value = '';
   },
 
   render: function() {
-	  return (
-	    <form onSubmit={this.handleSubmit} id="search-country">
-	      <input type="text" placeholder=" Search by country..." />
-	    </form>
-	  );
+    return (
+      <form id="search-country" onSubmit={this.handleSubmit} >
+        <input type="text" placeholder=" Search by country..." ref="text"/>
+        <input type="submit" value="submit" />
+      </form>
+    );
   },
 
 });
 
 module.exports = SearchCountryBar;
-
-
- 

@@ -9,23 +9,25 @@ var Profiles = require('./Profiles.react');
 //this gets the country data **as it already exists in the store** 
 //this does not make a new api call to the server, only to the store.
 function getDevSearchState() {
-  var countryData = DevSearchStore.getCountryDataFromStore();
+  var countrySpecificData = DevSearchStore.getFormattedCountryData() || {};
   var sortedCountriesByLanguageTop10 = DevSearchStore.getTop10CountriesByLanguage() || [];
   return {
-    countryData: countryData,
-    sortedCountriesByLanguageTop10: sortedCountriesByLanguageTop10 
+    sortedCountriesByLanguageTop10: sortedCountriesByLanguageTop10, 
+    countrySpecificData: countrySpecificData
   };
 }
 
 //this tells the store to make an api request for new data from the server
-function requestCountryData() {
+function requestCountrySpecificData() {
   DevSearchStore.getCountryDataFromServer();
+  DevSearchStore.getDeveloperCountByCountry();
 }
 
 var DevSearchApp = React.createClass({
 
   getInitialState: function() {
-    requestCountryData();
+    DevSearchStore.formatCountryData();
+    requestCountrySpecificData();
     return getDevSearchState();
   },
 
@@ -42,7 +44,9 @@ var DevSearchApp = React.createClass({
   render: function() {
   	return (
       <div>
-        <MainSection countryData={this.state.countryData} sortedCountriesByLanguageTop10={this.state.sortedCountriesByLanguageTop10}/>
+        <MainSection 
+          countrySpecificData={this.state.countrySpecificData} 
+          sortedCountriesByLanguageTop10={this.state.sortedCountriesByLanguageTop10} />
       </div>
   	);
   }

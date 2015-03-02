@@ -11,7 +11,7 @@ var Infobox = React.createClass({
       <section id="infobox">
         <button><a href="#features">Hire Coders</a></button>
       	<LanguageSubBox sortedCountriesByLanguageTop10={this.props.sortedCountriesByLanguageTop10} />
-      	<CountrySubBox countryData={this.props.countryData} developersByCountryData={this.props.developersByCountryData} />   
+      	<CountrySubBox countrySpecificData={this.props.countrySpecificData} />      	
       </section>
     );
   },
