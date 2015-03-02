@@ -6,7 +6,8 @@ var HireCodersSearchBox = React.createClass({
   render: function() {
     return (
       <form id="search-language-country" ref="form" onSubmit={this.handleSubmit}>
-        Hire <input type="text" placeholder="language" ref="language" /> coders in <input type="text" placeholder="country" ref="country" />
+        Hire <input type="text" placeholder="language" ref="language" list="json-datalist" /> coders in <input type="text" placeholder="country" ref="country" />
+        <datalist id="json-datalist"></datalist>
         <button type="submit" >search coders</button>
       </form>
 

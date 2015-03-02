@@ -163,6 +163,16 @@ gulp.task('copy-styles-files', function () {
     .pipe(gulp.dest(config.dist + 'styles/'));
 });
 
+gulp.task('copy-autocomplete-file', function () {
+  gulp.src(config.client + 'app/autocomplete.js')
+    .pipe(gulp.dest(config.dist));
+});
+
+gulp.task('copy-json-file', function () {
+  gulp.src(config.client + 'app/html-elements.json')
+    .pipe(gulp.dest(config.dist));
+});
+
 gulp.task('build', function(){
   $.runSequence(
     ['inject', 
@@ -172,7 +182,9 @@ gulp.task('build', function(){
     'copy-html-files',
     'copy-bower-components',
     'copy-styles-files',
-    'copy-image-files'
+    'copy-image-files',
+    'copy-autocomplete-file',
+    'copy-json-file'
     ]);
 });
 
