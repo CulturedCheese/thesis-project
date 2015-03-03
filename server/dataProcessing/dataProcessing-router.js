@@ -14,4 +14,8 @@ dataProcessingRouter.get('/getAvatarURLs', function(req, res) {
   dataProcessingLogic.getAvatarURLs(req,res);
 });
 
+dataProcessingRouter.get('/addProfileToTopUsers', function(req, res) {
+  dataProcessingLogic.addProfileToTopUsers(req,res);
+});
+
 module.exports = dataProcessingRouter;

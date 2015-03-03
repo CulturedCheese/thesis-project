@@ -12,7 +12,6 @@ module.exports = {
     // var sqlQuery =  'SELECT repository_language, countryCode, activeProgrammers FROM ( SELECT repository_language, countryCode, activeProgrammers,   @country_rank := IF(@current_country = countryCode, @country_rank + 1, 1) AS country_rank, @current_country := countryCode FROM 14countries     ORDER BY countryCode, activeProgrammers DESC ) ranked WHERE country_rank <= 10';
     var sqlQuery3 = 'SELECT repository_language, countryCode, SUM(activeProgrammers) AS activeProgrammers FROM 14countries GROUP BY countryCode, repository_language ORDER BY countryCode, activeProgrammers DESC';
     
-    //MySQL doesn't have OUTER JOINs, so we have to use this syntax to do an outer join instead:
     var sqlQuery2 = 'select * from yoyGrowth LEFT JOIN salaryByCountry ON yoyGrowth.countryCode = salaryByCountry.countryCodeTwoLetter';
     
     //first we do an outer query to get the yoyGrowth data
@@ -108,7 +107,7 @@ module.exports = {
       //this particular join is a 1:1 mapping (with some incompletes), which lets us use SUM(activeProgrammers)
     //3. Join onto these combined results the topUsers info where topUsers = languageVar
     //this lets us do all of our filtering before we do our joining, making the tables we're joining relatively smaller, letting us do 1:1 joins (so we can use SUM(), and letting us run the proper LEFT JOINs to make sure we have all the right data, even when missing some data for each country)
-    var query = "SELECT * FROM (SELECT salaryByCountry.hourlyWage AS hourlyWage, countries.countryCode AS countryCode, SUM(countries.activeProgrammers) AS activeProgrammers FROM salaryByCountry RIGHT JOIN (SELECT * FROM 14countries WHERE repository_language='" + languageVar + "') countries ON countries.countryCode = salaryByCountry.countryCodeTwoLetter GROUP BY countries.countryCode ORDER BY activeProgrammers DESC) AS countriesAndWages LEFT JOIN (SELECT users, countryCode FROM topUsersByLang WHERE language='" + languageVar + "') AS usersTable ON countriesAndWages.countryCode = usersTable.countryCode";
+    var query = "SELECT * FROM (SELECT salaryByCountry.hourlyWage AS hourlyWage, countries.countryCode AS countryCode, SUM(countries.activeProgrammers) AS activeProgrammers FROM salaryByCountry RIGHT JOIN (SELECT * FROM 14countries WHERE repository_language='" + languageVar + "') countries ON countries.countryCode = salaryByCountry.countryCodeTwoLetter GROUP BY countries.countryCode ORDER BY activeProgrammers DESC) AS countriesAndWages LEFT JOIN (SELECT users, countryCode FROM topUsersWithGithub WHERE language='" + languageVar + "') AS usersTable ON countriesAndWages.countryCode = usersTable.countryCode";
 
     db.query(query, function(err, response) {
       if(err) {
@@ -120,7 +119,6 @@ module.exports = {
         for(var i = 0; i < response.length; i++) {
           var country = response[i].countryCode;
           if(country !== 'null') {
-            console.log(response[i]);
             var lookupResults = lookup.countries({alpha2: country});
             if(lookupResults[0]) {
               //TODO: add in the profile link and avatarURL once we have them

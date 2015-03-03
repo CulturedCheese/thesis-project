@@ -189,6 +189,7 @@ module.exports = {
   topDevsByCountry: function(req,res) {
     console.log('heard a request to topDevsByCountry');
     var sqlQuery = 'SELECT * FROM 14users';
+
     db.query(sqlQuery, function(err, response) {
       if(err) {
         console.error(err);
@@ -229,10 +230,7 @@ module.exports = {
         var insertionCount = 0;
         var queryCount = 0;
         for (var country in results) {
-          // console.log(country);
           for (var language in results[country]) {
-            // console.log(results[country][language]);
-            // console.log(JSON.stringify(results[country][language]));
             //insert results into db!
             var sqlInsert = "INSERT INTO topUsersByLang (countryCode, language, users) VALUES('"
               + country + "','"
@@ -257,6 +255,62 @@ module.exports = {
         res.send(results);
       }
     })
+  },
+
+  addProfileToTopUsers: function(req,res) {
+    db.query('SELECT * FROM githubUserData', function(err, response) {
+      if(err) {
+        console.error(err);
+      } else {
+        var ghUsers = {};
+        for(var i = 0; i < response.length; i++) {
+          var user = response[i];
+          ghUsers[user.username] = {
+            avatarURL: user.avatarURL,
+            profileURL: user.profileURL
+          };
+        }
+        db.query('SELECT * FROM topUsersByLang', function(err, response) {
+          if(err) {
+            console.error(err);
+          } else {
+            for(var j = 0; j < response.length; j++) {
+              var users = JSON.parse(response[j].users);
+              var cleanUsers = [];
+              for(var k = 0; k < users.length; k++) {
+                //check to see if the user exists on github currently. if not, we don't want to include them.
+                if(ghUsers[users[k].username]) {
+                  var fullUser = {
+                    username: users[k].username,
+                    activeRepos: users[k].activeRepos,
+                    profileURL: ghUsers[users[k].username].profileURL,
+                    avatarURL: ghUsers[users[k].username].avatarURL
+                  };
+                  cleanUsers.push(fullUser);
+                  
+                }
+              }
+              var insertQuery = "INSERT INTO topUsersWithGithub (countryCode, language, users) VALUES('" + response[j].countryCode + "','" + response[j].language + "','" + JSON.stringify(cleanUsers) + "')";
+              //Now that we have the user info properly associated, insert it into the DB!
+              db.query(insertQuery, function(err, response) {
+                if(err) {
+                  console.error(err)
+                } else if(j % 100 === 0) {
+                  console.log(j, 'inserted into db');
+                }
+              });
+            }
+            res.send(response);
+            //iterate through response
+              //for each row, iterate through the users
+                //for each user, replace that user with the results from ghUsers;
+              //update the table with the users array that now incldues the github data. 
+            // res.send(formattedUsers);
+          }
+        });
+        // res.send(ghUsers);
+      }
+    });
   },
 
   getAvatarURLs: function(req,res) {
