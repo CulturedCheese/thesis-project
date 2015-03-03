@@ -11,12 +11,16 @@ var ProfilesActions = {
     });
   },
 
-  getCoders: function(language, country) {
+  getCoders: function(language, country, subcategory, hourlyRateMax, minScore, maxScore) {
     console.log('heard a getCoders in ProfilesActions!')
     AppDispatcher.handleViewAction({
       actionType: 'GET_CODERS',
       language: language,
-      country: country
+      country: country,
+      subcategory: subcategory,
+      hourlyRateMax: hourlyRateMax,
+      minScore: minScore,
+      maxScore: maxScore
     });
   }
 

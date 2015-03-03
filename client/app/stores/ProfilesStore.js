@@ -8,15 +8,18 @@ var CHANGE_EVENT = 'change';
 var profileData = [];
 var selectedLanguage = "";
 var selectedCountry = "";
+var selectedSubcategory = "";
+var selectedHourlyRateMax = "";
+var selectedMinScore = 0;
+var selectedMaxScore = 0;
 var page = 0;
 
 var ProfilesStore = assign({}, EventEmitter.prototype, {
   
   // this function grabs the next page of profiles. TODO: rename function
-  getODeskData: function(page, language, country) {
+  getODeskData: function(page, language, country, subcategory, hourlyRateMax, minScore, maxScore) {
     
-    var url =  'api/1/codersNextPage?page=' + page + '=&language=' + selectedLanguage + '=&country=' + selectedCountry;
-
+    var url =  'api/1/codersNextPage?page=' + page + '=&language=' + language + '=&country=' + country + '=&subcategory=' + subcategory + '=&hourlyRateMax=' + hourlyRateMax + '=&minScore=' + minScore + '=&maxScore=' + maxScore;
     $.ajax({
       url: url,
       dataType: 'json',
@@ -31,11 +34,16 @@ var ProfilesStore = assign({}, EventEmitter.prototype, {
     });
   },
 
-  getCodersByLanguageByCountry: function(language,country) {
-    console.log("invoking getCodersByLanguageByCountry");  
-    var url =  'api/1/codersByLanguageByCountry?page=0=&language=' + language + '=&country=' + country;
+  getCoders: function(language,country,subcategory, hourlyRateMax, minScore, maxScore) {
+    console.log("invoking getCoders");  
+    var url =  'api/1/coders?page=0=&language=' + language + '=&country=' + country + '=&subcategory=' + subcategory + '=&hourlyRateMax=' + hourlyRateMax + '=&minScore=' + minScore + '=&maxScore=' + maxScore;
     selectedLanguage = language;
     selectedCountry = country; 
+    selectedSubcategory = subcategory;
+    selectedHourlyRateMax = hourlyRateMax;
+    selectedMinScore = minScore;
+    selectedMaxScore = maxScore;
+
     $.ajax({
       url: url,
       dataType: 'json',
@@ -52,12 +60,12 @@ var ProfilesStore = assign({}, EventEmitter.prototype, {
 
   },
 
-  getProfileDataFromServer: function(page, language, country) {
-    return this.getODeskData(page, language, country);
+  getNextPageFromServer: function(page, language, country, subcategory, minScore, maxScore) {
+    return this.getODeskData(page, language, country, subcategory, minScore, maxScore);
   },
 
-  getProfileDataFromServerLangCountry: function(language, country) {
-    return this.getCodersByLanguageByCountry(language,country);
+  getProfileDataFromServer: function(language, country, subcategory, hourlyRateMax, minScore, maxScore) {
+    return this.getCoders(language,country, subcategory, hourlyRateMax, minScore, maxScore);
   },
 
   getProfileDataFromStore: function() {
@@ -90,18 +98,22 @@ var ProfilesStore = assign({}, EventEmitter.prototype, {
     var page = action.page || 0;
     var language = action.language || 'JavaScript';
     var country = action.country || 'Thailand';
+    var subcategory = action.subcategory || 'Web Development';
+    var hourlyRateMax = action.hourlyRateMax || '100';
+    var minScore = action.minScore || 0;
+    var maxScore = action.maxScore || 5;
 
     console.log(action.actionType);
     //incoming callbacks/changes
     switch(action.actionType) {
       case 'PROFILES_NEXT_PAGE':
         console.log('invoking PROFILES_NEXT_PAGE');
-        ProfilesStore.getProfileDataFromServer(page, selectedLanguage, selectedCountry);
+        ProfilesStore.getNextPageFromServer(page, selectedLanguage, selectedCountry, selectedSubcategory, selectedHourlyRateMax, selectedMinScore, selectedMaxScore);
         ProfilesStore.emitChange();
         break;
       case 'GET_CODERS':
         console.log('invoking GET_CODERS');
-        ProfilesStore.getProfileDataFromServerLangCountry(language, country);
+        ProfilesStore.getProfileDataFromServer(language, country, subcategory, hourlyRateMax, minScore, maxScore);
         ProfilesStore.emitChange();
         break;
     };
