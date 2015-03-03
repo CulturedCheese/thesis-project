@@ -17,6 +17,23 @@ var DevSearchActions = {
      actionType: 'DISPLAY_COUNTRY_DATA',
      country: country
    });
+ },
+
+ displayGithubHandles: function(country,language) {
+   console.log('heard a displayGithubHandles in DevSearchActions!', country, language);
+   AppDispatcher.handleViewAction({
+     actionType: 'DISPLAY_GITHUB_HANDLES',
+     country: country,
+     language: language
+   });
+ },
+
+ switchWorkflow: function(workflow) {
+   console.log('heard a switchWorkflow in DevSearchActions!', workflow);
+   AppDispatcher.handleViewAction({
+     actionType: 'SWITCH_WORKFLOW',
+     workflow: workflow
+   }); 
  }
 
 };

@@ -4,7 +4,7 @@ var languageInput = document.getElementById('ajax');
 var languageList = document.getElementById('json-languagelist');
 // Create a new XMLHttpRequest.
 
-var autocomplete = function(list, input, source) {
+var autocomplete = function(list, input, source, message) {
   var request = new XMLHttpRequest();
   // Handle state changes for the request.
   request.onreadystatechange = function(response) {
@@ -28,7 +28,7 @@ var autocomplete = function(list, input, source) {
       }
     }
     // Update the placeholder text.
-    input.placeholder = "Loading options...";
+    input.placeholder = message;
   };
 
 
@@ -38,7 +38,7 @@ var autocomplete = function(list, input, source) {
   request.send();
 };
 
-autocomplete(languageList, languageInput, 'html-languages.json');
-autocomplete(countryList, countryInput, 'html-countries.json');
+autocomplete(languageList, languageInput, 'html-languages.json', 'Search by Language');
+autocomplete(countryList, countryInput, 'html-countries.json', 'Search by Country');
 
 
