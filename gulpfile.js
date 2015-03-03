@@ -168,8 +168,18 @@ gulp.task('copy-autocomplete-file', function () {
     .pipe(gulp.dest(config.dist));
 });
 
+gulp.task('copy-autocompleteCountry-file', function () {
+  gulp.src(config.client + 'app/autocompleteCountry.js')
+    .pipe(gulp.dest(config.dist));
+});
+
 gulp.task('copy-languagejson-file', function () {
   gulp.src(config.client + 'app/html-languages.json')
+    .pipe(gulp.dest(config.dist));
+});
+
+gulp.task('copy-countryjson-file', function () {
+  gulp.src(config.client + 'app/html-countries.json')
     .pipe(gulp.dest(config.dist));
 });
 
@@ -189,6 +199,7 @@ gulp.task('build', function(){
     'copy-styles-files',
     'copy-image-files',
     'copy-autocomplete-file',
+    'copy-autocompleteCountry-file',
     'copy-languagejson-file',
     'copy-countryjson-file'
     ]);
