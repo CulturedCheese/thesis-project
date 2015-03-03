@@ -6,23 +6,23 @@ var lookup = require('country-data').lookup;
 
 module.exports = {
   allCountriesAllLanguages: function(req, res) {
-    console.log('heard a request to allCountriesAllLanguages');
     //theoretically selects the top 10 languages by country, but for some reason, isn't working.
     //oddly, this works perfectly well in MySQL directly, it just doesn't work so well when using db.query. 
     //TODO: rearrange this so that we have a table prepopulated with only the top 10 for each country, and then just serve up all results from that table within this api call. 
     // var sqlQuery =  'SELECT repository_language, countryCode, activeProgrammers FROM ( SELECT repository_language, countryCode, activeProgrammers,   @country_rank := IF(@current_country = countryCode, @country_rank + 1, 1) AS country_rank, @current_country := countryCode FROM 14countries     ORDER BY countryCode, activeProgrammers DESC ) ranked WHERE country_rank <= 10';
-
     var sqlQuery3 = 'SELECT repository_language, countryCode, SUM(activeProgrammers) AS activeProgrammers FROM 14countries GROUP BY countryCode, repository_language ORDER BY countryCode, activeProgrammers DESC';
     
-    var sqlQuery2 = 'select * from yoyGrowth JOIN salaryByCountry ON yoyGrowth.countryCode = salaryByCountry.countryCodeTwoLetter';
+    //MySQL doesn't have OUTER JOINs, so we have to use this syntax to do an outer join instead:
+    var sqlQuery2 = 'select * from yoyGrowth LEFT JOIN salaryByCountry ON yoyGrowth.countryCode = salaryByCountry.countryCodeTwoLetter';
+    
     //first we do an outer query to get the yoyGrowth data
     //we could do a merge of this into the inner query, but that would create a lot of denormalized data
     //this way we can just add this data in once for each country, rather than for each language for each country. 
+    console.log('sending off first query to the db')
     db.query(sqlQuery2, function(err, response) {
       if(err) {
         console.error(err);
       } else {
-
         //this outer query gets the list of programmers for each country for each year
         var yoyGrowth = {};
 
@@ -96,41 +96,39 @@ module.exports = {
 
   },
 
-  // getAvatars: function(req,res, countries) {
-  //   //nvm, we'll just do some batch processing up front to grab all this data beforehand. 
-  //   console.log('got to getAvatars');
-  //   for(var country in countries) {
-  //     // console.log(countries[country]);
-  //     for(var i = 0; i < countries[country]['topUsers'].length; i++) {
-  //       var user = countries[country].topUsers[i];
-  //       console.log(user);
-  //     }
-  //   }
-  //   res.send(countries);
-  // },
-
   countriesForLanguage: function(req,res) {
     //TODO: figure out what format our language variable is coming in as
     var languageVar = req._parsedUrl.query;
-    var countriesQuery = 'SELECT MAX(14countries.activeProgrammers) AS activeProgrammers, 14countries.countryCode, hourlyWage, users FROM 14countries JOIN salaryByCountry ON 14countries.countryCode = salaryByCountry.countryCodeTwoLetter JOIN topUsersByLang ON topUsersByLang.countryCode = 14countries.countryCode WHERE repository_language="' + languageVar + '" GROUP BY countryCode ORDER BY activeProgrammers DESC';
-    // var countriesQuery2 = "select countryCode, activeProgrammers FROM 14countries WHERE repository_language='javascript' GROUP BY countryCode";
-    db.query(countriesQuery, function(err, response) {
+
+    //this query is quick and effective, even for our largest datasets. 
+    //unfortunately, db.query doesn't allow newlines inside queries, so this is one ugly text blob right now. 
+    //There are three levels of queries here, starting from the innermost:
+    //1. select everything from countries where the lang is langVar
+    //2. join onto this table the salaryByCountry table, since salary has incomplete information
+      //this particular join is a 1:1 mapping (with some incompletes), which lets us use SUM(activeProgrammers)
+    //3. Join onto these combined results the topUsers info where topUsers = languageVar
+    //this lets us do all of our filtering before we do our joining, making the tables we're joining relatively smaller, letting us do 1:1 joins (so we can use SUM(), and letting us run the proper LEFT JOINs to make sure we have all the right data, even when missing some data for each country)
+    var query = "SELECT * FROM (SELECT salaryByCountry.hourlyWage AS hourlyWage, countries.countryCode AS countryCode, SUM(countries.activeProgrammers) AS activeProgrammers FROM salaryByCountry RIGHT JOIN (SELECT * FROM 14countries WHERE repository_language='" + languageVar + "') countries ON countries.countryCode = salaryByCountry.countryCodeTwoLetter GROUP BY countries.countryCode ORDER BY activeProgrammers DESC) AS countriesAndWages LEFT JOIN (SELECT users, countryCode FROM topUsersByLang WHERE language='" + languageVar + "') AS usersTable ON countriesAndWages.countryCode = usersTable.countryCode";
+
+    db.query(query, function(err, response) {
       if(err) {
         console.error(err);
       } else {
-
+        console.log('got data back from db');
         //all this logic is to get the three letter country code, and to format our response object to use the fillKey format
         var countries = {};
         for(var i = 0; i < response.length; i++) {
           var country = response[i].countryCode;
           if(country !== 'null') {
+            console.log(response[i]);
             var lookupResults = lookup.countries({alpha2: country});
             if(lookupResults[0]) {
               //TODO: add in the profile link and avatarURL once we have them
               var threeLetterName = lookupResults[0].alpha3;
               countries[threeLetterName] = {
                 fillKey: response[i].activeProgrammers,
-                topUsers: JSON.parse(response[0].users),
+                hourlyWage: response[i].hourlyWage,
+                topUsers: JSON.parse(response[i].users),
                 countryCode2: lookupResults[0].alpha2,
                 countryCode3: threeLetterName,
                 countryName: lookupResults[0].name
@@ -145,7 +143,7 @@ module.exports = {
   },
 
   developerCountByCountry: function(req,res) {
-    var sqlQuery = 'SELECT countryCode, programmers2014, programmers2013, hourlyWage FROM yoyGrowth JOIN salaryByCountry ON yoyGrowth.countryCode = salaryByCountry.countryCodeTwoLetter';
+    var sqlQuery = 'select * from yoyGrowth LEFT JOIN salaryByCountry ON yoyGrowth.countryCode = salaryByCountry.countryCodeTwoLetter';
     db.query(sqlQuery, function(err, response) {
       if(err) {
         console.error(err);

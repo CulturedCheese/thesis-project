@@ -5,7 +5,9 @@ var Q = require('q');
 var url = require('url');
 var databaseLogic = require('./databaseLogic.js');
 
+//TODO: refactor this into the config file.
 // configures oDesk api to enable HTTP requets
+// TODO: we're also requiring and then immediately overwriting our config. is that what we want?!
 var config = require('./../../../config.js');
 var config = {
   consumerKey : config.odeskAPI,
@@ -16,14 +18,14 @@ var config = {
 };
 var api = new oDeskApi(config);
 
-// app controllers // TODO: rename to controller
+// controllers
 var databaseLogic = require('./databaseLogic.js');
 var freelancersLogic = require('./freelancersLogic.js');
 
 // api routes for Github data
 apiRouter.get('/allCountriesAllLanguages', function(req,res) {
   console.log('heard a request to allCountriesAllLanguages');
-  // databaseLogic.allCountriesAllLanguages(req,res);
+  databaseLogic.allCountriesAllLanguages(req,res);
 });
 
 apiRouter.get('/countriesForLanguage', function(req,res) {
@@ -41,6 +43,7 @@ apiRouter.get('/developerCountByLanguage', function(req,res) {
   databaseLogic.developerCountByLanguage(req,res);
 });
 
+//TODO: cleanup. 
 // when user selects a language, a list of top 10 countries for that language is returned
 apiRouter.get('/CountryCountByLanguage', function(req,res) {
   console.log('heard a request to CountryCountByLanguage');
@@ -64,6 +67,8 @@ apiRouter.get('/CountryCountByLanguage', function(req,res) {
   // from countryLanguageCount, select the top 10 countries by # of active developers 
   
 });
+
+//TODO: refactor to go into a separate Logic file, rather than in the routing file
 // api route for oDesk data
 // routes to the odesk API-based profile listing given country and language
 // TODO: move to freelancersLogic.js
@@ -101,6 +106,7 @@ apiRouter.get('/codersNextPage', function(req, res) {
   });
 });
 
+//TODO: refactor to go into a dedicated logic file, rather than in the routing file like it is now
 apiRouter.get('/coders', function(req, res) {
   api.setAccessToken(config.accessToken, config.accessSecret, function() {
     console.log("server hears a call for /coders")
