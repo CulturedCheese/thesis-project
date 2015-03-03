@@ -13,8 +13,12 @@ var MainSection = React.createClass({
       <section id="main">
 	      <SearchLanguageBar />
 	      <SearchCountryBar />      
-	      <Map countryData={this.props.countryData} sortedCountriesByLanguageTop10={this.props.sortedCountriesByLanguageTop10}/>
-	      <Infobox countryData={this.props.countryData} sortedCountriesByLanguageTop10={this.props.sortedCountriesByLanguageTop10} />
+	      <Map 
+          countrySpecificData={this.props.countrySpecificData} 
+          sortedCountriesByLanguageTop10={this.props.sortedCountriesByLanguageTop10}/>
+	      <Infobox 
+          countrySpecificData={this.props.countrySpecificData} 
+          sortedCountriesByLanguageTop10={this.props.sortedCountriesByLanguageTop10} />
       </section>
     );
   },

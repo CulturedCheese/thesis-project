@@ -6,7 +6,6 @@ var SearchLanguageBar = React.createClass({
 	
 	getInitialState: function() {
     return {language: '' };
-    console.log(this.props.language);
   },
 
   handleSubmit: function(e) {
