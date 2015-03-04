@@ -1,5 +1,11 @@
+#profiles p {
+  margin-top: 1px;
+  margin-bottom: 1px;
+}
 
-
+input::-webkit-calendar-picker-indicator {
+  display: none;
+}
 
 #d3Map {
 	height: 450px;
