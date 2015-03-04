@@ -11,9 +11,11 @@ var Profiles = require('./Profiles.react');
 function getDevSearchState() {
   var countrySpecificData = DevSearchStore.getFormattedCountryData() || {};
   var sortedCountriesByLanguageTop10 = DevSearchStore.getTop10CountriesByLanguage() || [];
+  var workflow = DevSearchStore.getWorkflow();
   return {
     sortedCountriesByLanguageTop10: sortedCountriesByLanguageTop10, 
-    countrySpecificData: countrySpecificData
+    countrySpecificData: countrySpecificData,
+    workflow: workflow
   };
 }
 
@@ -46,7 +48,8 @@ var DevSearchApp = React.createClass({
       <div>
         <MainSection 
           countrySpecificData={this.state.countrySpecificData} 
-          sortedCountriesByLanguageTop10={this.state.sortedCountriesByLanguageTop10} />
+          sortedCountriesByLanguageTop10={this.state.sortedCountriesByLanguageTop10}
+          workflow={this.state.workflow} />
       </div>
   	);
   }
