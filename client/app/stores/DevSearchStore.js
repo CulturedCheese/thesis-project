@@ -127,7 +127,6 @@ var DevSearchStore = assign({}, EventEmitter.prototype, {
     console.log('calling top 10 countries by language');
     var countryLanguageCount = [];
     var language = language || 'JavaScript';
-    console.log(language);
     // iterate through countryData object
     for(var country in countryData) {
       var countryInfo = {};
@@ -158,10 +157,10 @@ var DevSearchStore = assign({}, EventEmitter.prototype, {
 
   formatCountryData: function(country) {
   	var country = country || "United States";
-  	console.log("We is " + country);
 
   	var countrySpecificData = {};  	
 		countrySpecificData["countryCode3"] = countryNameAbbrev[country];
+		countrySpecificData["fillKey"] = countryNameAbbrev[country];
 		var countryCode = countryNameAbbrev[country];
   	
 		if(standardizedCountryName[countryCode]){
@@ -179,8 +178,6 @@ var DevSearchStore = assign({}, EventEmitter.prototype, {
 			countrySpecificData["mostPopularLang"] = 0;
   		countrySpecificData["hourlyWage"] = 0;
 		};
-
-		console.log("We still is " + countrySpecificData["countryName"]);  	
 
 		if(developersByCountryData[countryCode]){
 	  	countrySpecificData["programmers2013"] = developersByCountryData[countryCode]["programmers2013"];

@@ -2,7 +2,9 @@ var React = require('react');
 var DevSearchActions = require('../actions/DevSearchActions');
 //languageColors is the object that maps from a language string to a color hex.
 var languageColors = require('./languageColors'); 
+var countryColors = require('./countryColors'); 
 var selectedLanguage = "";
+var selectedCountry = "";
 
 var Map = React.createClass({
   callsToRender: 0,
@@ -25,12 +27,14 @@ var Map = React.createClass({
             parsedData[data[i].countryCode3] = countryObj; 
           }
         }
-        console.log('parsed data:', parsedData);
 
         document.getElementById('d3Map').innerHTML='';
 
         var map = new Datamap({
           element: document.getElementById('d3Map'),
+          geographyConfig: {
+            popupOnHover: false
+          },
           done: function(datamap) {
               datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
                   var country = geography.properties.name;
@@ -57,7 +61,13 @@ var Map = React.createClass({
     } 
 
     if (this.props.workflow === "countryWorkflow") {
-      // this.props.countrySpecificData is an object. The data property on Datamap class is expecting an object argument. 
+      
+      var parsedData = {};
+      var countryObj = this.props.countrySpecificData;
+      var countryCode = this.props.countrySpecificData.countryCode3;
+      
+      parsedData[countryCode] = countryObj;
+      console.log(parsedData); 
 
       document.getElementById('d3Map').innerHTML='';
       new Datamap({
@@ -65,12 +75,12 @@ var Map = React.createClass({
         done: function(datamap) {
           datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
             var country = geography.properties.name;
-            DevSearchActions.displayCountryData(country);
+            DevSearchActions.displayData(country, "countryWorkflow");
             // alert(geography.properties.name + ": "+ geography.id);
           });  //allows map to be clickable
         },
-        fills: languageColors, //mapping file from language to the color code. it's a long file so we're saving it elsewhere. 
-        data: data  //this is the data that is attached to each country
+        fills: countryColors, //mapping file from language to the color code. it's a long file so we're saving it elsewhere. 
+        data: parsedData  //this is the data that is attached to each country
       });
     }
   },
@@ -96,7 +106,6 @@ var Map = React.createClass({
   render: function() {
     //TODO: style the svg to be the right size. 
     //TODO: give the svg an ID.
-    console.log('rendering!')
     return(
       <div id="d3Map" ></div>
     ) 
