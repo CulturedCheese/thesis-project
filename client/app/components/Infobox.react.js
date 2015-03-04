@@ -5,15 +5,11 @@ var CountrySubBox = require('./CountrySubBox.react');
 
 var Infobox = React.createClass({
   
-
-	
-
-
   render: function() {
 
 		var renderedBox;
 		if(this.props.workflow === "countryWorkflow"){
-			renderedBox =  <CountrySubBox countrySpecificData={ this.props.countrySpecificData } />;      	
+			renderedBox = <CountrySubBox countrySpecificData={ this.props.countrySpecificData } />;      	
 		} else if(this.props.workflow === "languageWorkflow"){
 			renderedBox = <LanguageSubBox sortedCountriesByLanguageTop10={ this.props.sortedCountriesByLanguageTop10 } />;      	
 		}

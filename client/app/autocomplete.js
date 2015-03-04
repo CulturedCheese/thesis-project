@@ -38,7 +38,5 @@ var autocomplete = function(list, input, source, message) {
   request.send();
 };
 
-autocomplete(languageList, languageInput, 'html-languages.json', 'Search by Language');
 autocomplete(countryList, countryInput, 'html-countries.json', 'Search by Country');
-
-
+autocomplete(languageList, languageInput, 'html-languages.json', 'Search by Language');

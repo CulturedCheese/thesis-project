@@ -28,24 +28,13 @@ input::-webkit-calendar-picker-indicator {
 	float: left;
 }
 
-#search-language {
+#search {
 	margin-top: 20px;
 	border-color: lightgrey;
 	margin-left: 15%;
 	margin-bottom: 0px;
 	font-size: 25px;
 	font-color: black;
-	font-family: times;
-	position: inline-block;
-}
-
-#search-country {
-	margin-top: 20px;
-	margin-left: 8%;
-	margin-bottom: 0px;
-	font-color: black;
-	border-color: lightgrey;	
-	font-size: 25px;
 	font-family: times;
 	position: inline-block;
 }

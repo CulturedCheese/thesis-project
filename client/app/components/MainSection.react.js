@@ -10,6 +10,13 @@ var Infobox = require('./Infobox.react');
 var MainSection = React.createClass({
 
   render: function() {
+    var renderedSearchBar;
+    if(this.props.workflow === "countryWorkflow") {
+      renderedSearchBar = <SearchCountryBar workflow={this.props.workflow} />;
+    } else if (this.props.workflow === "languageWorkflow") {
+      renderedSearchBar = <SearchLanguageBar workflow={this.props.workflow} />;
+    }
+    
     return (
       <section id="main">
         <SelectWorkflowBar />
@@ -17,8 +24,11 @@ var MainSection = React.createClass({
         <br />
         <br />
         <br />
-	      <SearchLanguageBar />
-	      <SearchCountryBar />      
+        { renderedSearchBar }
+        <br />
+        <br />
+        <br />
+        <br />
 	      <Map 
           countrySpecificData={this.props.countrySpecificData} 
           sortedCountriesByLanguageTop10={this.props.sortedCountriesByLanguageTop10}
