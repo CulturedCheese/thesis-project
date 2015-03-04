@@ -2,7 +2,9 @@ var React = require('react');
 var DevSearchActions = require('../actions/DevSearchActions');
 //languageColors is the object that maps from a language string to a color hex.
 var languageColors = require('./languageColors'); 
+var countryColors = require('./countryColors'); 
 var selectedLanguage = "";
+var selectedCountry = "";
 
 var Map = React.createClass({
   callsToRender: 0,
@@ -25,12 +27,14 @@ var Map = React.createClass({
             parsedData[data[i].countryCode3] = countryObj; 
           }
         }
-        console.log('parsed data:', parsedData);
 
         document.getElementById('d3Map').innerHTML='';
 
         var map = new Datamap({
           element: document.getElementById('d3Map'),
+          geographyConfig: {
+            popupOnHover: false
+          },
           done: function(datamap) {
               datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
                   var country = geography.properties.name;
@@ -39,38 +43,71 @@ var Map = React.createClass({
               }); //allows map to be clickable
           },
           fills: languageColors, //mapping file from language to the color code. it's a long file so we're saving it elsewhere. 
-          data: parsedData,  //this is the data that is attached to each country
-          geographyConfig: {
-            popupTemplate: function(geography, data) {
-              //TODO: we should be able to make this a separate React component
+          data: parsedData  //this is the data that is attached to each country
+          // geographyConfig: {
+          //   popupTemplate: function(geography, data) {
+          //     //TODO: we should be able to make this a separate React component
 
-              return ['<div class="hoverinfo"><strong>',
-                      geography.properties.name, ': ', 
-                      data.activeProgrammers, " ", 
-                      data.fillKey, 
-                      " Coders",
-                      '</strong></div>'].join('');
-            }
-          }
+          //     return ['<div class="hoverinfo"><strong>',
+          //             geography.properties.name, ': ', 
+          //             data.activeProgrammers, " ", 
+          //             data.fillKey, 
+          //             " Coders",
+          //             '</strong></div>'].join('');
+          //   }
+          // }
         });
         return map; 
     } 
 
     if (this.props.workflow === "countryWorkflow") {
       // this.props.countrySpecificData is an object. The data property on Datamap class is expecting an object argument. 
+      var parsedData = {};
+      var countryObj = this.props.countrySpecificData;
+      var countryCode = this.props.countrySpecificData.countryCode3;
+      // countryObj.fillKey = this.props.countrySpecificData.countryCode3;
+      // countryObj.countryCode3 = this.props.countrySpecificData.countryCode3;
+      // countryObj.countryName = this.props.countrySpecificData.countryName;
+      parsedData[countryCode] = countryObj;
+      console.log(parsedData); 
+
+
 
       document.getElementById('d3Map').innerHTML='';
       new Datamap({
         element: document.getElementById('d3Map'),
+        geographyConfig: {
+          popupOnHover: false
+        },
+        // fills: {
+        //   SELECTED: "#f1e05a"
+        // },
         done: function(datamap) {
           datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
             var country = geography.properties.name;
+            console.log("Country name");
+            console.log(country);
             DevSearchActions.displayCountryData(country);
+            selectedCountry = geography.id; 
+            console.log("Country code");
+            console.log(selectedCountry);
+            // map.update({
+            //   countryCode: {fillKey: "#f1e05a" }
+            // });
             // alert(geography.properties.name + ": "+ geography.id);
           });  //allows map to be clickable
         },
-        fills: languageColors, //mapping file from language to the color code. it's a long file so we're saving it elsewhere. 
-        data: data  //this is the data that is attached to each country
+        fills: countryColors, 
+        // {
+        //   SELECTED: 'blue' 
+        // }, 
+        data: parsedData 
+        // {
+        //   data,
+        //   selectedCountry: {
+        //     fillKey: 'SELECTED'
+        //   }
+        // }  //this is the data that is attached to each country
       });
     }
   },
@@ -96,7 +133,6 @@ var Map = React.createClass({
   render: function() {
     //TODO: style the svg to be the right size. 
     //TODO: give the svg an ID.
-    console.log('rendering!')
     return(
       <div id="d3Map" ></div>
     ) 
