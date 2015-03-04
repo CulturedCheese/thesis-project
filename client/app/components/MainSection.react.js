@@ -22,10 +22,11 @@ var MainSection = React.createClass({
 	      <Map 
           countrySpecificData={this.props.countrySpecificData} 
           sortedCountriesByLanguageTop10={this.props.sortedCountriesByLanguageTop10}
-          workflow={this.props.workflow}/>
+          workflow={this.props.workflow} />
 	      <Infobox 
           countrySpecificData={this.props.countrySpecificData} 
-          sortedCountriesByLanguageTop10={this.props.sortedCountriesByLanguageTop10} />
+          sortedCountriesByLanguageTop10={this.props.sortedCountriesByLanguageTop10} 
+          workflow={this.props.workflow} />
       </section>
     );
   },
