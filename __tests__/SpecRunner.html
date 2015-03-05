@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CoderTracks Server Test Suite [Mocha]</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="mocha.css" />
+    <!-- // <script src="../node_modules/jquery.js"></script> -->
+    <!-- // <script src="../node_modules/picomodal.js"></script> -->
+    <!-- // <script src="../node_modules/tweetit/tweetit.js"></script> -->
+    <script src="expect.js"></script>
+    <script src="../node_modules/mocha/mocha.js"></script>
+    <script src="../node_modules/chai/chai.js"></script>
+    <!-- // <script src="../node_modules/sinon.js"></script> -->
+
+    <script>
+      // Tell mocha to use bdd-style expects
+      mocha.setup('bdd');
+    </script>
+
+    <!-- Load tests and helpers here -->
+    <!-- // <script src="src/underbar.js"></script> -->
+    <script src="serverSpec.js"></script>
+
+    <script>
+      // Mocha expects a global onload var here and automagically executes it on pageload
+      onload = function(){
+        var runner = window.mochaPhantomJS ? mochaPhantomJS.run() : mocha.run();
+        runner.on('end', function() {
+          if(!this.failures){
+            console.log('you did it!');
+            // window.tweetit();
+          }
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <div id="mocha"></div>
+  </body>
+</html>
