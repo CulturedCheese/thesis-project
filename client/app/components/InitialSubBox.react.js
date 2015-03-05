@@ -10,7 +10,7 @@ var InitialSubBox = React.createClass({
     var result = this.props.initialWorkflowData;   
     return (
       <div className="initialsubbox">
-        <h5><u>Dominant Language     </u><u># Devs </u> </h5> 
+        <h4><u>Dominant Language     </u><u># Devs </u> </h4> 
         <ol>
           <li> { result["topTenLangs"][0][0] } ({ result["topTenLangs"][0][1] })  </li>
           <li> { result["topTenLangs"][1][0] } ({ result["topTenLangs"][1][1] })  </li>

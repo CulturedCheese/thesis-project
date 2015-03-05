@@ -14,8 +14,8 @@ var SelectWorkflowBar = React.createClass({
     return (
       <form id="search" onSubmit={this.handleSubmit} >
         <select type="text" placeholder="Search by..." ref="workflow">
-          <option value="languageWorkflow">Programming Language</option>
           <option value="countryWorkflow">Country</option>
+          <option value="languageWorkflow">Programming Language</option>
         </select> 
         <button type="submit" >Select</button>
       </form>
