@@ -65,13 +65,9 @@ var Map = React.createClass({
       var parsedData = {};
       var countryObj = this.props.countrySpecificData;
       var countryCode = this.props.countrySpecificData.countryCode3;
-      // countryObj.fillKey = this.props.countrySpecificData.countryCode3;
-      // countryObj.countryCode3 = this.props.countrySpecificData.countryCode3;
-      // countryObj.countryName = this.props.countrySpecificData.countryName;
+      
       parsedData[countryCode] = countryObj;
       console.log(parsedData); 
-
-
 
       document.getElementById('d3Map').innerHTML='';
       new Datamap({
@@ -85,29 +81,12 @@ var Map = React.createClass({
         done: function(datamap) {
           datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
             var country = geography.properties.name;
-            console.log("Country name");
-            console.log(country);
-            DevSearchActions.displayCountryData(country);
-            selectedCountry = geography.id; 
-            console.log("Country code");
-            console.log(selectedCountry);
-            // map.update({
-            //   countryCode: {fillKey: "#f1e05a" }
-            // });
+            DevSearchActions.displayData(country, "countryWorkflow");
             // alert(geography.properties.name + ": "+ geography.id);
           });  //allows map to be clickable
         },
-        fills: countryColors, 
-        // {
-        //   SELECTED: 'blue' 
-        // }, 
-        data: parsedData 
-        // {
-        //   data,
-        //   selectedCountry: {
-        //     fillKey: 'SELECTED'
-        //   }
-        // }  //this is the data that is attached to each country
+        fills: countryColors, //mapping file from language to the color code. it's a long file so we're saving it elsewhere. 
+        data: parsedData  //this is the data that is attached to each country
       });
     }
   },
