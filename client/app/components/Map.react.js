@@ -13,6 +13,38 @@ var Map = React.createClass({
   //https://github.com/CulturedCheese/thesis-project/wiki/DataMaps
 
   drawMap: function(data) {
+    if (this.props.workflow === "initialWorkflow") {
+      var parsedData = {};
+      var workflowData = this.props.initialWorkflowData["topLangsInCountryColors"];
+      
+      for(var countryCode3 in workflowData){
+        parsedData[countryCode3] = workflowData[countryCode3];
+      }
+
+      console.log("parsedData");
+      console.log(this.props.initialWorkflowData);
+
+      document.getElementById('d3Map').innerHTML='';
+      new Datamap({
+          element: document.getElementById('d3Map'),
+          fills: languageColors, //mapping file from language to the color code. it's a long file so we're saving it elsewhere. 
+          data: parsedData,
+          geographyConfig: {
+            popupTemplate: function(geography, data) {
+              //TODO: we should be able to make this a separate React component
+
+              return ['<div class="hoverinfo"><strong>',
+                      geography.properties.name, ': ', 
+                      data.activeProgrammers, " ", 
+                      data.fillKey, 
+                      " Coders",
+                      '</strong></div>'].join('');
+            }
+          }
+        });
+        return map; 
+    } 
+
     if (this.props.workflow === "languageWorkflow") {
         // this.props.sortedCountriesByLanguageTop10 is a sorted array. The data property on Datamap class is expecting an object argument. 
         // Therefore, we need to parse the array of objects into an object.
@@ -98,6 +130,9 @@ var Map = React.createClass({
     if (this.props.workflow === "countryWorkflow") {
       this.drawMap(this.props.countrySpecificData);
     }
+    if (this.props.workflow === "initialWorkflow") {
+      this.drawMap(this.props.initialWorkflowData);
+    }
   },
 
   componentDidUpdate: function() {
@@ -106,6 +141,9 @@ var Map = React.createClass({
     }
     if (this.props.workflow === "countryWorkflow") {
       this.drawMap(this.props.countrySpecificData);
+    }
+    if (this.props.workflow === "initialWorkflow") {
+      this.drawMap(this.props.initialWorkflowData);
     }
   },
 

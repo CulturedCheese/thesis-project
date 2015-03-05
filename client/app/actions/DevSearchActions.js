@@ -14,6 +14,10 @@ var DevSearchActions = {
       workflowType = "LANGUAGE";
     }
 
+    if (workflow === "initialWorkflow") {
+      workflowType = "INITIAL";
+    }
+
     AppDispatcher.handleViewAction({
       actionType: "DISPLAY_" + workflowType + "_DATA",
       input: input

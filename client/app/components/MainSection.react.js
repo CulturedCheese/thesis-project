@@ -11,7 +11,9 @@ var MainSection = React.createClass({
 
   render: function() {
     var renderedSearchBar;
-    if(this.props.workflow === "countryWorkflow") {
+    if(this.props.workflow === "initialWorkflow") {
+      renderedSearchBar = <SearchCountryBar workflow={this.props.workflow} />;
+    } else if(this.props.workflow === "countryWorkflow") {
       renderedSearchBar = <SearchCountryBar workflow={this.props.workflow} />;
     } else if (this.props.workflow === "languageWorkflow") {
       renderedSearchBar = <SearchLanguageBar workflow={this.props.workflow} />;
@@ -32,10 +34,12 @@ var MainSection = React.createClass({
 	      <Map 
           countrySpecificData={this.props.countrySpecificData} 
           sortedCountriesByLanguageTop10={this.props.sortedCountriesByLanguageTop10}
+          initialWorkflowData = { this.props.initialWorkflowData }
           workflow={this.props.workflow} />
 	      <Infobox 
           countrySpecificData={this.props.countrySpecificData} 
           sortedCountriesByLanguageTop10={this.props.sortedCountriesByLanguageTop10} 
+          initialWorkflowData = { this.props.initialWorkflowData }
           workflow={this.props.workflow} />
       </section>
     );
