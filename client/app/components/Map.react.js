@@ -43,19 +43,19 @@ var Map = React.createClass({
               }); //allows map to be clickable
           },
           fills: languageColors, //mapping file from language to the color code. it's a long file so we're saving it elsewhere. 
-          data: parsedData  //this is the data that is attached to each country
-          // geographyConfig: {
-          //   popupTemplate: function(geography, data) {
-          //     //TODO: we should be able to make this a separate React component
+          data: parsedData,  //this is the data that is attached to each country
+          geographyConfig: {
+            popupTemplate: function(geography, data) {
+              //TODO: we should be able to make this a separate React component
 
-          //     return ['<div class="hoverinfo"><strong>',
-          //             geography.properties.name, ': ', 
-          //             data.activeProgrammers, " ", 
-          //             data.fillKey, 
-          //             " Coders",
-          //             '</strong></div>'].join('');
-          //   }
-          // }
+              return ['<div class="hoverinfo"><strong>',
+                      geography.properties.name, ': ', 
+                      data.activeProgrammers, " ", 
+                      data.fillKey, 
+                      " Coders",
+                      '</strong></div>'].join('');
+            }
+          }
         });
         return map; 
     } 
