@@ -12,8 +12,6 @@ var config = {
   debug : false
 };
 
-
-
 // a function to get access token/secret pair
 function getAccessTokenSecretPair(api, callback) {
   // get authorization url

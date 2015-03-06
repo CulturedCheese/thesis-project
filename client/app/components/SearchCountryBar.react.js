@@ -13,24 +13,28 @@ var SearchCountryBar = React.createClass({
   },
 
   render: function() {
+    var countryList = document.getElementById('json-countrylist');
+    var languageList = document.getElementById('json-languagelist');
+    var autocompleteScript = document.getElementById('autocomplete');
+    var body = document.getElementsByTagName('body')[0];
+    var script = document.createElement('script');
+
     var reloadJs = function(src) {
-      var body = document.getElementsByTagName('body')[0];
-      var script = document.createElement('script');
       script.src = src;
       script.id = "autocomplete";
       // removes old script 
-      if (document.getElementById('autocomplete')){
-        document.getElementById('autocomplete').remove();
+      if (autocompleteScript){
+        autocompleteScript.remove();
       }
       // removes datalist from language workflow, if applicable
-      if (document.getElementById('json-languagelist')){
-        document.getElementById('json-languagelist').remove();
+      if (languageList){
+        languageList.remove();
       }
       // attaches new script and reloads it
       body.appendChild(script);
     };
     
-    if (!document.getElementById('json-countrylist')){
+    if (!countryList){
       reloadJs('./autocomplete.js');
     }
 

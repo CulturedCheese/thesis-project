@@ -13,21 +13,25 @@ var SearchLanguageBar = React.createClass({
   },
 
   render: function() {
+    var countryList = document.getElementById('json-countrylist');
+    var languageList = document.getElementById('json-languagelist');
+    var autocompleteScript = document.getElementById('autocomplete');
+    var body = document.getElementsByTagName('body')[0];
+    var script = document.createElement('script');
+
     var reloadJs = function(src) {
-      var body = document.getElementsByTagName('body')[0];
-      var script = document.createElement('script');
-      if (document.getElementById('autocomplete')){
-        document.getElementById('autocomplete').remove();
+      if (autocompleteScript){
+        autocompleteScript.remove();
       }
-      if (document.getElementById('json-countrylist')){
-        document.getElementById('json-countrylist').remove();
+      if (countryList){
+        countryList.remove();
       }
       script.src = src;
       script.id = "autocomplete";
       body.appendChild(script);
     };
 
-    if (!document.getElementById('json-languagelist')){
+    if (!languageList){
       reloadJs('./autocomplete.js');
     }
 

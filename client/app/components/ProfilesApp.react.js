@@ -1,7 +1,7 @@
 var React = require('react');
 var ProfilesStore = require('../stores/ProfilesStore');
 var Profiles = require('./Profiles.react');
-var NextPage = require('./NextPage.react');
+
 //This component operates as a "Controller-View".  It listens for changes in
 //the DevSearchStore and passes the new data to its children.
 
@@ -45,7 +45,7 @@ var ProfilesApp = React.createClass({
         <Profiles profileData = {this.state.profileData} />
       </div>
   	);
-  },
+  }
 
 });
 
