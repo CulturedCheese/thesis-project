@@ -27,9 +27,9 @@ var Map = React.createClass({
       document.getElementById('d3Map').innerHTML='';
       var map = new Datamap({
           element: document.getElementById('d3Map'),
-          // height: '50%',
-          // width: '50%',
           responsive: true,
+          height: null, //if not null, datamaps will grab the height of 'element'
+          width: null,
           fills: languageColors, //mapping file from language to the color code. it's a long file so we're saving it elsewhere. 
           data: parsedData,
           geographyConfig: {
@@ -67,9 +67,9 @@ var Map = React.createClass({
 
         var map = new Datamap({
           element: document.getElementById('d3Map'),
-          // height: 50%,
-          // width: 50%,
           responsive: true,
+          height: null, //if not null, datamaps will grab the height of 'element'
+          width: null,
           geographyConfig: {
             popupOnHover: false
           },
@@ -110,6 +110,9 @@ var Map = React.createClass({
       document.getElementById('d3Map').innerHTML='';
       var map = new Datamap({
         element: document.getElementById('d3Map'),
+        responsive: true,
+        height: null, //if not null, datamaps will grab the height of 'element'
+        width: null,
         geographyConfig: {
           popupOnHover: false
         },

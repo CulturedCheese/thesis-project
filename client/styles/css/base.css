@@ -3,21 +3,60 @@
   margin-bottom: 1px;
 }
 
-input::-webkit-calendar-picker-indicator {
+.menudrop {
+	padding-top: 5px;
+	padding-right: 5px;	
+}
+
+.initialsubbox {
+	padding-left: 20%;
+	padding-right: 15%;
+}
+
+#trigger-overlay {
+	padding-top: 30px;
+	padding-right: 50px;
+}
+
+#mainsection {
+	background-image: src(./landing.jpg) no-repeat 100% 0;
+}
+
+.container {
+	width: 98%;
+	padding-top: 20px;
+	margin-left: 1%;
+}
+
+/*input::-webkit-calendar-picker-indicator {
   display: none;
+}*/
+
+section#devsearchapp {
+	height: 600px;
+	width: 100%;
+}
+
+#main {
+	height: 600px;
+	width: 100%;
+}
+
+.headerbox {
+	height: 25px;
 }
 
 #d3Map {
-	height: 450px;
-	width: 900px;
+	height: 600px;
+	width: 72%;
 	margin-left: 0px;
 	float: left;
 }
 
 #datamaps-subunits {
 	position: inline-block; 
-	width: 700px; 
-	height: 1800px;
+	width: 72%; 
+	height: 100%;
 	padding-left: -50px;
 	margin-left: 0px;
 	margin-top: 0px;
@@ -48,16 +87,23 @@ form {
 }
 
 #infobox {
-	height: 380px;
-	width: 300px;
-	margin-top: 2.5em;
+	height: 65%;
+	width: 24%;
+	margin-top: 7em;
 	margin-left: 3em;
-	border: solid;
+	/*border: solid;
 	border-color: grey;
-	border-width: 15%;
-	float: left;
+	border-width: 15%;*/
+	float: right;
 	border-radius: 10px;
 	position: inline-block;
+	text-align: left;
+	background-color: white; 
+	-webkit-box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.4); 
+	-moz-box-shadow: 0px 1px 6px rgba(23, 69, 88, .5);
+	-webkit-border-radius: 12px;
+	-moz-border-radius: 7px; 
+	border-radius: 7px;
 }
 
 div.col-lg-10.centered {
@@ -70,3 +116,54 @@ div.col-lg-10.centered {
 	height: 50%;
 }
 
+
+#searchbar {
+	margin-top: 4%;
+	margin-left: 50px;
+}
+
+#searchdropdown {
+	margin-top: 4%;
+	float: left;
+	background-size: 34px;
+	background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0;
+	height: 34px;
+	overflow: hidden;
+	width: 250px;
+	padding-right: 50%;
+}
+
+input#ajax {
+	float: left;
+	border-radius: 0.5em 0% 0% 0.5em;
+	height: 34px;
+	overflow: hidden;
+	width: 220px; 
+}
+
+input#ajax2 {
+	float: left;
+	border-radius: 0.5em 0% 0% 0.5em;
+	height: 34px;
+	overflow: hidden;
+	width: 220px; 
+}
+
+input#submitbutton {
+	height: 34px;	
+	border-radius: 0% 0.5em 0.5em 0%;
+}
+
+input#submitbutton2 {
+	height: 34px;	
+	border-radius: 0% 0.5em 0.5em 0%;
+}
+
+input#submitbutton3 {
+	height: 34px;	
+	border-radius: 0% 0.5em 0.5em 0%;
+}
+
+.logobar {
+	width: 30%;
+}

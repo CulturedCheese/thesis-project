@@ -12,13 +12,14 @@ var SelectWorkflowBar = React.createClass({
 
   render: function() {
     return (
-      <form id="search" onSubmit={this.handleSubmit} >
-        <select type="text" placeholder="Search by..." ref="workflow">
-          <option value="countryWorkflow">Country</option>
-          <option value="languageWorkflow">Programming Language</option>
-        </select> 
-        <button type="submit" >Select</button>
-      </form>
+      <select id="searchdropdown" onChange={this.handleSubmit} placeholder="Search by..." ref="workflow" >
+        <button class="btn btn-default dropdown-toggle" placeholder="Search by..." type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+          <span class="caret"></span>
+        </button>
+        <option value="initialWorkflow">Search by...</option>
+        <option value="languageWorkflow">Programming Language</option>
+        <option value="countryWorkflow">Country</option>
+      </select>
     );
   }
 
