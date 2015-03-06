@@ -10,21 +10,7 @@ var Profiles = React.createClass({
 	    return (
 	      <section id="profiles">
           <HireCodersSearchBox />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
           <NextPage profileData={results} />
-          <br />
           {results.map(function(result) {
             return <ProfileBox profileData={result} />;
           })}
