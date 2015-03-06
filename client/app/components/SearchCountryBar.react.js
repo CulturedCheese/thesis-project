@@ -27,9 +27,9 @@ var SearchCountryBar = React.createClass({
     reloadJs('./autocomplete.js');
 
     return (
-      <form id="search" onSubmit={this.handleSubmit} >
-        <input type="text" placeholder=" Search by country..." id="ajax2" list="json-countrylist" ref="text"/>
-        <input type="submit" value="submit" />
+      <form id="searchbar" onSubmit={this.handleSubmit} >
+        <input type="text" id="ajax2" placeholder="  Search" list="json-countrylist" ref="text"/>
+        <input id="submitbutton" type="submit" value="Submit" />
         <datalist id="json-countrylist"></datalist>  
       </form>
     );

@@ -28,7 +28,7 @@ var autocomplete = function(list, input, source, message) {
       }
     }
     // Update the placeholder text.
-    input.placeholder = message;
+    // input.placeholder = message;
   };
 
 
