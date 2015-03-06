@@ -25,8 +25,11 @@ var Map = React.createClass({
       console.log(this.props.initialWorkflowData);
 
       document.getElementById('d3Map').innerHTML='';
-      new Datamap({
+      var map = new Datamap({
           element: document.getElementById('d3Map'),
+          // height: '50%',
+          // width: '50%',
+          responsive: true,
           fills: languageColors, //mapping file from language to the color code. it's a long file so we're saving it elsewhere. 
           data: parsedData,
           geographyConfig: {
@@ -64,6 +67,9 @@ var Map = React.createClass({
 
         var map = new Datamap({
           element: document.getElementById('d3Map'),
+          // height: 50%,
+          // width: 50%,
+          responsive: true,
           geographyConfig: {
             popupOnHover: false
           },
@@ -102,7 +108,7 @@ var Map = React.createClass({
       console.log(parsedData); 
 
       document.getElementById('d3Map').innerHTML='';
-      new Datamap({
+      var map = new Datamap({
         element: document.getElementById('d3Map'),
         geographyConfig: {
           popupOnHover: false
@@ -120,6 +126,7 @@ var Map = React.createClass({
         fills: countryColors, //mapping file from language to the color code. it's a long file so we're saving it elsewhere. 
         data: parsedData  //this is the data that is attached to each country
       });
+      return map;
     }
   },
 
@@ -152,7 +159,7 @@ var Map = React.createClass({
     //TODO: give the svg an ID.
     return(
       <div id="d3Map" ></div>
-    ) 
+    ); 
   }
 });
 
