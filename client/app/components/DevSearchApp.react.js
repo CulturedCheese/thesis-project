@@ -9,9 +9,9 @@ var Profiles = require('./Profiles.react');
 //this gets the country data **as it already exists in the store** 
 //this does not make a new api call to the server, only to the store.
 function getDevSearchState() {
+  var initialWorkflowData = DevSearchStore.getInitialWorkflowData() || {};
   var countrySpecificData = DevSearchStore.getFormattedCountryData() || {};
   var sortedCountriesByLanguageTop10 = DevSearchStore.getTop10CountriesByLanguage() || [];
-  var initialWorkflowData = DevSearchStore.getInitialWorkflowData() || {};
   var workflow = DevSearchStore.getWorkflow();
   return {
     sortedCountriesByLanguageTop10: sortedCountriesByLanguageTop10, 
@@ -24,14 +24,16 @@ function getDevSearchState() {
 //this tells the store to make an api request for new data from the server
 function requestCountrySpecificData() {
   DevSearchStore.getCountryDataFromServer();
-  DevSearchStore.getDeveloperCountByCountry();
+  DevSearchStore.getDeveloperCountByCountryFromServer();
+  DevSearchStore.getDeveloperCountByLanguageFromServer();
 }
 
 var DevSearchApp = React.createClass({
 
   getInitialState: function() {
-    DevSearchStore.formatCountryData();
     requestCountrySpecificData();
+    DevSearchStore.formatInitialWorkflowData();
+    DevSearchStore.formatCountryData();
     return getDevSearchState();
   },
 

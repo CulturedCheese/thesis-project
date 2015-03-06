@@ -1,7 +1,6 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var DevSearchConstants = require('../constants/DevSearchConstants');
 
-
 var DevSearchActions = {
 
   displayData: function(input, workflow) {
@@ -21,15 +20,6 @@ var DevSearchActions = {
     AppDispatcher.handleViewAction({
       actionType: "DISPLAY_" + workflowType + "_DATA",
       input: input
-    });
-  },
-
-  displayGithubHandles: function(country,language) {
-    console.log("heard a displayGithubHandles in DevSearchActions!", country, language);
-    AppDispatcher.handleViewAction({
-      actionType: "DISPLAY_GITHUB_HANDLES",
-      country: country,
-      language: language
     });
   },
 

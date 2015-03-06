@@ -19,12 +19,17 @@ var SearchLanguageBar = React.createClass({
       if (document.getElementById('autocomplete')){
         document.getElementById('autocomplete').remove();
       }
+      if (document.getElementById('json-countrylist')){
+        document.getElementById('json-countrylist').remove();
+      }
       script.src = src;
       script.id = "autocomplete";
       body.appendChild(script);
     };
 
-    reloadJs('./autocomplete.js');
+    if (!document.getElementById('json-languagelist')){
+      reloadJs('./autocomplete.js');
+    }
 
     return (
       <form id="searchbar" onSubmit={this.handleSubmit} >
