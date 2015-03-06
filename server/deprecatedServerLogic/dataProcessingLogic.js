@@ -6,7 +6,7 @@ var https = require('https');
 var lookup = require('country-data').lookup;
 
 module.exports = {
-  get: function (req, res) {
+  get: function(req, res) {
     //this works, but we are not using it
     //the unlock places api is not very accurate, so we switched to using the geonames api instead. 
     var sqlString = 'SELECT * FROM places ORDER BY user_location_count DESC LIMIT 2'; //gets the top 100 locations;
@@ -15,13 +15,13 @@ module.exports = {
       console.log('queried the db!');
       console.log('db results', results);
       //the results are an array of objects, with keys for user_location and user_location_count
-      for(var i = 0; i < results.length; i++) {
+      for (var i = 0; i < results.length; i++) {
         var createUrlString = function(place) {
           return 'http://unlock.edina.ac.uk/ws/closestMatchSearch?name=' + place + '&gazetteer=geonames&format=json';
         }
         var urlString = createUrlString(results[i].user_location);
         console.log('urlString', urlString);
-        if(results[i].user_location) {
+        if (results[i].user_location) {
           //turn this into an http request, rather than an ajax request. 
           http.get(urlString, function(response) {
               console.log('receiving data...');
@@ -47,7 +47,7 @@ module.exports = {
       res.send(results);
     });
 },
-  createUserTable: function(req,res) {
+  createUserTable: function(req, res) {
     //this also works, but we are not using it either. 
     //instead, we're aggregating users using MySQL and Google BigQuery
     console.log('heard a request to createUserTable');
@@ -61,18 +61,18 @@ module.exports = {
     //TODO: insert this data into the users table. 
     var getAllDataSql = 'SELECT * FROM raw_data_import';
     db.query(getAllDataSql, function(err, results){
-      if(err) {
+      if (err) {
         console.error(err);
       } else {
         console.log('got data back from table. processing now');
         var users = {};
         // console.log('results from db query', results);
-        for(var i = 0; i < results.length; i++) {
+        for (var i = 0; i < results.length; i++) {
           var cUser = results[i].user_login;
           var cLang = results[i].repository_language;
           var cLocation = results[i].user_location;
           // var cCountryCode = results[i].countryCode;
-          if( !users[cUser] ) {
+          if ( !users[cUser] ) {
             //could add in a query to the places database to get the gps and country code. 
             //but i prefer keeping it more normalized and just doing a table join later. 
             users[cUser] = {
@@ -83,7 +83,7 @@ module.exports = {
             }
             users[cUser].languages[cLang] = 1;
 
-          } else if(!users[cUser].languages[cLang]) {
+          } else if (!users[cUser].languages[cLang]) {
             users[cUser].languages[cLang] = 1;
           } else {
             users[cUser].languages[cLang] += 1;
@@ -94,7 +94,7 @@ module.exports = {
         //insert into users table
         var count = 0;
         console.log('about to start inserting users');
-        for(var key in users) {
+        for (var key in users) {
           count++;
           var user_login = key.slice(0,25);
           var userObj = users[key];
@@ -329,7 +329,7 @@ module.exports = {
     });
 
   },
-  convertLatLongToCountry: function(req,res) {
+  convertLatLongToCountry: function(req, res) {
     //This works and we ARE using it! 
     //this grabs data from our db to get the lat/long
       //then queries the geonames api for the two-letter country Code surrounding that lat/long
@@ -349,13 +349,13 @@ module.exports = {
       var rowNum = i;
       var sqlQuery = 'SELECT * FROM placesWithGeo WHERE ID= ' + rowNum;
 
-      if(i >= 67121) {
+      if (i >= 67121) {
         clearInterval(interval);
         console.log('GOT TO THE END OF 17755!!!!!!');
       } else {
 
         db.query(sqlQuery, function(err, results) {
-          if(err) {
+          if (err) {
             dbErrorObj[rowNum] = 'dbError';
             console.error(err);
           } else {
@@ -384,7 +384,7 @@ module.exports = {
       }
     }, 2000);
   },
-  convertLatLongToCountryOnlyNull2: function(req,res) {
+  convertLatLongToCountryOnlyNull2: function(req, res) {
     //This works and we ARE using it. this finds the NULL values only from our DB and gets the associated countryCodes
     console.log('heard a request to convertLatLongToCountry!');
     var i = 82817;
@@ -395,13 +395,13 @@ module.exports = {
       var rowNum = i;
       var sqlQuery = 'SELECT * FROM placesWithGeo WHERE ID= ' + rowNum;
 
-      if(i >= 84915) {
+      if (i >= 84915) {
         clearInterval(interval);
         console.log('GOT TO THE END OF 17755!!!!!!');
       } else {
 
         db.query(sqlQuery, function(err, results) {
-          if(err) {
+          if (err) {
             dbErrorObj[rowNum] = 'dbError';
             console.error(err);
           } else {
@@ -409,7 +409,7 @@ module.exports = {
             var long = results[0].longitude;
             var urlString = 'http://ws.geonames.org/countryCode?lat=' + lat + '&lng=' + long + '&username=climbsrocks';
 
-            if(!results[0].countryCode) {
+            if (!results[0].countryCode) {
               http.get(urlString, function(response) {
 
                 // Continuously update stream with data
@@ -437,7 +437,7 @@ module.exports = {
       }
     }, 2000);
   },
-  convertLatLongToCountryOnlyNull: function(req,res) {
+  convertLatLongToCountryOnlyNull: function(req, res) {
     console.log('heard a request to convertLatLongToCountryOnlyNull!');
     var i = 64797;
 
@@ -447,13 +447,13 @@ module.exports = {
       var rowNum = i;
       var sqlQuery = 'SELECT * FROM placesWithGeo WHERE ID= ' + rowNum;
 
-      if(i >= 67507) {
+      if (i >= 67507) {
         clearInterval(interval);
         console.log('GOT TO THE END OF 17755!!!!!!');
       } else {
 
         db.query(sqlQuery, function(err, results) {
-          if(err) {
+          if (err) {
             dbErrorObj[rowNum] = 'dbError';
             console.error(err);
           } else {
@@ -461,7 +461,7 @@ module.exports = {
             var long = results[0].longitude;
             var urlString = 'http://ws.geonames.org/countryCode?lat=' + lat + '&lng=' + long + '&username=tinytim';
 
-            if(!results[0].countryCode) {
+            if (!results[0].countryCode) {
               http.get(urlString, function(response) {
 
                 // Continuously update stream with data
@@ -490,7 +490,7 @@ module.exports = {
     }, 2000);
   },
 
-  convertLatLongToCountryCleaning: function(req,res) {
+  convertLatLongToCountryCleaning: function(req, res) {
     //This works and we ARE using it. 
     //this grabs all the error codes and NULL s and finds their countryCodes
     console.log('heard a request to convertLatLongToCountryCleaning!');
@@ -504,13 +504,13 @@ module.exports = {
       //select only rows that have a countryCode of 'ER' (error) or null
       var sqlQuery = 'SELECT * FROM placesWithGeo WHERE (countryCode="ER" OR countryCode IS NULL) AND ID>=' + rowID + ' ORDER BY ID ASC LIMIT 1';
 
-      if(rowID >= 84916) {//the ID of the last row in our db is 84916
+      if (rowID >= 84916) {//the ID of the last row in our db is 84916
         clearInterval(interval);
         console.log('GOT TO THE END OF the db!');
       } else {
 
         db.query(sqlQuery, function(err, results) {
-          if(err) {
+          if (err) {
             console.error(err);
           } else {
             var lat = results[0].latitude;
@@ -551,7 +551,7 @@ module.exports = {
     }, 2000);
   },
 
-  googleMapsTest: function(req,res) {
+  googleMapsTest: function(req, res) {
     //This works, but we are not using it. 
     //GoogleMaps does not let us specify a radius around a lat/long to include, which is what we need for coastal countries. 
     var lat = 37.774933;
@@ -569,7 +569,7 @@ module.exports = {
         body = JSON.parse(body);
         console.log(body);
         var keys = [];
-        for(var key in body) {
+        for (var key in body) {
           keys.push(key);
         }
         console.log(body.results[0])
@@ -610,7 +610,7 @@ module.exports = {
       }
     };
 
-    for(var key in countryHashTest) {
+    for (var key in countryHashTest) {
       var countryObj = countryHashTest[key];
       var languages = countryObj.languages;
       var countryCode = key;

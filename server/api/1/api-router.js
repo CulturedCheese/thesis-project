@@ -1,27 +1,24 @@
+'use strict';
 var express = require('express');
 var apiRouter = express.Router();
 var databaseLogic = require('./databaseLogic.js');
 var oDeskLogic = require('./odeskLogic.js');
 
 // api routes for Github data
-apiRouter.get('/allCountriesAllLanguages', function(req,res) {
-  console.log('heard a request to allCountriesAllLanguages');
-  databaseLogic.allCountriesAllLanguages(req,res);
+apiRouter.get('/allCountriesAllLanguages', function(req, res) {
+  databaseLogic.allCountriesAllLanguages(req, res);
 });
 
-apiRouter.get('/countriesForLanguage', function(req,res) {
-  console.log('heard a request to countriesForLanguage');
-  databaseLogic.countriesForLanguage(req,res);
+apiRouter.get('/countriesForLanguage', function(req, res) {
+  databaseLogic.countriesForLanguage(req, res);
 });
 
-apiRouter.get('/developerCountByCountry', function(req,res) {
-  console.log('heard a request to developerCountByCountry');
-  databaseLogic.developerCountByCountry(req,res);
+apiRouter.get('/developerCountByCountry', function(req, res) {
+  databaseLogic.developerCountByCountry(req, res);
 });
 
-apiRouter.get('/developerCountByLanguage', function(req,res) {
-  console.log('heard a request to developerCountByLanguage');
-  databaseLogic.developerCountByLanguage(req,res);
+apiRouter.get('/developerCountByLanguage', function(req, res) {
+  databaseLogic.developerCountByLanguage(req, res);
 });
 
 // api route for oDesk data

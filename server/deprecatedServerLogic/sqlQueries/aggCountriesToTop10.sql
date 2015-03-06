@@ -1,7 +1,7 @@
 SELECT repository_language, countryCode, totalActiveRepos
 FROM (
   SELECT repository_language, countryCode, totalActiveRepos, 
-    @country_rank := IF(@current_country = countryCode, @country_rank + 1, 1) AS country_rank, @current_country := countryCode 
+    @country_rank := if(@current_country = countryCode, @country_rank + 1, 1) AS country_rank, @current_country := countryCode 
   FROM countriesAggAll
   ORDER BY countryCode, totalActiveRepos DESC
 ) ranked
@@ -13,7 +13,7 @@ SELECT * FROM (
   SELECT repository_language, countryCode, totalActiveRepos
   FROM (
     SELECT repository_language, countryCode, totalActiveRepos, 
-      @country_rank := IF(@current_country = countryCode, @country_rank + 1, 1) AS country_rank, @current_country := countryCode 
+      @country_rank := if (@current_country = countryCode, @country_rank + 1, 1) AS country_rank, @current_country := countryCode 
     FROM countriesAggAll
     ORDER BY countryCode, totalActiveRepos DESC
   ) ranked

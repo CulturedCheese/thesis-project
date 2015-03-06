@@ -15,8 +15,16 @@ module.exports = function() {
           client + 'app/**/*.js',
           '!' + client + 'bower_components/**/*.js', // exclude bower component js files
           '!' + client + 'app/bundle.js', // exclude bundle.js
-          '!' + client + 'app/bundle.min.js' // exclude bundle.min.js
-          // server + '**/*.js'
+          '!' + client + 'app/bundle.min.js', // exclude bundle.min.js
+          server + '**//**/**/*.js'
+      ],
+      allserverjs: [
+          server + '**/**/**/*.js',
+          '!' + server + 'api/1/freelancersLogic.js',
+          '!' + server + 'api/1/odeskOauth.js',
+          '!' + server + 'dataProcessing/dataProcessingLogic.js',
+          '!' + server + 'deprecatedServerLogic/**/**/**/*.js',
+          '!' + server + 'config/utils.js'
       ],
       dist: dist,
       client: client,

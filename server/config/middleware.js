@@ -17,7 +17,7 @@ module.exports = function(app, express) {
   app.use(helpers.errorHandler);
   app.use(express.static(path.join(__dirname + '../../../dist')));
   //api is the router for all of our client-server api endpoints
-  app.use('/api', apiRouter); 
+  app.use('/api', apiRouter);
   //dataProcessing router is for all our internal data processing, and is only used once when we import the data
   app.use('/dataProcessing', dataProcessingRouter);
 };
