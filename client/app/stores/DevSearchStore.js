@@ -217,17 +217,14 @@ dispatcherIndex: AppDispatcher.register(function(payload) {
     //incoming callbacks/changes
     switch(action.actionType) {
       case 'DISPLAY_LANGUAGE_DATA':
-        console.log('invoking DISPLAY_LANGUAGE_DATA', input);
         DevSearchStore.sortTop10CountriesByLanguage(input);
         DevSearchStore.emitChange();
         break;
       case 'DISPLAY_COUNTRY_DATA':
-        console.log('invoking DISPLAY_COUNTRY_DATA', input);
         DevSearchStore.formatCountryData(input);
         DevSearchStore.emitChange();
         break;
       case 'SWITCH_WORKFLOW':
-        console.log('invoking SWITCH_WORKFLOW');
         DevSearchStore.switchWorkflow(workflow);
         DevSearchStore.emitChange();
         break;

@@ -3,14 +3,6 @@ var ProfilesConstants = require('../constants/ProfilesConstants');
 
 var ProfilesActions = {
 
-  nextPage: function(page) {
-    console.log('heard a nextPage in ProfilesActions!')
-    AppDispatcher.handleViewAction({
-      actionType: 'PROFILES_NEXT_PAGE',
-      page: page
-    });
-  },
-
   getCoders: function(language, country, subcategory, hourlyRateMax, minScore, maxScore) {
     console.log('heard a getCoders in ProfilesActions!')
     AppDispatcher.handleViewAction({
@@ -22,8 +14,15 @@ var ProfilesActions = {
       minScore: minScore,
       maxScore: maxScore
     });
-  }
+  },
 
+  nextPage: function(page) {
+    console.log('heard a nextPage in ProfilesActions!')
+    AppDispatcher.handleViewAction({
+      actionType: 'PROFILES_NEXT_PAGE',
+      page: page
+    });
+  }
 };
 
 module.exports = ProfilesActions;

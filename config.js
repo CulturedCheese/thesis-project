@@ -9,4 +9,4 @@ config = {
  	odeskCallbackURL: 'http://localhost:3000/api/1/auth/odesk/callback'
 };
 
-module.exports = config
+module.exports = config;
