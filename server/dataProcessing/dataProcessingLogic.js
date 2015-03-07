@@ -9,7 +9,7 @@ var Github = require('github-api');
 
 var github = new Github({
   token: process.env.githubAPIDataGathering,
-  auth: "oauth"
+  auth: 'oauth'
 });
 
 var GHuser = github.getUser();
@@ -40,7 +40,7 @@ module.exports = {
     console.log('filePath:');
     console.log(filePath);
     fs.readFile(filePath,'utf8', function(err, data) {
-      if(err) {
+      if (err) {
         console.log('error from reading file inside escapeAndLoadUsersByLang');
         console.error(err);
       } else {
@@ -51,14 +51,14 @@ module.exports = {
         //using setInterval to iterate through the csv file without overloading our db
         var interval = setInterval(function() {
           var line = bufferStringSplit[i];
-          if(i%1000 === 0) {
+          if (i%1000 === 0) {
             console.log('Processed row ',i,':',line);
           }
           //the problem is that the users have commas in their place names. 
           //we could probably use a regular expression to split each line, escape it, and then insert it to the DB.
           var insertQuery = '';
           db.query(insertQuery);
-          if(++i >=bufferStringSplit.length) {
+          if (++i >=bufferStringSplit.length) {
             console.log('reached the end of the file!');
             clearInterval(interval);
           }
@@ -69,7 +69,7 @@ module.exports = {
     });
   },
 
-  convertLatLongToCountry: function(req,res) {
+  convertLatLongToCountry: function(req, res) {
     //This works and we ARE using it! 
     //this grabs data from our db to get the lat/long
       //then queries the geonames api for the two-letter country Code surrounding that lat/long
@@ -89,13 +89,13 @@ module.exports = {
       var rowNum = i;
       var sqlQuery = 'SELECT * FROM placesWithGeo WHERE ID= ' + rowNum;
 
-      if(i >= 67121) {
+      if (i >= 67121) {
         clearInterval(interval);
         console.log('GOT TO THE END OF 17755!!!!!!');
       } else {
 
         db.query(sqlQuery, function(err, results) {
-          if(err) {
+          if (err) {
             dbErrorObj[rowNum] = 'dbError';
             console.error(err);
           } else {
@@ -125,7 +125,7 @@ module.exports = {
     }, 2000);
   },
 
-  convertLatLongToCountryCleaning: function(req,res) {
+  convertLatLongToCountryCleaning: function(req, res) {
     //This works and we ARE using it. 
     //this grabs all the error codes and NULL s and finds their countryCodes
     console.log('heard a request to convertLatLongToCountryCleaning!');
@@ -139,13 +139,13 @@ module.exports = {
       //select only rows that have a countryCode of 'ER' (error) or null
       var sqlQuery = 'SELECT * FROM placesWithGeo WHERE (countryCode="ER" OR countryCode IS NULL) AND ID>=' + rowID + ' ORDER BY ID ASC LIMIT 1';
 
-      if(rowID >= 84916) {//the ID of the last row in our db is 84916
+      if (rowID >= 84916) {//the ID of the last row in our db is 84916
         clearInterval(interval);
         console.log('GOT TO THE END OF the db!');
       } else {
 
         db.query(sqlQuery, function(err, results) {
-          if(err) {
+          if (err) {
             console.error(err);
           } else {
             var lat = results[0].latitude;
@@ -153,7 +153,7 @@ module.exports = {
             rowNum = results[0].ID;
             rowID = results[0].ID;
             //I expected the Google Maps API to be more reliable, but it turns out that GeoNames is pretty good, and allows the radius parameter.
-            //The radius parameter says "find the nearest country within this radius in km", which works really well for countries like NZ where the lat long is actually in the water in between the islands. 
+            //The radius parameter says 'find the nearest country within this radius in km', which works really well for countries like NZ where the lat long is actually in the water in between the islands. 
             // var googleMapsURL = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' +lat + ',' + long + '&result_type=country&key=AIzaSyC2XH3yPRy-DfzFgkcl1JaVsFeC-qm0T0E';
             var geonamesURL = 'http://ws.geonames.org/countryCode?lat=' + lat + '&lng=' + long + '&radius=10&username=climbsrocks';
 
@@ -186,30 +186,30 @@ module.exports = {
     }, 2000);
   },
 
-  topDevsByCountry: function(req,res) {
+  topDevsByCountry: function(req, res) {
     console.log('heard a request to topDevsByCountry');
     var sqlQuery = 'SELECT * FROM 14users';
 
     db.query(sqlQuery, function(err, response) {
-      if(err) {
+      if (err) {
         console.error(err);
       } else {
         var results = {};
-        for(var i = 0; i < response.length; i++) {
+        for (var i = 0; i < response.length; i++) {
           var item = response[i];
           var country = item.countryCode;
           var language = item.repository_language;
           //if the country doesn't exist, initialize it
-          if(!results[country]) {
+          if (!results[country]) {
             results[country] = {};
           }
           //if the language doesn't exist for that country, initialize it
-          if(!results[country][language]) {
+          if (!results[country][language]) {
             results[country][language] = [];
           }
           //now the country and language exist
           //check to see if we can skip out on this easily because we already have 10 items and the new item is less than the 10th largest item. if 
-          if(!(results[country][language].length === 10 && item.activeReposByLang < results[country][language][9].activeRepos)) {
+          if (!(results[country][language].length === 10 && item.activeReposByLang < results[country][language][9].activeRepos)) {
             //create the item to be added
             var pushItem = {
               username: item.actor_attributes_login,
@@ -222,7 +222,7 @@ module.exports = {
               return b.activeRepos - a.activeRepos;
             });
             //if we have too many items, get rid of one.
-            if(results[country][language].length > 10) {
+            if (results[country][language].length > 10) {
               results[country][language].pop();
             }
           }
@@ -238,10 +238,10 @@ module.exports = {
               + JSON.stringify(results[country][language]) + "')";
 
             db.query(sqlInsert, function(err, response) {
-              if(err) {
+              if (err) {
                 console.error(err);
               } else {
-                if(++insertionCount % 1000 === 0) {
+                if (++insertionCount % 1000 === 0) {
                   console.log('inserted ' + insertionCount + ' into db!');
                 }
               }
@@ -257,13 +257,13 @@ module.exports = {
     })
   },
 
-  addProfileToTopUsers: function(req,res) {
+  addProfileToTopUsers: function(req, res) {
     db.query('SELECT * FROM githubUserData', function(err, response) {
-      if(err) {
+      if (err) {
         console.error(err);
       } else {
         var ghUsers = {};
-        for(var i = 0; i < response.length; i++) {
+        for (var i = 0; i < response.length; i++) {
           var user = response[i];
           ghUsers[user.username] = {
             avatarURL: user.avatarURL,
@@ -271,15 +271,15 @@ module.exports = {
           };
         }
         db.query('SELECT * FROM topUsersByLang', function(err, response) {
-          if(err) {
+          if (err) {
             console.error(err);
           } else {
-            for(var j = 0; j < response.length; j++) {
+            for (var j = 0; j < response.length; j++) {
               var users = JSON.parse(response[j].users);
               var cleanUsers = [];
-              for(var k = 0; k < users.length; k++) {
+              for (var k = 0; k < users.length; k++) {
                 //check to see if the user exists on github currently. if not, we don't want to include them.
-                if(ghUsers[users[k].username]) {
+                if (ghUsers[users[k].username]) {
                   var fullUser = {
                     username: users[k].username,
                     activeRepos: users[k].activeRepos,
@@ -293,9 +293,9 @@ module.exports = {
               var insertQuery = "INSERT INTO topUsersWithGithub (countryCode, language, users) VALUES('" + response[j].countryCode + "','" + response[j].language + "','" + JSON.stringify(cleanUsers) + "')";
               //Now that we have the user info properly associated, insert it into the DB!
               db.query(insertQuery, function(err, response) {
-                if(err) {
+                if (err) {
                   console.error(err)
-                } else if(j % 100 === 0) {
+                } else if (j % 100 === 0) {
                   console.log(j, 'inserted into db');
                 }
               });
@@ -313,19 +313,19 @@ module.exports = {
     });
   },
 
-  getAvatarURLs: function(req,res) {
+  getAvatarURLs: function(req, res) {
     console.log(process.env.githubAPIDataGathering);
     var sqlQuery = 'SELECT * FROM topUsersByLang';
     var allUsers = {};
     var userList = [];
     db.query(sqlQuery, function(err, response) {
       // res.send(response);
-      if(err) {
+      if (err) {
         console.error(err);
       } else {
-        for(var i = 0; i < response.length; i++) {
+        for (var i = 0; i < response.length; i++) {
           var users = JSON.parse(response[i].users);
-          for(var k = 0; k < users.length; k++) {
+          for (var k = 0; k < users.length; k++) {
             //worst case scenario this just overwrites the username with a blank object again
             allUsers[users[k].username] = users[k].username;
           }
@@ -334,22 +334,22 @@ module.exports = {
         // create an array of all the usernames
         // use setInterval to iterate through the array at a steady pace
         // update the allUsers obj with the results of the http request
-        for(var username in allUsers) {
+        for (var username in allUsers) {
           userList.push(username);
         }
 
-        var sqlCheck = "SELECT * FROM githubUserData";
+        var sqlCheck = 'SELECT * FROM githubUserData';
         db.query(sqlCheck, function(err, response) {
-          if(err) {
+          if (err) {
             console.error(err);
           } else {
-            for(var j = 0; j < response.length; j++) {
+            for (var j = 0; j < response.length; j++) {
               var usernameFromTable = response[j].username;
               allUsers[usernameFromTable] = 'in table';
             }
             var usersToQuery = [];
             for (var user in allUsers) {
-              if(allUsers[user] !== 'in table') {
+              if (allUsers[user] !== 'in table') {
                 usersToQuery.push(user);
               }
             }
@@ -359,7 +359,7 @@ module.exports = {
             //timing calculates how many requests we can make per second to stay below the 5000 per hour rate limit of the api
             var timing = 3600/4900*1000; 
             var interval = setInterval(function() {
-              if(counter === usersToQuery.length) {
+              if (counter === usersToQuery.length) {
                 clearInterval(interval);
               } else {
                 module.exports.getOneUser(usersToQuery[counter], counter);
@@ -378,13 +378,13 @@ module.exports = {
 
   getOneUser: function(username, count) {
     GHuser.show(username, function(err, user) {
-      if(err) {
+      if (err) {
         console.error(err);
         module.exports.githubUserErrors[username] = true;
       } else {
         var insertionQuery = "INSERT INTO githubUserData (username, avatarURL, profileURL) VALUES('" + username + "','" + user.avatar_url + "','" + user.html_url + "')";
         db.query(insertionQuery, function(err, response) {
-          if(err) {
+          if (err) {
             module.exports.githubUserErrors[username] = true;
             console.error(err);
           } else {

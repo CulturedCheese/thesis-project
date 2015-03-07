@@ -48,6 +48,24 @@ gulp.task('vet', function() {
       .pipe($.jshint.reporter('fail'));
 });
 
+// checks code syntax and style with JSHint and JSCS
+gulp.task('vetserver', function() {
+  console.log('Analyzing source with JSHint and JSCS');
+
+  return gulp
+      // reads all js files into the stream
+      .src(config.allserverjs) // TODO: include server js 
+      // prints all files being piped through the stream
+      .pipe($.if(args.verbose, $.print()))
+      // lints code style to enforce style guide
+      .pipe($.jscs())
+      .pipe($.jshint())
+      // adds formatting to the jshint log
+      .pipe($.jshint.reporter('jshint-stylish', {verbose: true}))
+      // outputs 'fail' to the console
+      .pipe($.jshint.reporter('fail'));
+});
+
 // run gulp clean prior to each dist to delete the previous dist
 gulp.task('clean', function() {
     gulp.src([config.dist + '*', config.client + 'app/bundle*', config.client + 'styles/styles.css'])
