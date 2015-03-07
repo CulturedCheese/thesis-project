@@ -22,7 +22,7 @@ var Infobox = React.createClass({
   	return (
       <section id="infobox">
         { renderedBox } 
-        <button id="hirebutton"><a href="#features" >Hire Developers</a></button>
+        <button id="hirebutton"><a href="#features" >Click to find developers</a></button>
       </section>
     );
   },
