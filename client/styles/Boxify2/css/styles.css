@@ -449,10 +449,10 @@ p {
     line-height: 25px;
 }
 a {
-    color: grey;
+    color: #73d0da
 }
 a:hover, a:focus {
-    color: #3f6184;
+    color: #73d0da;
     text-decoration: none;
 }
 .texture-overlay {
@@ -460,9 +460,8 @@ a:hover, a:focus {
     top: 0px;
     left: 0px;
     width: 100%;
-    height: 60px;
+    height: 100%;
     background-image: url(../img/grid.png);
-    border-bottom: black;
 }
 
 /* ==========================================================================
@@ -582,7 +581,7 @@ Hero
     position: relative;
     padding: 60px 0 60px 0;
     min-height: 800px;
-    /*background: rgb(40, 70, 102) url('../img/hero-01.jpg') no-repeat center center;*/
+    background: rgb(40, 70, 102) url('../img/hero-01.jpg') no-repeat center center;
     background-size: cover;
     color: #fff;
 }
@@ -659,7 +658,7 @@ Features Slider
 .features-bg {
     position: relative;
     min-height: 400px;
-    background: url('../img/01-screenshot.jpg') no-repeat center center;
+    background: url('../img/features-intro-01.jpg') no-repeat center center;
     background-size: cover;
 }
 .features-img {
@@ -712,7 +711,7 @@ Features Slider
 Features List
 ========================================================================== */
 .features-list {
-    padding: 5px 0
+    padding: 130px 0
 }
 .features-list h1 {
     margin: 0 0 10px 0;
@@ -812,7 +811,7 @@ Showcase
 }
 .showcase-wrap {
     position: relative;
-    padding: 15px 0;
+    padding: 100px 0;
     min-height: 600px;
 }
 .showcase-slider ul {
@@ -907,8 +906,7 @@ Screenshots
 .screenshots figcaption p {
     margin-bottom: 0;
     text-transform: uppercase;
-    font-weight: 900;
-    font-size: 35px;
+    font-weight: 400;
 }
 .screenshots figcaption .caption-content {
     position: absolute;
@@ -964,7 +962,7 @@ footer li {
     font-weight: 400;
 }
 footer li a {
-    color: lightgrey;
+    color: #3f6184
 }
 footer li:last-child {
     margin-right: 0

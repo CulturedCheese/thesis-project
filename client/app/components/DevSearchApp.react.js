@@ -34,6 +34,7 @@ var DevSearchApp = React.createClass({
     requestCountrySpecificData();
     DevSearchStore.formatInitialWorkflowData();
     DevSearchStore.formatCountryData();
+    DevSearchStore.sortTop10CountriesByLanguage();
     return getDevSearchState();
   },
 
