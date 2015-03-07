@@ -55,7 +55,7 @@
 			<div class="texture-overlay"></div>
 				<div class="row nav-wrapper">
 					<div class="logobar col-md-6 col-sm-6 col-xs-6 text-left">
-						<a href="#"><img src="styles/Boxify/img/footprints.png" alt="CoderTracks Logo"></a>
+						<a href="#"><img src="" alt="CoderTracks Logo"></a>
 					</div>
 					<div class="col-md-6 col-sm-6 col-xs-6 text-right navicon">
 						<p class="menudrop">MENU</p><a id="trigger-overlay" class="nav_slide_button nav-toggle" href="#"><span class="dropbars"></span></a>
@@ -78,7 +78,7 @@
 <!-- PROFILES SECTION -->
 
 		<section class="features-list" id="features">
-			<h1>Freelancer Profiles</h1>
+			<h1 id="profilestitle">DEVELOPER PROFILES</h1>
 			<div class="container">
 			  <section id="profiles" ></section>
 			</div>
@@ -100,7 +100,7 @@
 						</div>
 						<div class="container mtb">
 						 	<div class="row centered">
-								<h1>MEET OUR TEAM</h1>
+								<h1 id="profilestitle">MEET OUR TEAM</h1>
 					 	
 					 	<div class="col-lg-3 col-md-3 col-sm-3">
 							<div class="he-wrap tpl6">
@@ -258,13 +258,13 @@
 		<section class="screenshots" id="screenshots">
 			<div class="container-fluid">
 				<div class="row centered">
-				 	<h1>OUR TECH STACK</h1>
+				 	<h1 id="profilestitle">OUR TECH STACK</h1>
 				</div>
 				<div class="row">
 					<ul class="grid">
 						<li>
 							<figure>
-								<img src="styles/Boxify/img/node.jpg" alt="Screenshot 01" style="position: relative; width: 520px; height: 270px;">
+								<img src="styles/Boxify/img/node.jpg" alt="Screenshot 01" style="position: relative; width: 420px; height: 220px;">
 								<figcaption>
 								<div class="caption-content">
 									<a href="http://nodejs.org/" class="single_image">
@@ -277,7 +277,7 @@
 						</li>
 						<li>
 							<figure>
-								<img src="styles/Boxify/img/react.png" alt="Screenshot 01" style="position: relative; width: 520px; height: 270px;">
+								<img src="styles/Boxify/img/react.png" alt="Screenshot 01" style="position: relative; width: 420px; height: 220px;">
 								<figcaption>
 								<div class="caption-content">
 									<a href="http://facebook.github.io/react/" class="single_image">
@@ -290,7 +290,7 @@
 						</li>
 						<li>
 							<figure>
-								<img src="styles/Boxify/img/aws.jpg" alt="Screenshot 01" style="position: relative; width: 520px; height: 270px;">
+								<img src="styles/Boxify/img/aws.jpg" alt="Screenshot 01" style="position: relative; width: 420px; height: 220px;;">
 								<figcaption>
 								<div class="caption-content">
 									<a href="http://aws.amazon.com/" class="single_image">
@@ -303,7 +303,7 @@
 						</li>
 						<li>
 							<figure>
-								<img id="gulp" src="styles/Boxify/img/gulp.png" alt="Screenshot 01" style="position: relative; width: 520px; height: 270px;">
+								<img id="gulp" src="styles/Boxify/img/gulp.png" alt="Screenshot 01" style="position: relative; width: 420px; height: 220px;;">
 								<figcaption>
 								<div class="caption-content">
 									<a href="http://gulpjs.com/" class="single_image">
@@ -314,10 +314,6 @@
 								</figcaption>
 							</figure>
 						</li>
-					</ul>
-				</div>
-				<div class="row">
-					<ul class="grid">
 						<li>
 							<figure>
 								<img src="styles/Boxify/img/flux.svg" alt="Screenshot 01" style="position: relative; width: 520px; height: 270px;">
@@ -331,6 +327,10 @@
 								</figcaption>
 							</figure>
 						</li>
+					</ul>
+				</div>
+				<div class="row">
+					<ul class="grid">
 						<li>
 							<figure>
 								<img src="styles/Boxify/img/mysql.jpeg" alt="Screenshot 01" style="position: relative; width: 520px; height: 270px;">
@@ -413,23 +413,12 @@
 				</div>
 			</div>
 		</section>
-		<section class="download" id="download">
-			
-<!-- 			<div class="container">
-				<div class="row">
-					<div class="col-md-12 text-center wp4">
-						<h1>Seen Enough?</h1>
-						<a href="http://tympanus.net/codrops/?p=22554" class="download-btn">Download! <i class="fa fa-download"></i></a>
-					</div>
-				</div>
-			</div>
- -->		</section>
 		<footer>
-			<div class="container">
-				<div class="row">
+			<div id="footercontainer" class="container">
+				<div id="footerrow" class="row">
 					<div class="col-md-5">
 						<h1 class="footer-logo">
-						<img src="styles/Boxify/img/footprints.png" alt="Footer Logo Blue">
+						<img src="" alt="Footer Logo Blue">
 						</h1>
 						<p>© CoderTracks 2015 - Designed &amp; Developed &#64; <a href="http://www.hackreactor.com/">Hack Reactor</a></p>
 					</div>
@@ -443,7 +432,7 @@
 					</div>
 				</div>
 			</div>
-		</footer>
+		</footer class="download" id="download">
 		<div class="overlay overlay-boxify">
 			<nav>
 				<ul>
