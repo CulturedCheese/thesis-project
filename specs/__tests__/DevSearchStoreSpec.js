@@ -1,7 +1,7 @@
 'use strict';
 /** @jsx React.DOM */
 
-jest.dontMock('../client/app/stores/DevSearchStore');
+jest.dontMock('../../client/app/stores/DevSearchStore');
 jest.dontMock('object-assign');
 
 describe('DevSearchStore', function() {
@@ -27,10 +27,9 @@ describe('DevSearchStore', function() {
     workflow: 'initialWorkflow'
   };
 
-
   beforeEach(function() {
-    AppDispatcher = require('../client/app/dispatcher/AppDispatcher');
-    TodoStore = require('../client/app/stores/DevSearchStore');
+    AppDispatcher = require('../../client/app/dispatcher/AppDispatcher');
+    TodoStore = require('../../client/app/stores/DevSearchStore');
     callback = AppDispatcher.register.mock.calls[0][0];
   });
 
@@ -38,6 +37,25 @@ describe('DevSearchStore', function() {
     expect(AppDispatcher.register.mock.calls.length).toBe(1);
   });
 
+  it('', function() {
+
+  });
+
+  it('', function() {
+
+  });
+
+  it('', function() {
+
+  });
+
+  it('', function() {
+
+  });
+
+  it('', function() {
+
+  });
   // it('initializes with initialWorkflow', function() {
   //   var all = TodoStore.getAll();
   //   expect(all).toEqual({});

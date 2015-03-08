@@ -8,12 +8,14 @@ var Profiles = React.createClass({
   render: function() {
   	var results = this.props.profileData;
 	    return (
-	      <section id="profiles">
+	      <section className="profiles">
           <HireCodersSearchBox />
+          <div className="profileBoxes">
+            {results.map(function(result) {
+              return <ProfileBox profileData={result} />;
+            })}
+          </div>
           <NextPage profileData={results} />
-          {results.map(function(result) {
-            return <ProfileBox profileData={result} />;
-          })}
 	      </section>
 	    );
   }

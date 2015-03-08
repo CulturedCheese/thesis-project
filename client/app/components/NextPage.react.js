@@ -5,7 +5,7 @@ var NextPage = React.createClass({
 
   render: function() {
     return (
-      <form id="nextPageButton" ref="form" onSubmit={this.handleSubmit}>
+      <form className="nextPageButton" ref="form" onSubmit={this.handleSubmit}>
         <button type="submit" >NEXT PAGE</button>
       </form>
     );
