@@ -204,6 +204,7 @@
 }
 
 #hirebutton {
+	text-align: center;
 	margin-left: auto;
   margin-right: auto;
   width: 100%;
@@ -213,9 +214,6 @@
   bottom: 0;
   left: 0;
   border: none;
-	background-color: none; 
-	font-color: blue;
-	color: none;
 }
 
 .footer-nav li {
@@ -309,8 +307,20 @@ div.container.mtb {
 	font-weight: 700;
 }
 
+#ToddPic p {
+	text-align: center;
+}
+
+#PrestonPic p {
+	text-align: center;
+}
+
+#HouPic p {
+	text-align: center;
+}
+
 .teamtitle {
-	font-size: 150%;
+	font-size: 125%;
 	font-family: 'Lato', sans-serif;	
 	text-align: center;
 	margin-top: 2%;
@@ -331,7 +341,7 @@ i.fa::before {
 	height: 25px;
 	width: 25px;
 	font-size: 45px;
-	font-color: black;	
+	color: #3f6184;	
 	font-weight: 900;	
 }
 
@@ -339,23 +349,37 @@ i.fa::after {
 	height: 25px;
 	width: 25px;
 	font-size: 45px;
-	font-color: black;	
+	color: #3f6184;	
 	font-weight: 900;	
 }
 
 #PrestonPic {
-	margin-left: 10%;
+	/*margin-left: 10%;*/
+	width: 19.75em; 
+	padding-left: 0px;
+	padding-right: 0px;
+	float: right;
 }
 
 #ToddPic {
 	/*float: center;*/
-	margin-left: 11%;
+/*	margin-left: 11%;
+*/	width: 19.75em; 
+	padding-left: 0px;
+	padding-right: 0px;
+	/*margin-left: 12.2em;*/
+	margin-left: 14.5%;
 }
 
 #HouPic {
 	/*float: left;*/
-	margin-left: 1%;
+	/*margin-left: 1%;*/
+	width: 19.75em; 
+	padding-left: 0px;
+	padding-right: 0px;
 }
+
+
 
 #search {
 	margin-top: 20px;
