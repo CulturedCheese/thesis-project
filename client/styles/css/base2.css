@@ -220,7 +220,9 @@
 }
 
 #hirebutton a {	
-	font-color: blue;
+	font-color: #778899;
+	font-size: 125%;
+	font-weight: 700;
 }
 
 .footer-nav li {
@@ -348,7 +350,7 @@ i.fa::before {
 	height: 1.125em;
 	width: 1.125em;
 	font-size: 2.1em;
-	color: #3f6184;	
+	color: #383838;	
 	font-weight: 900;	
 }
 
@@ -356,7 +358,7 @@ i.fa::after {
 	height: 1.125em;
 	width: 1.125em;
 	font-size: 2.1em;
-	color: #3f6184;	
+	color: #383838;	
 	font-weight: 900;	
 }
 
@@ -424,7 +426,7 @@ img.teambigpics{
 }
 
 #profilestitle {
-	padding-top: 1em;
+	padding-top: 3em;
 	text-align: center;
 	font-size: 2em;
 	font-family: 'Lato', sans-serif;
@@ -477,6 +479,16 @@ input {
 /*    font-weight: bold;
 */}
 :-ms-input-placeholder {
+    color: black;
+/*    font-weight: bold;
+*/}
+
+::-webkit-select-placeholder {
+    color: black;
+/*    font-weight: bold;
+*/}
+
+:-ms-select-placeholder {
     color: black;
 /*    font-weight: bold;
 */}
@@ -622,7 +634,7 @@ input#submitbutton3 {
 }
 
 .hireDevsButton {
-	background: #3F6184;
+	background: #383838;
 	border: 1px solid rgba(0,0,0,0.15);
 	border-radius: 6px;
 	transition: all 0.3s ease-out;
@@ -652,7 +664,7 @@ input#submitbutton3 {
 }
 
 .nextPageButton {
-	background: #3F6184;
+	background: #383838;
 	border: 1px solid rgba(0,0,0,0.15);
 	border-radius: 6px;
 	box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 2px 2px rgba(0,0,0,0.3), 0 0 4px 1px rgba(0,0,0,0.2);
@@ -773,7 +785,7 @@ p.profileDescription {
 	margin-left: 50px;
 	margin-top: 9px;
 	border-radius: 6px;
-	background-color: #3F6184;
+	background-color: #383838;
 	border: none;
 }
 
@@ -805,6 +817,11 @@ a.learn-btn.animated.fadeInUp {
 	width: 222px;
 }
 
+.row.centered {
+	background-color: #f6f7f9;
+}
+
+
 div .overlay {
   margin-top: 100px;
   margin-left: 10%;
@@ -820,15 +837,23 @@ div .overlay {
   line-height: 1.8;
 }
 
-i.fa::before {
+#learnarrow i.fa::before {
 	height: 30px;
 	width: 30px;
 	font-size: 40px;
 	color: whitesmoke;
 }
 
+
 #codertracks-map-logo {
 	height: 80px;
 	width: 350px;
 	margin-left: 390px;
+}
+
+i.fa::before {
+	height: 30px;
+	width: 30px;
+	font-size: 40px;
+	color: #383838;
 }
