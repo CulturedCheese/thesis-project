@@ -24,16 +24,17 @@ var MainSection = React.createClass({
       <section id="main">
         <SelectWorkflowBar />
         { renderedSearchBar }
-	      <Map 
+        <Map 
           countrySpecificData={this.props.countrySpecificData} 
           sortedCountriesByLanguageTop10={this.props.sortedCountriesByLanguageTop10}
           initialWorkflowData = { this.props.initialWorkflowData }
           workflow={this.props.workflow} />
-	      <Infobox 
+        <Infobox 
           countrySpecificData={this.props.countrySpecificData} 
           sortedCountriesByLanguageTop10={this.props.sortedCountriesByLanguageTop10} 
           initialWorkflowData = { this.props.initialWorkflowData }
           workflow={this.props.workflow} />
+        <img id="codertracks-map-logo" src="images/clients/codertracks-logo-black.png" alt="CoderTracks Logo Black" />
       </section>
     );
   },

@@ -826,3 +826,9 @@ i.fa::before {
 	font-size: 40px;
 	color: whitesmoke;
 }
+
+#codertracks-map-logo {
+	height: 80px;
+	width: 350px;
+	margin-left: 390px;
+}
