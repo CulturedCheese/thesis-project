@@ -40,7 +40,7 @@ var SearchCountryBar = React.createClass({
 
     return (
       <form id="searchbar" onSubmit={this.handleSubmit} >
-        <input type="text" id="ajax2" placeholder="  Search" list="json-countrylist" ref="text"/>
+        <input type="text" id="ajax2" placeholder="  Search by country..." list="json-countrylist" ref="text"/>
         <input id="submitbutton" type="submit" value="Submit" />
         <datalist id="json-countrylist"></datalist>  
       </form>

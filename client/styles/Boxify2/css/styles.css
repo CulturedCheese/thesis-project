@@ -627,14 +627,14 @@ section.video {
     background-color: #f6f7f9;
 }
 section.video a {
-    color: #323a45
+    color: blue;
 }
 section.video a:hover, section.video a:focus {
-    color: #73d0da;
+    color: blue;
     text-decoration: none;
 }
 section.video a:hover i, section.video a:focus i {
-    color: #73d0da
+    color: blue;
 }
 
 /* ==========================================================================

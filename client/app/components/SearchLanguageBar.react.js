@@ -37,7 +37,7 @@ var SearchLanguageBar = React.createClass({
 
     return (
       <form id="searchbar" onSubmit={this.handleSubmit} >
-        <input type="text" id="ajax" placeholder="  Search" list="json-languagelist" ref="text"/>
+        <input type="text" id="ajax" placeholder="  Search by language..." list="json-languagelist" ref="text"/>
         <input id="submitbutton2" type="submit" value="Submit" />
         <datalist id="json-languagelist" ></datalist>
       </form>

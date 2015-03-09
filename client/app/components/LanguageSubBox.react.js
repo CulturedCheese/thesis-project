@@ -28,7 +28,7 @@ var LanguageSubBox = React.createClass({
     return (
       <div id="languagesubbox">
         <h1><b>Language:</b></h1> 
-        <h1><b>{language}</b></h1>
+        <h1 id="dynamicresult"><b>{language}</b></h1>
         <h2>(# Developers)</h2>  
         <div> {formattedNums.map(function(country) {
           return (
