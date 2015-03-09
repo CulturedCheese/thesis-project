@@ -220,7 +220,9 @@
 }
 
 #hirebutton a {	
-	font-color: blue;
+	font-color: #778899;
+	font-size: 125%;
+	font-weight: 700;
 }
 
 .footer-nav li {
@@ -477,6 +479,16 @@ input {
 /*    font-weight: bold;
 */}
 :-ms-input-placeholder {
+    color: black;
+/*    font-weight: bold;
+*/}
+
+::-webkit-select-placeholder {
+    color: black;
+/*    font-weight: bold;
+*/}
+
+:-ms-select-placeholder {
     color: black;
 /*    font-weight: bold;
 */}
