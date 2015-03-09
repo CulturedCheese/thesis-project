@@ -450,10 +450,10 @@ p {
     line-height: 25px;
 }
 a {
-    color: #73d0da
+    color: #lightgrey;
 }
 a:hover, a:focus {
-    color: #73d0da;
+    color: #lightgrey;
     text-decoration: none;
 }
 .texture-overlay {
@@ -672,7 +672,7 @@ Features Slider
     position: relative;
     padding: 11% 100px 10% 100px;
     height: 400px;
-    background-color: #3F6184;
+    background-color: #383838;
 }
 .features-slider ul {
     margin: 0;
@@ -1030,8 +1030,8 @@ Nav Overlay
     transition: all 300ms ease-in-out;
 }
 .overlay ul li a:hover, .overlay ul li a:focus {
-    border-color: #73d0da;
-    color: #73d0da;
+    border-color: #383838;
+    color: #383838;
 }
 
 /* Effects */
