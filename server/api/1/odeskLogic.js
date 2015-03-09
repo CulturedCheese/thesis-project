@@ -18,17 +18,16 @@ module.exports = {
 		api.setAccessToken(config.accessToken, config.accessSecret, function() {
 		  var Search = require('odesk-api/lib/routers/freelancers/search.js').Search;
 		  var freelancers = new Search(api);
-		  var page = req.url.split("=")[1] || 0;
 		  var language = req.url.split("=")[3] || 'JavaScript'; 
 		  var country = req.url.split("=")[5] || 'Vietnam'; 
 		  var hourlyRate = req.url.split("=")[7] || '100'; 
 		  var minScore = req.url.split('=')[9] || 0;
 		  var maxScore = req.url.split('=')[11] || 5;
+		  var page = req.url.split("=")[1] || 0;
 
 		  var summaryProfiles = {};
 		  var params = {'q': 'skills:'+ language + ' AND country:' + country, 'rate': '[0 TO ' + hourlyRate+ ']', 'paging': page + ';8', 'feedback': '[' + minScore + ' TO ' + maxScore + ']'};
 
-		  console.log(language, country, hourlyRate, minScore, maxScore, params);
 		  var profiles = Q.nbind(freelancers.find,freelancers);
 		  
 		  profiles(params)

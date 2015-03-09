@@ -11,6 +11,9 @@ var ProfileBox = React.createClass({
 
     if (this.props.profileData.feedback > 0) {
       score = Math.round( this.props.profileData.feedback * 100) / 100;
+      if (score.toString().length === 1) {
+        score = score + '.00';
+      }
     }
     if (!portrait) {
       portrait = "../../images/clients/download.png";
