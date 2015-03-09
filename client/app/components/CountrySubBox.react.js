@@ -25,7 +25,7 @@ var CountrySubBox = React.createClass({
           <div> 9. { result["topLangs"][8] }: ({ result["numDevs"][8] })  </div>
           <div> 10. { result["topLangs"][9] }: ({ result["numDevs"][9] })  </div>
         </div>
-        <h3><b>YoY Growth: { result.growthRate }%</b></h3>
+        <h3 id="yearlygrowth"><b>YoY Growth: { result.growthRate }%</b></h3>
         <h3><b>Avg. Hourly Wage: ${ result.hourlyWage }/hr</b></h3>
       </div>
     );
