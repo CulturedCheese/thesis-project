@@ -6,10 +6,11 @@ var HireCodersSearchBox = React.createClass({
 render: function() {
     return (
       <form className="developers-search" ref="form" onSubmit={this.handleSubmit}>
+        <h2> CoderTracks Search</h2>
         <h3> What are you looking for? </h3>
-        <input className="programmersearch" type="text" placeholder="  Enter a programming language..." ref="language" list="json-datalist" /><br />
+        <input className="programmersearch" type="text" placeholder="  Enter a language..." ref="language" list="json-datalist" /><br />
         <input className="programmersearch" type="text" placeholder="  Enter a country..." ref="country" /><datalist id="json-datalist"></datalist><br />
-        <input className="programmersearch" type="text" placeholder="  Enter a max hourly rate..." ref="hourlyRateMax"/><br />
+        <input className="programmersearch" type="text" placeholder="  Enter a max hourly rate in USD..." ref="hourlyRateMax"/><br />
         <select className="ratingdropdown" type="text" placeholder="Select score" ref="feedbackScore">      
           <option value="0,5"> Any feedback score </option>
           <option value="4.5,5"> 4.5 - 5.0 Stars </option>

@@ -4,11 +4,21 @@ var ProfileBox = React.createClass({
 
   render: function() {
     var style = {};
+    var score = "n/a";
+    var starSpan = <span className="glyphicon glyphicon-star" aria-hidden="true"></span>;
+    var locationSpan = <span className="glyphicon glyphicon-map-marker" aria-hidden="true"></span>;
+    var portrait = this.props.profileData.portrait; 
 
+    if (this.props.profileData.feedback > 0) {
+      score = Math.round( this.props.profileData.feedback * 100) / 100;
+    }
+    if (!portrait) {
+      portrait = "../../images/clients/download.png";
+    }
     return (
-      <div className="profileThumbnail">
+      <div className="profileThumbnail fadeIn">
           <a href={this.props.profileData.url}>
-            <img className = "profilePortrait" data-src="holder.js/300x200" alt="300x200" src={this.props.profileData.portrait} />
+            <img src={portrait} alt="image not found" className = "profilePortrait" data-src="holder.js/300x200" />
           </a>
           <div className="caption">
             <div className="info">
@@ -18,12 +28,10 @@ var ProfileBox = React.createClass({
             </div>
             <div className="title">{this.props.profileData.title}</div> 
             <div className="rating-location">
-              <p>oDesk Score: {Math.round( this.props.profileData.feedback * 10) / 10}</p>
-              <p>Country: {this.props.profileData.country}</p>
+              <p className="rating">{starSpan} {score}</p>
+              <p className="location">{locationSpan} {this.props.profileData.country} </p>
             </div>
-            <p>Skills: {this.props.profileData.skills.join(', ')}</p>
-            <p className="profileDescription">{this.props.profileData.description}</p>
-            <p>Page: {Number(this.props.profileData.page) + 1}</p>
+            <p className="profileDescription">{this.props.profileData.description}</p> 
             <ProfileLink url={this.props.profileData.url} />
           </div>
       </div>
@@ -35,9 +43,13 @@ var ProfileBox = React.createClass({
 var ProfileLink = React.createClass({
   render: function() {
     return (
-      <a href={this.props.url} target="_blank">
-        More details
-      </a>
+      <div className="oDeskButton">
+        <button>
+          <a href={this.props.url} target="_blank">
+          oDesk Profile
+          </a>
+        </button>
+      </div>
     );
   }
 });
