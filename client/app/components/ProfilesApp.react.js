@@ -14,8 +14,8 @@ function getProfilesState() {
 }
 
 //this tells the store to make an api request for new data from the server
-function requestProfilesData(page) {
-  ProfilesStore.getProfileDataFromServer(page);
+function requestProfilesData() {
+  ProfilesStore.getProfileDataFromServer('JavaScript', 'Vietnam', '100', 0, 5, 0);
 }
 
 var ProfilesApp = React.createClass({

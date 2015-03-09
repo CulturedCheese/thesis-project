@@ -6,7 +6,7 @@ var HireCodersSearchBox = React.createClass({
 render: function() {
     return (
       <form className="developers-search" ref="form" onSubmit={this.handleSubmit}>
-        <h2> CoderTracks Search</h2>
+        <h2> Find Developers </h2>
         <h3> What are you looking for? </h3>
         <input className="programmersearch" type="text" placeholder="  Enter a language..." ref="language" list="json-datalist" /><br />
         <input className="programmersearch" type="text" placeholder="  Enter a country..." ref="country" /><datalist id="json-datalist"></datalist><br />
