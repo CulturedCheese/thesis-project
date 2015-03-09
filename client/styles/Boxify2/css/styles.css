@@ -623,7 +623,7 @@ section.video h1 {
     font-size: 28px;
 }
 section.video {
-    padding: 60px 0;
+    padding: 2px 0;
     background-color: #f6f7f9;
 }
 section.video a {
@@ -849,6 +849,7 @@ Screenshots
     margin: 0;
     padding: 0;
     width: 100%;
+    background-color: #f6f7f9;
 }
 .screenshots ul li {
     float: left;
