@@ -1,8 +1,5 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<html class="no-js"> 
 <html lang="en" class="no-js">
 	<head>
 		<meta charset="utf-8">
@@ -17,6 +14,28 @@
 		<link rel="stylesheet" type="text/css" href="styles/css/animations.css">
 		<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 		<link href='http://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'>
+
+		<script src="styles/Boxify2/js/min/toucheffects-min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="styles/Boxify2/js/flickity.pkgd.min.js"></script>
+		<script src="styles/Boxify2/js/jquery.fancybox.pack.js"></script>
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+		<script src="styles/Boxify2/js/retina.js"></script>
+		<script src="styles/Boxify2/js/waypoints.min.js"></script>
+		<script src="styles/Boxify2/js/bootstrap.min.js"></script>
+		<script src="styles/Boxify2/js/min/scripts-min.js"></script>
+		<link href="styles/Boxify2/css/styles.css" rel="stylesheet">
+		<link href="styles/Boxify2/css/queries.css" rel="stylesheet">
+		<!-- Our custom scripts -->
+		<script src="bower_components/modernizr/modernizr.js"></script>
+	  <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
+  	
+    <link rel="stylesheet" href="./styles/css/base2.css">  <!--this is the 
+  <!-- endbower -->
+	  <script src="./autocomplete.js" id="autocomplete"></script>
+		<script src="styles/Boxify2/js/min/scripts-min.js"></script>
+
+
 		<!-- Facebook and Twitter integration -->
 		<meta property="og:title" content=""/>
 		<meta property="og:image" content=""/>
@@ -27,18 +46,9 @@
 		<meta name="twitter:image" content="" />
 		<meta name="twitter:url" content="" />
 		<meta name="twitter:card" content="" />
-		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-		<!--[if lt IE 9]>
-		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-		<![endif]-->
 	</head>
+
 	<body>
-		<!--[if lt IE 7]>
-		<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-		<![endif]-->
-		<!-- open/close -->
 		<header>
 			<section class="hero">
 				<div class="texture-overlay"></div>
@@ -46,14 +56,14 @@
 					<div class="row nav-wrapper">
 						<div class="col-md-6 col-sm-6 col-xs-6 text-left">
 						</div>
-						<div class="col-md-6 col-sm-6 col-xs-6 text-right navicon">
+<!-- 						<div class="col-md-6 col-sm-6 col-xs-6 text-right navicon">
 							<p>MENU</p><a id="trigger-overlay" class="nav_slide_button nav-toggle" href="#"><span></span></a>
-						</div>
+						</div> -->
 					</div>
 					<div class="row hero-content">
 						<div class="col-md-12">
 						  <div class="overlay">
-							<a href="#"><img id="codertracks-logo" src="images/clients/codertracks-logo.png" alt="Coder Tracks"></a>
+							<a href="#"><img id="codertracks-logo" src="styles/Boxify2/img/codertracks-logo.png" alt="Coder Tracks"></a>
 							<h2 class="animated fadeInDown">VISUALIZING HOTBEDS OF SOFTWARE DEVELOPMENT AROUND THE WORLD</h2>
 							<a href="#about" id="learnarrow"class="learn-btn animated fadeInUp"><i class="fa fa-arrow-down"></i></a>
 						  </div>	
@@ -82,7 +92,7 @@
 			</div>			
 		</section>
 
-
+<!-- FEATURES SECTION -->
 		<section class="features-intro">
 			<div class="container-fluid">
 				<div class="row">
@@ -99,7 +109,7 @@
 										<p>Oftentimes project owners who are on a tight budget but need to hire a team of developers choose to look overseas but don't know exactly where to look. CoderTracks can answer that question.</p>
 									</li>
 									<li>
-										<h1>Analyze &amp; GitHub Data</h1>
+										<h1>Analyze &amp; Map GitHub Data</h1>
 										<p>By analyzing and mapping Github data, programming language popularity, and average developer costs, CoderTracks can point our users to active communities of developers  so they can direct their search to where it will be most effective and within budget. </p>
 									</li>
 									<li>
@@ -113,94 +123,7 @@
 			</div>
 		</section>
 
-
-
-
-
-		<!-- <section class="features-list" id="features">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-
-						<div class="col-md-4 feature-1 wp2">
-							<div class="feature-icon">
-								<i class="fa fa-desktop"></i>
-							</div>
-							<div class="feature-content">
-								<h1>Responsive</h1>
-								<p>Built using HTML5/CSS3 and jQuery, and built using one of the world's most powerful CSS frameworks available, Bootstrap.</p>
-								<a href="http://tympanus.net/codrops/?p=22554" class="read-more-btn">Read More <i class="fa fa-chevron-circle-right"></i></a>
-							</div>
-						</div>
-						<div class="col-md-4 feature-2 wp2 delay-05s">
-							<div class="feature-icon">
-								<i class="fa fa-flash"></i>
-							</div>
-							<div class="feature-content">
-								<h1>Multi-Purpose</h1>
-								<p>Perfect if you run your own start-up, product or service. Boxify can showcase your business converting your visits to income.</p>
-								<a href="http://tympanus.net/codrops/?p=22554" class="read-more-btn">Read More <i class="fa fa-chevron-circle-right"></i></a>
-							</div>
-						</div>
-						<div class="col-md-4 feature-3 wp2 delay-1s">
-							<div class="feature-icon">
-								<i class="fa fa-heart"></i>
-							</div>
-							<div class="feature-content">
-								<h1>Absolutely Free</h1>
-								<p>As aways, download Boxify for free exclusively from Codrops. If you love Boxify and want to thank me, simply <a href="http://peterfinlan.com/">buy me a beer</a>. </p>
-								<a href="http://tympanus.net/codrops/?p=22554" class="read-more-btn">Read More <i class="fa fa-chevron-circle-right"></i></a>
-							</div>
-						</div>
-
-					</div>
-				</div>
-			</div>
-		</section> -->
-
-
-
-
-		<!-- <section class="showcase">
-			<div class="showcase-wrap">
-				<div class="texture-overlay"></div>
-				<div class="container">
-					<div class="row">
-						<div class="col-md-6">
-							<div class="device wp3">
-								<div class="device-content">
-									<div class="showcase-slider">
-										<ul class="slides" id="showcaseSlider">
-											<li>
-												<img src="styles/Boxify2/img/screen1.jpg" alt="Device Content Image">
-											</li>
-											<li>
-												<img src="styles/Boxify2/img/screen2.jpg" alt="Device Content Image">
-											</li>
-											<li>
-												<img src="styles/Boxify2/img/screen3.jpg" alt="Device Content Image">
-											</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<h1>Showcase your Product or Service</h1>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a lorem quis neque interdum consequat ut sed sem. Duis quis tempor nunc. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
-							<blockquote class="team-quote">
-								<div class="avatar"><img src="img/avatar.png" alt="User Avatar"></div>
-								<p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a lorem quis neque interdum consequat ut sed sem. Duis quis tempor nunc." - Peter Finlan</p>
-								<div class="logo-quote">
-									<a href="http://tympanus.net/codrops/"><img src="img/codrops-logo.png" alt="Codrops Logo"></a>
-								</div>
-							</blockquote>
-							<a href="http://tympanus.net/codrops/?p=22554" class="download-btn">Download! <i class="fa fa-download"></i></a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section> -->
+<!-- TEAM SECTION -->
 
 		<section class="screenshots-intro" id="teampictures">
 						<div class="container fluid">
@@ -209,7 +132,7 @@
 								<div id="teammemberspics">
 									<div id="HouPic" class="col-lg-3 col-md-3 col-sm-3">
 										<div class="he-wrap tpl6">
-											<img class="teambigpics" src="images/team/Hou.jpg">
+											<img class="teambigpics" src="styles/team/Hou.jpg">
 										</div><!-- he wrap -->
 										<h4>Hou Chia</h4>
 										<h5 class="teamtitle">SCRUM MASTER</h5>
@@ -224,7 +147,7 @@
 								 	</div>
 								 	<div id="ToddPic" class="col-lg-3 col-md-3 col-sm-3">
 										<div class="he-wrap tpl6">
-											<img  class="teambigpics" src="images/team/team02.jpg">
+											<img  class="teambigpics" src="styles/team/team02.jpg">
 										</div>							
 										<h4>Todd Skinner</h4>
 										<h5 class="teamtitle">PROJECT LEAD</h5>
@@ -234,13 +157,13 @@
 							          <td><a href="https://github.com/toddskinner" target="_blank"><i class="fa fa-github"></i></a></td>
 								        <td><a href="https://www.linkedin.com/in/toddmskinner" target="_blank"><i class="fa fa-linkedin"></i></a></td>
 							          <td><a href="https://twitter.com/toddskinner" target="_blank"><i class="fa fa-twitter"></i></a></td>
-<!-- 							          <td><a href="http://toddskinner.io/" target="_blank"><i class="fa fa-home"></i></a></td>
- -->							        </tr>
+							          <td><a href="http://toddskinner.io/" target="_blank"><i class="fa fa-home"></i></a></td>
+							        </tr>
 							      </table>
 								 	</div>		 				 	
 								 	<div id="PrestonPic" class="col-lg-3 col-md-3 col-sm-3">
 										<div class="he-wrap tpl6">
-											<img  class="teambigpics" src="images/team/team01.jpeg">
+											<img  class="teambigpics" src="styles/team/team01.jpeg">
 										</div>
 										<h4>Preston Parry</h4>
 										<h5 class="teamtitle">DATA SCIENTIST</h5>
@@ -259,9 +182,7 @@
 					</div>
 		</section>
 
-
-
-
+<!-- TECH STACK SECTION -->
 
 		<section class="screenshots" id="screenshots">
 			<div class="container-fluid">
@@ -272,7 +193,7 @@
 					<ul class="grid">
 						<li>
 							<figure>
-								<img src="styles/Boxify/img/node.jpg" alt="Screenshot 01" style="position: relative; width: 380px; height: 270px;">
+								<img src="styles/Boxify2/img/node.jpg" alt="Screenshot 01" style="position: relative; width: 380px; height: 270px;">
 								<figcaption>
 								<div class="caption-content">
 									<a href="http://nodejs.org/" class="single_image">
@@ -336,7 +257,7 @@
 						</li>
 						<li>
 							<figure>
-								<img id="gulp" src="styles/Boxify/img/gulp.png" alt="Screenshot 01" style="position: relative; width: 380px; height: 270px;;">
+								<img id="gulp" src="styles/Boxify2/img/gulp.png" alt="Screenshot 01" style="position: relative; width: 380px; height: 270px;;">
 								<figcaption>
 								<div class="caption-content">
 									<a href="http://gulpjs.com/" class="single_image">
@@ -375,29 +296,14 @@
 			</div>
 		</section>
 
-
-
-		
-		<!-- <section class="download" id="download">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12 text-center wp4">
-						<h1>Seen Enough?</h1>
-						<a href="http://tympanus.net/codrops/?p=22554" class="download-btn">Download! <i class="fa fa-download"></i></a>
-					</div>
-				</div>
-			</div>
-		</section> -->
-
-
-
+<!-- FOOTER SECTION -->
 		
 		<footer>
 			<div class="container">
 				<div class="row">
 					<div class="col-md-5">
 						<h1 class="footer-logo">
-						<img id="codertracks-footer-logo" src="images/clients/codertracks-logo-black.png" alt="Footer Logo Black">
+						<img id="codertracks-footer-logo" src="styles/Boxify2/img/codertracks-logo-black.png" alt="Footer Logo Black">
 						</h1>
 						<p>Designed &amp; Developed at <a href="http://www.hackreactor.com/">Hack Reactor
 					</div>
@@ -425,29 +331,11 @@
 			</nav>
 		</div>
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-		<script src="styles/Boxify2/js/min/toucheffects-min.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-		<script src="styles/Boxify2/js/flickity.pkgd.min.js"></script>
-		<script src="styles/Boxify2/js/jquery.fancybox.pack.js"></script>
-		<!-- Include all compiled plugins (below), or include individual files as needed -->
-		<script src="styles/Boxify2/js/retina.js"></script>
-		<script src="styles/Boxify2/js/waypoints.min.js"></script>
-		<script src="styles/Boxify2/js/bootstrap.min.js"></script>
-		<script src="styles/Boxify2/js/min/scripts-min.js"></script>
-		<link href="styles/Boxify2/css/styles.css" rel="stylesheet">
-		<link href="styles/Boxify2/css/queries.css" rel="stylesheet">
-		<!-- Our custom scripts -->
-		<script src="bower_components/modernizr/modernizr.js"></script>
-	  <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
-  	<script src="bower_components/react/react.js"></script>
+		<script src="bower_components/react/react.js"></script>
   	<script src="bower_components/react-bootstrap/react-bootstrap.js"></script>
   	<script src="bower_components/d3/d3.js"></script>
   	<script src="bower_components/topojson/topojson.js"></script>
     <script src="bower_components/datamaps/dist/datamaps.all.js"></script>
-    <link rel="stylesheet" href="./styles/css/base2.css">  <!--this is the 
-  <!-- endbower -->
     <script src="./bundle.js"></script>
-	  <script src="./autocomplete.js" id="autocomplete"></script>
-		// <script src="styles/Boxify2/js/min/scripts-min.js"></script>
 	</body>
 </html>
