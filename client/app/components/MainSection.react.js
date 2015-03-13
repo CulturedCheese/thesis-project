@@ -24,6 +24,7 @@ var MainSection = React.createClass({
       <section id="main">
         <SelectWorkflowBar />
         { renderedSearchBar }
+        <img id="codertracks-map-logo" src="styles/Boxify2/img/codertracks-logo-black.png" alt="CoderTracks Logo Black" />
         <Map 
           countrySpecificData={this.props.countrySpecificData} 
           sortedCountriesByLanguageTop10={this.props.sortedCountriesByLanguageTop10}
@@ -34,7 +35,6 @@ var MainSection = React.createClass({
           sortedCountriesByLanguageTop10={this.props.sortedCountriesByLanguageTop10} 
           initialWorkflowData = { this.props.initialWorkflowData }
           workflow={this.props.workflow} />
-        <img id="codertracks-map-logo" src="styles/Boxify2/img/codertracks-logo-black.png" alt="CoderTracks Logo Black" />
       </section>
     );
   },

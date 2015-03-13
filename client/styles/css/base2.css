@@ -188,13 +188,13 @@
 }
 
 #d3Map {
-	padding-top: 3%;
+	padding-top: 0%;
 	height: 110%;
 	width: 90%;
 	margin-left: -10%;
 	float: left;
+	position: top;
 }
-
 
 #nextPageButton {
 	font-family: 'Lato', sans-serif;	
@@ -846,9 +846,11 @@ div .overlay {
 
 
 #codertracks-map-logo {
-	height: 80px;
-	width: 350px;
-	margin-left: 390px;
+	height: 5em;
+	width: 21.875em;
+	margin-left: 24.375em;
+	margin-top: 3em;
+
 }
 
 i.fa::before {
