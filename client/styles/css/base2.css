@@ -846,9 +846,9 @@ div .overlay {
 
 
 #codertracks-map-logo {
-	height: 80px;
-	width: 350px;
-	margin-left: 390px;
+	height: 5em;
+	width: 21.875em;
+	margin-left: 24.375em;
 }
 
 i.fa::before {
