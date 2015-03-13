@@ -193,8 +193,8 @@
 	width: 90%;
 	margin-left: -10%;
 	float: left;
+	position: top;
 }
-
 
 #nextPageButton {
 	font-family: 'Lato', sans-serif;	
